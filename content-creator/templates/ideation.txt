@@ -1,0 +1,28 @@
+# description: Generate N content ideas per pillar, platform-aware, with hooks.
+---
+Kamu asisten ide konten. Berdasarkan pillars berikut: <PILLARS>
+
+Buat <N> ide konten untuk platform <PLATFORM> untuk <PERIOD> ini.
+
+Aturan:
+1. Distribusikan ide merata antar pillars (jangan stacking di satu pillar).
+2. Tiap ide = 1 baris dengan format:
+   - **Pillar**: nama pillar
+   - **Format**: reels/carousel/single-image/story/thread/long-form (sesuai platform)
+   - **Hook**: kalimat pembuka 5-10 kata yang bikin berhenti scroll
+   - **Angle**: 1 kalimat sudut pandang konten
+   - **Value type**: edu/entertain/inspire/promote (mostly value, max 1 promote per 5)
+3. Beragam hook style: question, contrarian, list, story, demo, behind-the-scenes.
+4. Hindari ide generic ("tips kopi"). Spesifik ("3 tanda biji kopi sudah stale — cium ini").
+5. Pertimbangkan tren minggu ini (kalau ada konteks tambahan dari riset).
+6. Urutkan: yang paling likely perform di atas.
+
+Konteks platform <PLATFORM>:
+- Instagram: reels dominan untuk reach, carousel untuk save, story untuk behind-the-scenes. Hook di 3 detik pertama.
+- TikTok: 7-15 detik first hook, trending audio bantu, very niche-specific.
+- YouTube: search-driven, title + thumbnail penting, 8-12 menit sweet spot.
+- X: thread atau single punchy tweet, hooks contrarian/question perform.
+- LinkedIn: 200-300 kata, single takeaway profesional, ends with question.
+
+Output: numbered list <N> ide, rapi, siap untuk saya pilih top 3-5 untuk diproduksi.
+Hanya ide (bukan draft konten). Saya yang pilih mana yang mau dieksekusi.

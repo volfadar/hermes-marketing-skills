@@ -1,0 +1,20 @@
+# description: Audit landing page kompetitor (headline, fitur, CTA, social proof).
+---
+Analisis landing page kompetitor. Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) buka halaman landing <QUERY> (paste URL lengkap, mis. https://tokopedia.com/...)
+3. Ambil elemen berikut:
+   - Headline utama (H1)
+   - Sub-headline / tagline
+   - 3 fitur/benefit unggulan yang dijanjikan
+   - Social proof (review/testimoni/rating/jumlah customer)
+   - Call-to-action utama (warna, teks, posisi)
+   - Promo/diskon yang dijanjikan
+4. Screenshot mental: halaman terasa professional / murahan / reliable / scammy?
+
+Output dalam 2 bagian:
+- Ringkasan elemen (tabel markdown)
+- 2-3 rekomendasi konkret apa yang bisa dipelajari untuk landing page SAYA sendiri.
+
+Hanya riset publik. Tidak login, tidak submit form (mis. tidak klik "beli" sampai checkout).

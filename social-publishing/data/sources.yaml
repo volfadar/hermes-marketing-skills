@@ -1,0 +1,219 @@
+# sources.yaml — setiap klaim di skill ini punya asal-usulnya di sini.
+#
+# Tingkat keyakinan (dipinjam dari legenda Report C, karena legendanya bagus):
+#   green  🟢  sumber primer, dibuka langsung, angkanya ada di halamannya
+#   yellow 🟡  laporan komunitas berulang (Reddit/HN/GitHub issue), banyak orang
+#   orange 🟠  satu sumber saja, atau tidak bisa diverifikasi ulang
+#   red    🔴  klaim vendor tentang produknya sendiri — perlakukan sebagai iklan
+#
+# `verified` = tanggal seseorang benar-benar membuka halaman itu.
+# Kalau umurnya sudah lebih dari 3 bulan, buka lagi sebelum dipakai mengajar.
+
+meta:
+  compiled_from:
+    - hermes-openclaw-social-automation-deep-research-2026-08-11.md   # Report A
+    - deep-research-social-automation-hermes-openclaw.md              # Report C
+    - 01-Hermes-OpenClaw-Social-Automation.pdf                        # Report B — lihat catatan
+  note_report_b: >
+    Report B tidak dipakai sebagai sumber di file ini. Premis utamanya —
+    bahwa X API "sering menghabiskan $100 per bulan" — terbantah oleh halaman
+    harga X sendiri, dan catatan kakinya mengarah ke blog vendor yang menjual
+    jembatan X seharga $11,99/bulan, produk yang kemudian direkomendasikannya.
+    Nol kutipan primer dari platform. Disimpan di repo sebagai bahan ajar
+    tentang cara mengenali riset yang terdengar meyakinkan tapi kosong.
+
+sources:
+  # ---------------------------------------------------------------- platform
+  - id: x-pricing
+    confidence: green
+    verified: 2026-08-12
+    url: https://docs.x.com/x-api/getting-started/pricing
+    title: X API pay-per-usage pricing and credits
+    claims:
+      - "Post: Create — $0.015 per request"
+      - "Post: Create (with URL) — $0.200 per request"
+    note: >
+      Ini membalik anggapan umum bahwa memposting ke X butuh langganan
+      $100–200/bulan. Untuk 20 post/bulan tanpa URL, biayanya $0,30.
+      Post dengan URL 13x lebih mahal — itu detail yang mengubah cara kamu
+      menulis caption.
+
+  - id: threads-overview
+    confidence: green
+    verified: 2026-08-12
+    url: https://developers.facebook.com/documentation/threads/overview
+    title: Threads API overview
+    claims:
+      - "250 API-published posts per 24 hours"
+      - "1,000 replies per 24 hours"
+      - "500 character text limit"
+      - "carousel 2-20 items"
+
+  - id: ig-content-publishing
+    confidence: green
+    verified: 2026-08-12
+    url: https://developers.facebook.com/docs/instagram-platform/content-publishing
+    title: Instagram Platform — Content Publishing
+    claims:
+      - "Instagram accounts are limited to 100 API-published posts within a 24-hour moving period"
+      - "Carousels are limited to 10 images, videos, or a mix of the two"
+      - "JPEG is the only image format supported"
+      - "Shopping tags are not supported"
+      - "Filters are not supported"
+      - "akun profesional (Business/Creator) saja — akun pribadi tidak bisa"
+
+  - id: buffer-pricing
+    confidence: green
+    verified: 2026-08-12
+    url: https://buffer.com/pricing
+    title: Buffer pricing
+    claims:
+      - "Free: connect up to 3 channels, 10 scheduled posts per channel"
+      - "Essentials $5/month per channel"
+      - "Team $10/month per channel"
+      - "kanal: Instagram, Facebook, TikTok, LinkedIn, X, YouTube, Threads, Pinterest, Google Business Profile, Bluesky, Mastodon"
+    note: >
+      Harga per KANAL, bukan per akun. Tiga kanal di Essentials = $15/bulan,
+      bukan $5. Ini sumber salah hitung paling sering saat membandingkan
+      dengan self-host.
+
+  - id: repliz-home
+    confidence: green
+    verified: 2026-08-13
+    url: https://repliz.com/
+    title: "Repliz — Social Media Comment Automation"
+    claims:
+      - "otomasi: balas komentar, hapus komentar, like komentar, komentar→DM, balas DM"
+      - "Content Management: jadwalkan & terbitkan posting tanpa membuka tiap aplikasi"
+      - "Unified Inbox untuk semua percakapan"
+      - "Public API + webhook, disebut 'developer-ready endpoints ... with managed storage'"
+      - "AI Integration: pakai API key sendiri ATAU beli Token Balance di dalam Repliz"
+      - "integrasi disebut di halaman depan: Facebook, Instagram, Threads, TikTok, YouTube, LinkedIn"
+      - "FAQ: 'We strictly use a one-time payment model ... no auto-renewals'"
+    note: >
+      Buatan Indonesia. LinkedIn muncul di halaman depan tapi TIDAK muncul di
+      tabel perbandingan paket — jangan janjikan LinkedIn sebelum dicek di akun.
+      Klaim "sekali bayar" adalah klaim vendor tentang produknya sendiri;
+      sampaikan apa adanya, jangan dijadikan jaminan.
+
+  - id: repliz-pricing
+    confidence: green
+    verified: 2026-08-13
+    url: https://repliz.com/pricing
+    title: "Repliz — pricing & feature comparison"
+    claims:
+      - "Free Rp0: 1 akun, tanpa operator, TANPA Public API, TANPA webhook"
+      - "Standard Rp18.000: 20 akun, 1 operator, Public API Limited, webhook"
+      - "Premium Rp29.000: 75 akun, 10 operator, Public API Limited, webhook"
+      - "Gold Rp49.000: 200 akun, 30 operator, Public API Full Access, webhook"
+      - "ada pengali periode 1/3/6/12 bulan; angka di atas tampilan awal (1 bulan)"
+      - "platform di tabel paket: Facebook, Instagram, Threads, TikTok, YouTube"
+      - "Research: Hashtag TikTok, Content TikTok, Content Threads"
+    note: >
+      Untuk dipakai bersama Hermes minimum Standard — paket Free tidak punya API
+      maupun webhook. Halaman /documentation GAGAL dibuka pada 13 Agu 2026, jadi
+      tidak ada endpoint, skema auth, atau bentuk payload yang tercatat di repo
+      ini. Buka dokumentasinya di sesi berjalan sebelum menulis integrasi.
+
+  - id: x-automation-rules
+    confidence: green
+    verified: 2026-08-11
+    url: https://help.x.com/en/rules-and-policies/x-automation
+    title: X automation rules
+    claims:
+      - "scripting situs non-API dapat berujung penangguhan permanen"
+
+  - id: instagram-terms
+    confidence: green
+    verified: 2026-08-11
+    url: https://help.instagram.com/581066165581870/
+    title: Instagram Terms of Use
+    claims:
+      - "melarang akses atau pengumpulan otomatis tanpa izin tertulis Meta"
+
+  # ------------------------------------------------------------------- repos
+  - id: repo-stats
+    confidence: green
+    verified: 2026-08-11
+    url: https://api.github.com/repos/gitroomhq/postiz-app
+    title: GitHub API — angka repo (semua dicek langsung, bukan dari ingatan)
+    claims:
+      - "gitroomhq/postiz-app — 34.532 bintang, lisensi AGPL-3.0, push terakhir 2026-08-11"
+      - "subzeroid/instagrapi — 6.628 bintang, lisensi NOASSERTION, push terakhir 2026-08-11"
+      - "browser-use/browser-use — 108.814 bintang, MIT, push terakhir 2026-08-11"
+      - "nirholas/XActions — 443 bintang, Apache-2.0, push terakhir 2026-08-04"
+      - "NousResearch/hermes-agent — 228.988 bintang, MIT, push terakhir 2026-08-11"
+      - "openclaw/openclaw — 385.950 bintang, NOASSERTION, push terakhir 2026-08-11"
+    note: >
+      AGPL-3.0 pada Postiz bukan detail sepele. Kalau kamu menawarkan Postiz
+      yang sudah kamu modifikasi sebagai layanan ke klien, AGPL mewajibkan
+      kamu menyediakan sumber modifikasinya. Untuk pemakaian internal, tidak
+      ada kewajiban apa pun.
+
+  # ------------------------------------------------ bukti kegagalan (penting)
+  - id: postiz-issues
+    confidence: yellow
+    verified: 2026-08-11
+    url: https://github.com/gitroomhq/postiz-app/issues/832
+    title: Laporan keandalan Postiz di issue tracker-nya sendiri
+    claims:
+      - "#832 — Continuous Reposting Loop for Standalone Instagram Integration - Risk! Account flagged"
+      - "#1724 — post Instagram tersangkut di status QUEUE"
+      - "#1581 — reply/CTA terjadwal X tidak ikut terkirim"
+      - "#1364 — Threads: publish teks jalan, publish gambar gagal"
+      - "#1259 — post terjadwal terlewat, padahal 'Post Now' jalan"
+    note: >
+      Kelima issue ini judulnya sudah dicek satu per satu lewat GitHub API,
+      bukan dikutip dari ringkasan orang lain. Pola yang muncul: yang gagal
+      adalah SCHEDULER-nya, sementara "Post Now" jalan — artinya bug ini
+      justru tidak terlihat saat kamu mencoba di depan kelas.
+
+  - id: openclaw-browser-issues
+    confidence: yellow
+    verified: 2026-08-11
+    url: https://github.com/openclaw/openclaw/issues/78602
+    title: Laporan keandalan browser automation di OpenClaw
+    claims:
+      - "#78602 — alur browser-cron Instagram/WhatsApp 5 menit: dilaporkan ~70% run gagal"
+      - "#54879 — composer X gagal menerima teks (kasus input Korea)"
+      - "#41483 — percakapan salah rute antar-akun"
+      - "#8824 — profil/sesi browser tidak stabil"
+      - "#56897 — usulan lapisan konfirmasi/audit: instruksi di SKILL.md bukan penegakan"
+    note: >
+      Angka "~70% gagal" berasal dari satu operator dan BELUM diverifikasi
+      isinya — yang sudah dicek hanya bahwa issue-nya ada dan judulnya cocok.
+      Perlakukan sebagai anekdot yang serius, bukan sebagai statistik.
+
+  - id: mixpost-gating
+    confidence: yellow
+    verified: 2026-08-11
+    url: https://www.reddit.com/r/selfhosted/comments/10fkxk2/
+    title: Laporan komunitas soal Mixpost Lite
+    claims:
+      - "versi gratis self-host dibatasi kanalnya — dilaporkan tanpa Instagram, Pinterest, LinkedIn, TikTok"
+    note: >
+      Kalau kamu memilih Mixpost karena gratis, cek daftar kanal versi Lite
+      HARI INI sebelum memasang. Ini berubah-ubah.
+
+  - id: n8n-telegram-approval
+    confidence: yellow
+    verified: 2026-08-11
+    url: https://www.reddit.com/r/n8n/comments/1jv9ikl/
+    title: "n8n → Telegram approval → 6 platform"
+    claims:
+      - "pola yang berulang di komunitas: AI menulis → antrian approval di Telegram → publish"
+    note: >
+      Yang menarik bukan n8n-nya. Yang menarik: orang yang membangun otomasi
+      penuh secara sukarela memasang manusia di tengah, dan menyebut itu fitur.
+
+  # ------------------------------------------------------------------ hukum
+  - id: uu-pdp
+    confidence: green
+    verified: 2026-08-11
+    url: https://jdih.komdigi.go.id/
+    title: UU No. 27/2022 tentang Pelindungan Data Pribadi
+    claims:
+      - "masa transisi berakhir 17 Oktober 2024"
+      - "sanksi administratif sampai 2% pendapatan tahunan"
+      - "notifikasi kebocoran 3x24 jam"
+      - "pengendali tetap bertanggung jawab walau pemrosesan dilakukan pihak ketiga"

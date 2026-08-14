@@ -1,0 +1,20 @@
+# description: Tren mingguan di niche kamu (ide konten + produk yang sedang naik).
+---
+Riset tren mingguan untuk niche "<QUERY>". Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) cek sumber berikut:
+   - https://www.tokopedia.com/search?st=product&q=<QUERY> → sort "terlaris", lihat 10 teratas
+   - https://www.google.com/trends?q=<QUERY>&geo=ID → topik/sub-topik yang naik
+   - 1-2 blog/portal topik <QUERY> di Indonesia → artikel terbaru minggu ini
+3. Untuk masing-masing, jawab:
+   - Produk/sub-niche apa yang sedang naik daun?
+   - Pertanyaan/topik apa yang sedang ramai dibahas?
+   - Ada event/musim yang relevan minggu ini (Lebaran, kemerdekaan, dll)?
+
+Output:
+- 5 ide konten minggu ini (hook + angle untuk Instagram/TikTok/blog)
+- 2 produk/sub-niche yang sedang tren (kandidat affiliate, keputusan final MANUSIA)
+- 1 "sudut jurnalistik" yang belum banyak dibahas (kesempatan konten orisinal)
+
+Hanya riset publik. Tidak login apapun. Fokus: tren, bukan scraping massal.

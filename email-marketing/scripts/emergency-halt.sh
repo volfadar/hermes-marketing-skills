@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# emergency-halt.sh — SHIM ke tombol berhenti bersama.
+#
+# Dulu file ini cuma menyentuh /tmp/hermes-email-halt: tidak menghentikan broadcast
+# WhatsApp (tombolnya beda), dan hilang saat komputer di-restart.
+#
+# Sekarang satu perintah menghentikan semuanya, dan bertahan setelah restart.
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+case "${1:-on}" in
+  --resume|off|--off) exec bash "$HERE/halt.sh" off ;;
+  status|--status)    exec bash "$HERE/halt.sh" status ;;
+  *)                  exec bash "$HERE/halt.sh" on --why "emergency-halt.sh (email)" ;;
+esac

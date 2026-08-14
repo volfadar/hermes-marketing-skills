@@ -1,0 +1,17 @@
+# description: Cek top 10 hasil Google untuk keyword (SEO/pesanan riset).
+---
+Cek SERP Google untuk keyword "<QUERY>". Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) buka:
+   https://www.google.com/search?q=<QUERY>&hl=id&gl=ID  (pakai Tailscale exit node supaya geo akurat, kalau sudah setup)
+3. Ambil top 10 hasil organik (bukan iklan). Untuk masing-masing:
+   - Judul halaman
+   - URL domain
+   - Meta description / snippet
+4. Catat: ada situs aggregator (marketplace, blog review) atau brand langsung? 
+5. Catat: orang juga tanya (People Also Ask) — 3 pertanyaan relevant.
+
+Output: tabel top 10 + 3 "orang juga tanya" + 1 insight (tren: brand vs aggregator vs blog).
+
+Hanya riset publik. Tidak klik iklan. Tidak login Google akun.

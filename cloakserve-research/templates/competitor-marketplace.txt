@@ -1,0 +1,13 @@
+# description: Riset 5 produk kompetitor di marketplace Indonesia (Tokopedia/Shopee), output tabel.
+---
+Riset kompetitor untuk niche "<QUERY>". Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) buka:
+   https://www.tokopedia.com/search?st=product&q=<QUERY>
+3. Ambil 5 produk teratas. Untuk masing-masing: nama produk, harga, nama toko, lokasi toko, rating, jumlah terjual.
+4. Catat pola: range harga, strategi diskon (coret), kata kunci di judul, kata kunci di deskripsi.
+
+Output dalam TABEL MARKDOWN rapi + 3 insight singkat di bawahnya.
+Hanya riset publik. Tidak login, tidak form submission, tidak pembelian.
+Kalau Tokopedia meminta captcha/anti-bot, fallback ke: https://shopee.co.id/search?keyword=<QUERY>

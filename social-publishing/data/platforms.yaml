@@ -1,0 +1,104 @@
+# platforms.yaml — angka resmi per platform. Semua dari halaman dokumentasi
+# platformnya sendiri, dibuka langsung, tanggal verifikasi tercatat.
+#
+# Kalau ada angka di sini yang berbeda dengan yang kamu dengar di YouTube,
+# yang di sini yang benar — atau halamannya sudah berubah dan file ini perlu
+# diperbarui. Cek `verified`.
+
+version: 1
+updated: 2026-08-12
+
+platforms:
+
+  - id: instagram
+    name: Instagram
+    source: ig-content-publishing
+    verified: 2026-08-12
+    publish_api: "Instagram Platform — Content Publishing (Meta Graph)"
+    account_requirement: "akun profesional (Business/Creator). Akun pribadi TIDAK bisa."
+    limits:
+      posts_per_24h: 100
+      carousel_max_items: 10
+      image_format: "JPEG saja (MPO dan JPS tidak didukung)"
+    supported_media: [image, video, reel, story, carousel]
+    not_supported:
+      - "shopping tag"
+      - "filter"
+      - "alt text untuk reel dan story (hanya untuk gambar)"
+    gotchas:
+      - "carousel dipotong mengikuti gambar PERTAMA (default 1:1) — urutan gambar menentukan cropping semuanya"
+      - "halaman yang sama mencantumkan sub-cap carousel ~50/24 jam di subsection carousel limitations — angka 100/24 jam adalah batas post umum, tapi carousel bisa terkena batas yang lebih ketat. Sebut keduanya, jangan hanya 100."
+      - "mendukung label konten AI dan branded content — pakai kalau relevan, itu menaikkan kepercayaan bukan menurunkan"
+    cost: "gratis"
+
+  - id: threads
+    name: Threads
+    source: threads-overview
+    verified: 2026-08-12
+    publish_api: "Threads API (Meta)"
+    account_requirement: "akun Threads terhubung ke akun profesional"
+    limits:
+      posts_per_24h: 250
+      replies_per_24h: 1000
+      deletes_per_24h: 100
+      text_chars: 500
+      carousel_items: [2, 20]
+    gotchas:
+      - "batas reply 1.000/hari jauh lebih longgar dari batas post — ini memberi tahu sesuatu tentang untuk apa platformnya dirancang"
+      - "laporan komunitas: publish gambar lewat penjadwal pihak ketiga sering gagal walau publish teks jalan (Postiz #1364)"
+    cost: "gratis"
+
+  - id: x
+    name: X (Twitter)
+    source: x-pricing
+    verified: 2026-08-12
+    publish_api: "X API — pay per usage"
+    account_requirement: "akun developer + billing"
+    limits: {}
+    pricing:
+      post_create_usd: 0.015
+      post_create_with_url_usd: 0.200
+    gotchas:
+      - "post dengan URL 13x lebih mahal. 20 post/bulan tanpa URL = $0,30; dengan URL = $4"
+      - "PAY-PER-USE sekarang — BUKAN free tier. Jangan kutip angka lama 'free 1.500/bulan' atau 'free 500/bulan'; tier itu sudah tidak berlaku untuk posting. Hitung pakai $0,015 / $0,200 per post."
+      - "ini membalik anggapan lama bahwa memposting ke X butuh $100–200/bulan"
+      - "aturan otomasi X: scripting situs non-API dapat berujung penangguhan permanen"
+      - "bot balasan publik bertenaga AI butuh persetujuan tertulis eksplisit dari X dulu — tanpa itu, balasan publik tetap mode draft + approval manusia, bukan otomatis"
+    cost: "$0.015 per post (tanpa URL)"
+
+  - id: facebook
+    name: Facebook Page
+    source: ig-content-publishing
+    verified: 2026-08-12
+    publish_api: "Meta Graph API (Pages)"
+    account_requirement: "Halaman (Page), bukan profil pribadi"
+    limits: {}
+    gotchas:
+      - "berbagi domain operasional dengan Instagram — satu proses review Meta menutup keduanya"
+    cost: "gratis"
+
+  - id: tiktok
+    name: TikTok
+    source: null
+    verified: null
+    publish_api: "Content Posting API (butuh audit aplikasi)"
+    account_requirement: "akun bisnis + aplikasi yang lolos audit"
+    limits: {}
+    gotchas:
+      - "BELUM DIVERIFIKASI di sesi ini. Jangan kutip angka apa pun untuk TikTok sampai halamannya dibuka."
+    cost: "belum diverifikasi"
+
+  - id: linkedin
+    name: LinkedIn
+    source: null
+    verified: null
+    publish_api: "LinkedIn Marketing/Share API"
+    account_requirement: "Company Page + aplikasi terdaftar"
+    limits: {}
+    gotchas:
+      - "BELUM DIVERIFIKASI di sesi ini."
+    cost: "belum diverifikasi"
+
+# Catatan kejujuran: dua platform terakhir sengaja ditandai belum diverifikasi
+# alih-alih diisi angka dari ingatan. Skill yang mengarang satu angka akan
+# diragukan seluruh isinya oleh orang pertama yang mengeceknya.

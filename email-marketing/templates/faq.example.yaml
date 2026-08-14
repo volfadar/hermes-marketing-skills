@@ -1,0 +1,201 @@
+# ~/.hermes/business/faq.yaml
+#
+# Ini definisi CAKUPAN untuk balasan otomatis. Bukan daftar keinginan —
+# daftar pertanyaan yang MEMANG berulang di inbox kamu.
+#
+# Cara mengisinya yang benar:
+#   1. Buka inbox, ambil 50 email masuk terakhir.
+#   2. Kelompokkan. Yang muncul >= 3 kali, itu kandidat FAQ.
+#   3. Tulis jawabannya persis seperti kamu menulisnya sendiri (bukan bahasa
+#      korporat). Pelanggan kenal cara kamu menulis.
+#   4. Jalankan: bash scripts/autoreply.sh validate
+#
+# ══════════════════════════════════════════════════════════════════════════
+# CONTOH INI BISNIS KARANGAN: "Laundry Mbak Sri" di Sidoarjo — bisnis yang
+# sama dengan profile.example.yaml, supaya dua contoh ini nyambung.
+#
+# Dia sengaja dibikin TIDAK MIRIP bisnis siapa pun yang dipakai waktu menguji
+# Hermes. Alasannya konkret: contoh yang sebelumnya kebetulan mirip data uji,
+# dan sebuah model menyalinnya mentah-mentah sebagai kalau itu data pemiliknya
+# — lalu kalimat karangan itu ikut terkirim ke pelanggan.
+#
+# Jadi: GANTI SEMUA ISINYA dengan bisnismu. Kalau ada kalimat di bawah ini
+# yang masih kebaca di file kamu, itu bukan jawabanmu — itu jawaban orang
+# karangan, dan pelangganmu yang akan menagihnya.
+# ══════════════════════════════════════════════════════════════════════════
+
+meta:
+  business: "Laundry Mbak Sri"
+  owner_name: "Sri"
+
+  # Di bawah angka ini, Hermes tidak menebak — dia melempar ke kamu.
+  # 0.75 = rekomendasi. 0.85 = lebih hati-hati, lebih banyak naik ke kamu.
+  # 0.60 = lebih banyak dijawab otomatis, lebih banyak salah.
+  confidence_threshold: 0.75
+
+  # Satu orang maksimal dapat satu balasan otomatis per sekian jam.
+  # Ini yang menghentikan dua bot saling membalas semalaman.
+  auto_reply_cooldown_hours: 12
+
+  # Batas balasan otomatis per hari. Bukan batas teknis — batas akal sehat.
+  daily_auto_cap: 40
+
+  # Di luar jam ini, pesan tetap diterima tapi jawaban otomatis bisa dimatikan
+  # (lihat --holding). Kosongkan kalau mau 24 jam.
+  business_hours: "08:00-21:00"
+
+  # WAJIB ADA, dan jangan diperhalus sampai menyesatkan.
+  # Orang yang tahu sedang bicara dengan asisten lalu dialihkan ke manusia
+  # jauh lebih tenang daripada orang yang merasa dibohongi robot.
+  disclosure: >
+    Balasan ini otomatis dari asisten Laundry Mbak Sri. Kalau pertanyaannya
+    belum terjawab atau kamu mau bicara langsung dengan Sri, balas email ini —
+    nanti dijawab manusia, biasanya di bawah 3 jam pada jam kerja.
+
+  # Dipakai saat ada trigger handoff: menjanjikan nol, mengarang nol.
+  holding_message: >
+    Terima kasih sudah menghubungi Laundry Mbak Sri. Pertanyaan kamu saya
+    teruskan ke Sri langsung karena butuh jawaban yang tidak bisa saya
+    pastikan sendiri. Biasanya dibalas di hari yang sama pada jam kerja
+    (08.00–21.00 WIB).
+
+  signature: |
+    Laundry Mbak Sri
+    Jl. Contoh No. 12, Sidoarjo
+    wa.me/628xxxxxxxxx · laundrymbaksri.example
+
+entries:
+  # ---------------------------------------------------------------------
+  # T2 — aman dijawab otomatis. Faktual, tidak mengikat, tidak berubah-ubah.
+  # ---------------------------------------------------------------------
+  - id: jam-buka
+    tier: T2
+    patterns:
+      - "jam buka"
+      - "buka jam berapa"
+      - "masih buka"
+      - "tutup jam berapa"
+      - "jam operasional"
+      - "opening hours"
+      - "what time do you open"
+    answer: |
+      Halo! Laundry Mbak Sri buka setiap hari 08.00–21.00 WIB.
+      Cucian yang masuk setelah jam 19.00 dihitung mulai besok paginya.
+      Minggu sore kami libur, tapi cucian tetap bisa dititip.
+
+  - id: lokasi-parkir
+    tier: T2
+    patterns:
+      - "lokasi di mana"
+      - "alamatnya di mana"
+      - "alamat lengkap"
+      - "ada parkir"
+      - "parkir mobil"
+      - "google maps"
+      - "patokannya apa"
+    answer: |
+      Alamat kami: Jl. Contoh No. 12, Sidoarjo — patokannya seberang apotek,
+      satu deret dengan warung soto.
+      Google Maps: maps.example/laundrymbaksri
+      Motor bisa parkir di depan, mobil muat 2 di halaman.
+
+  - id: lama-pengerjaan
+    tier: T2
+    patterns:
+      - "berapa hari"
+      - "berapa lama"
+      - "kapan selesai"
+      - "bisa ditunggu"
+      - "ada express"
+      - "kilat"
+    answer: |
+      Cuci kering lipat selesai 2 hari. Cuci setrika 2–3 hari tergantung
+      antrean.
+      Ada layanan sehari jadi (tambah Rp 5.000/kg), tapi harus masuk sebelum
+      jam 10 pagi.
+
+  - id: harga-satuan
+    tier: T2
+    patterns:
+      - "harga berapa"
+      - "berapa per kilo"
+      - "tarif"
+      - "daftar harga"
+      - "harga setrika saja"
+      - "hitungannya gimana"
+    answer: |
+      Cuci kering lipat Rp 7.000/kg (minimal 3 kg).
+      Cuci setrika Rp 9.000/pcs untuk item seperti kemeja dan celana bahan.
+      Langganan bulanan mulai 20 kg: Rp 6.000/kg.
+      Bed cover, jas, dan gorden dihitung terpisah — kirim fotonya dulu ya.
+
+  - id: antar-jemput
+    tier: T2
+    patterns:
+      - "bisa dijemput"
+      - "antar jemput"
+      - "ada kurir"
+      - "diantar ke rumah"
+      - "ongkos antar"
+    answer: |
+      Bisa. Antar-jemput Rp 5.000 sekali jalan, dan gratis kalau lokasinya
+      dalam radius 2 km.
+      Jemputan jalan dua kali sehari: pagi jam 09.00 dan sore jam 16.00.
+
+  # ---------------------------------------------------------------------
+  # T3 — dijawab manusia. Ditandai di sini supaya Hermes tidak coba-coba,
+  # walau polanya cocok dan keyakinannya tinggi.
+  # ---------------------------------------------------------------------
+  - id: harga-borongan-kerjasama
+    tier: T3
+    patterns:
+      - "harga untuk kos"
+      - "kerja sama"
+      - "borongan"
+      - "pesanan besar"
+      - "hotel"
+      - "penawaran khusus"
+      - "bisa nego"
+    answer: |
+      Terima kasih sudah menanyakan kerja sama. Ini saya teruskan ke Sri
+      supaya angkanya dihitung sesuai kebutuhan kamu — jumlah kilo per minggu,
+      jenis cucian, dan jaraknya berpengaruh ke harga.
+    # Kenapa T3: apa pun angka yang keluar di sini jadi janji.
+    # Salah sebut sekali, kamu terikat atau kamu terlihat plin-plan.
+
+  - id: komplain-cucian
+    tier: T3
+    patterns:
+      - "baju hilang"
+      - "cucian kurang"
+      - "bajunya rusak"
+      - "warnanya luntur"
+      - "masih bau"
+      - "kecewa"
+      - "minta ganti"
+    answer: |
+      Maaf atas pengalamannya. Ini langsung saya teruskan ke Sri dan akan
+      ditindaklanjuti hari ini juga.
+    # Kenapa T3: trigger 'emotion' juga akan menangkap ini, tapi menandainya
+    # eksplisit lebih jelas dibaca orang yang mengedit file ini nanti.
+
+  # ---------------------------------------------------------------------
+  # Contoh entri dengan disclaimer wajib. Disclaimer TIDAK BISA dimatikan
+  # lewat flag apa pun — dia melindungi pembaca, bukan bisnismu.
+  # ---------------------------------------------------------------------
+  - id: deterjen-dan-kulit-sensitif
+    tier: T2
+    disclaimer: health
+    patterns:
+      - "deterjennya apa"
+      - "aman buat bayi"
+      - "kulit sensitif"
+      - "alergi"
+      - "bikin gatal"
+      - "hypoallergenic"
+    must_not:
+      - "resep dokter"
+    answer: |
+      Kami punya pilihan deterjen tanpa pewangi untuk cucian bayi dan kulit
+      sensitif — bilasnya juga ditambah satu kali. Bilang saja waktu menitipkan,
+      nanti dipisah dari cucian lain.

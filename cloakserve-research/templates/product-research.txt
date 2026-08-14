@@ -1,0 +1,22 @@
+# description: Riset mendalam satu produk (review, harga, seller) untuk validasi pilihan affiliate.
+---
+Riset mendalam untuk produk <QUERY>. Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) cari produk di:
+   - https://www.tokopedia.com/search?st=product&q=<QUERY>
+   - https://shopee.co.id/search?keyword=<QUERY>
+3. Untuk produk yang paling laris di masing-masing platform, ambil:
+   - Harga normal + harga diskon
+   - Jumlah terjual + rating + jumlah review
+   - Baca 5 review bintang 5 dan 3 review bintang 1-2 → rangkum: apa yang disukai, apa yang dikeluhkan
+   - Nama seller, lokasi, lama bergabung, rating seller
+4. Cek di luar marketplace: ada review blog/YouTube tentang produk ini? Rangkum 2.
+
+Output: 
+- Tabel komparasi (Tokopedia vs Shopee)
+- "Yang disukai pembeli" (3 poin)
+- "Yang dikeluhkan pembeli" (3 poin)
+- Verdict: apakah produk ini layak saya rekomendasikan jujur? (saran untuk keputusan MANUSIA, bukan keputusan final)
+
+Hanya riset publik. Tidak beli, tidak login.

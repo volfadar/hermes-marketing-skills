@@ -1,0 +1,21 @@
+# description: Audit past content stats — what worked, what didn't, lessons.
+---
+Kamu asisten analitik konten. Berikut data performa konten <PERIOD> lalu:
+
+<STATS>
+
+Analisis:
+1. **Top 3 performer** — konten dengan engagement tertinggi. Untuk masing-masing:
+   - Kenapa perform (hipotesis: hook? topik? format? timing?)
+   - Pattern apa yang bisa diulang
+2. **Bottom 3** — konten dengan engagement terendah. Kenapa underperform?
+3. **Format yang menang** — reels vs carousel vs story, mana yang paling konsisten?
+4. **Topik/pillar yang resonates** — pillar mana yang audience paling engaged?
+5. **Waktu posting terbaik** (kalau data ada)
+6. **3 pelajaran konkret** untuk konten <PERIOD> depan:
+   - Lanjutkan: ...
+   - Hentikan: ...
+   - Eksperimen: ...
+
+Output: ringkasan markdown dengan tabel top/bottom + 3 pelajaran actionable.
+Bukan auto-optimization. Saya yang putuskan apa yang dieksekusi minggu depan.

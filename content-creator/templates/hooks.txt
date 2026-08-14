@@ -1,0 +1,69 @@
+# 36 Hook templates (by style) — copy, adapt, make your own
+
+Hook = 3 detik pertama video / baris pertama caption / judul. Orang decide
+lanjut atau scroll di sini. Berikut 36 template yang teruji perform di 2026.
+
+## Story hooks (vulnerable, relatable)
+1. "Saya habis [mistake], dan ini yang saya pelajari."
+2. "Dulu saya pikir [common belief]. Sampai [event] terjadi."
+3. "Yang tidak saya sangka dari [experience]..."
+4. "3 tahun lalu saya [low point]. Hari ini [contrast]. Ini rahasianya."
+5. "Jujur, saya ragu share ini. Tapi..."
+6. "Pernahkah kamu [relatable situation]? Saya juga."
+7. "Cerita ini agak memalukan, tapi..."
+8. "Yang customer saya tidak pernah tau: [behind-the-scenes truth]."
+9. "Saya hampir give up minggu lalu. Ini yang mengubah pikiran saya."
+
+## Question hooks (curiosity gap)
+10. "Tebak berapa [unexpected metric]..."
+11. "Pernah bertanya-tanya kenapa [phenomenon]?"
+12. "Kalau kamu [scenario], apa kamu akan [action]?"
+13. "Kenapa [common thing] sebenarnya [surprising truth]?"
+14. "Pertanyaan yang harus kamu tanyain sebelum [decision]..."
+15. "Mau tau rahasia [outcome]? Bukan yang kamu kira."
+
+## Contrarian hooks (pattern interrupt)
+16. "Unpopular opinion: [against-grain statement]."
+17. "Semua orang bilang [popular advice]. Mereka salah."
+18. "Stop [common action]. Lakukan ini instead."
+19. "Pendapat panas: [controversial-but-defensible take]."
+20. "Kalau kamu masih [common habit], kamu buang waktu."
+
+## List/numbered hooks (scannable, saveable)
+21. "3 [things] yang saya beli [outcome]..."
+22. "5 tanda [condition]..."
+23. "Top 5 [category] untuk [audience]..."
+24. "7 [things] yang saya wish saya tau sebelum [milestone]."
+25. "10 [items] di bawah Rp [X] yang mengubah [outcome]."
+
+## Demo/show hooks (visual proof)
+26. "Lihat apa yang terjadi kalau [action]..."
+27. "[Time]-detik demo [process]. Hasilnya gila."
+28. "Before/after: [transformation] tanpa [common assumption]."
+29. "Saya test [thing] selama [duration]. Ini hasilnya."
+30. "Stop scroll. Lihat [visual element]."
+
+## Behind-the-scenes hooks (authenticity)
+31. "Yang tidak kamu lihat di balik [output]..."
+32. "Tour kilat [workspace/studio/process] saya."
+33. "Hari di hidup [role]..."
+34. "Begini cara saya bikin [product]..."
+35. "Workspace kecil, output besar. Ini setup saya."
+
+## WARNING hooks (urgency)
+36. "Kalau kamu [at-risk behavior], ini warning serius..."
+
+---
+
+## Cara pakai
+- Pilih 1 hook style yang cocok dengan topik + platform.
+- **Adaptasi** jangan copy verbatim — audience bisa smell template.
+- Test: baca hook sendiri. Kalau gak bikin kamu penasaran, ganti.
+- Hook + first frame (visual) = duet. Visual harus match hook.
+- 3 detik pertama video: hook di visual + audio, bukan text overlay saja.
+
+## Anti-pattern
+- "Hari ini saya mau bahas..." (boring, no hook)
+- "Promo minggu ini..." (salesy, scroll past)
+- "Check this out!" (generic)
+- Hook clickbait yang tidak match content = bounce + algorithm penalty

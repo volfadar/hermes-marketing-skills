@@ -1,0 +1,17 @@
+# description: Pertanyaan nyata audience dari forum/komunitas (ide konten + lead magnet).
+---
+Riset pertanyaan nyata di komunitas niche "<QUERY>". Langkah:
+
+1. Cek status: bash <SKILL_DIR>/scripts/status.sh
+2. Pakai browser (CDP <CDP_URL>) buka:
+   - https://www.reddit.com/search/?q=<QUERY> (sort: relevan)
+   - https://www.facebook.com (cari grup publik topik <QUERY> — kalau bisa diakses publik)
+3. Ambil 5-7 thread/diskusi dengan engagement terbanyak.
+4. Untuk masing-masing catat: 1 pertanyaan inti yang sering muncul, dan 1 hal yang audience struggle dengan.
+
+Output: list 5-7 pertanyaan nyata (bahasa asli audience) yang bisa jadi:
+- Ide konten edukasi
+- Ide lead magnet (PDF/jawaban singkat)
+- Ide produk affiliate yang relevan
+
+Hanya konten publik. Tidak login Facebook. Kalau halaman butuh login, skip dan catat.

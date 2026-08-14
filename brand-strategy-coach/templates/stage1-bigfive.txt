@@ -1,0 +1,14 @@
+# Stage 1: Big Five + O*NET
+---
+Gunakan aturan lengkap di `templates/stage1-temu-bakat.txt`.
+
+Kalau peserta hanya punya Big Five, terima dulu. Jangan mengarang RIASEC. Tawarkan O*NET pada turn berikutnya atau catat bahwa peserta memilih melewatinya.
+
+Urutan:
+1. Tanyakan keputusan/goal.
+2. Minta hasil tes.
+3. Bentuk maksimal dua hipotesis.
+4. Validasi dengan satu contoh perilaku.
+5. Simpan `talent = {tests, hypotheses, behavioral_evidence, accommodations}`.
+
+Jangan merekomendasikan niche atau channel final sebelum CV/portofolio dan riset pasar.

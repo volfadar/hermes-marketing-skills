@@ -1,0 +1,117 @@
+# ~/.hermes/business/profile.yaml
+#
+# Satu file. Semua skill baca ini sebelum nulis apa pun.
+#
+# Tiga lapis, dan tiap lapis mencegah satu hal:
+#   fakta   → mencegah Hermes NGARANG. Tanpa harga di sini, dia bikin harga
+#             sendiri (pernah kejadian: "total kontrak Rp 12.150.000", ngarang).
+#   sikap   → mencegah SLOP. Tanpa ini promonya bisa dipakai toko sebelah
+#             dengan ganti satu kata. Fakta bikin pesan benar; sikap bikin
+#             pesan itu milik kamu.
+#   batasan → mencegah Hermes nyaranin hal yang kamu nggak akan kerjain.
+#
+# Nggak perlu diisi sekaligus. Isi `fakta` dulu (90 detik), kerjaan langsung
+# jalan. `sikap` tumbuh sendiri dari chat pelanggan yang kamu balas tiap hari.
+#
+# CONTOH ini sengaja pakai usaha yang beda jauh (laundry di Sidoarjo) supaya
+# ketahuan kalau ada yang tersalin. JANGAN pernah menyalin isinya ke profil
+# orang lain — `sikap` yang dikarang lebih buruk daripada `sikap` yang kosong,
+# karena dia masuk ke tiap promo sebagai kalimat "milik dia".
+#
+#   python3 shared/lib/profile.py show      # lihat isinya
+#   python3 shared/lib/profile.py missing   # apa yang belum diisi
+#   python3 shared/lib/profile.py check     # cek strukturnya
+
+meta:
+  usaha: "Laundry Mbak Sri"
+  pemilik: "Sri"
+  kota: "Sidoarjo"
+  # barang | jasa | reseller — ini nentuin pertanyaan `sikap` yang ditanya
+  jenis: jasa
+  diperbarui: 2026-08-13
+
+# ── FAKTA ────────────────────────────────────────────────────────────────
+# Angka polos. 15000, bukan "15rb" — biar bisa dihitung.
+fakta:
+  produk:
+    - nama: "Cuci kering lipat"
+      harga: 7000
+      satuan: kg
+      catatan: "selesai 2 hari"
+    - nama: "Cuci setrika"
+      harga: 9000
+      satuan: pcs
+
+  harga_khusus:
+    - untuk: langganan bulanan
+      min_qty: 20
+      harga: 6000
+
+  ongkir:
+    antar-jemput: 5000
+    radius 2km: 0
+    default: "cek dulu, aku kabari dalam 1 jam"
+
+  jam_buka: "08.00-21.00"
+  libur: "minggu sore"
+  cara_bayar: ["transfer BCA", "tunai saat ambil"]
+
+  legal:
+    izin_usaha: "sudah, NIB"
+
+  # Yang boleh Hermes janjiin tanpa nanya kamu dulu. Isi ini hemat waktu:
+  # tiap janji yang nggak ada di sini bikin Hermes berhenti dan nanya.
+  yang_boleh_dijanjikan:
+    - "antar-jemput gratis radius 2km"
+    - "cuci ulang gratis kalau masih bau"
+
+  # Yang selalu dilempar balik ke kamu, walaupun mode otomatis nyala.
+  yang_harus_tanya_dulu:
+    - "refund"
+    - "tempo bayar"
+    - "diskon di atas 10%"
+    - "ganti rugi baju rusak"
+
+# ── SIKAP ────────────────────────────────────────────────────────────────
+# Ini yang bikin promomu bukan promo siapa-siapa.
+# Tulis dengan kalimat kamu sendiri. Jangan dirapiin.
+sikap:
+  # "Kalau pelanggan pilih yang sebelah, biasanya kenapa?"
+  kenapa_aku: "yang lain wangi pas baru diambil doang, punya aku wanginya tahan seminggu"
+
+  # "Yang paling sering beli itu orang kayak gimana?"
+  buat_siapa: "anak kos sama ibu kerja yang nggak sempet nyuci"
+
+  # "Apa yang kamu pastiin selalu dapet, tiap pesanan?"
+  janji_tiap_kali: "dipisah per warna, nggak pernah dicampur punya orang lain"
+
+  # "Ada yang kamu nggak mau lakuin walaupun laku?"
+  ga_pernah: "nggak mau pakai pemutih keras, walaupun nodanya jadi lebih lama ilang"
+
+  suara_saya:
+    sapaan: "aku"          # aku | saya | gue
+    # Copy-paste chat asli kamu ke pelanggan. Apa adanya, typo sekalian.
+    contoh_chat:
+      - "iya kak bisa, mau diambil kapan? aku catat dulu ya"
+      - "maaf ya kak baru bales, tadi lagi nyetrika"
+      - "kalau bahannya tipis mending jangan disetrika panas, nanti mengkerut"
+
+  # Cerita yang muncul sendiri waktu ngobrol. Ini bahan promo paling mahal
+  # dan paling sering kebuang. Hermes nambahin sendiri kalau denger.
+  cerita:
+    - "mulai buka gara-gara tetangga sering nitip cucian pas aku masih kerja kantoran"
+
+# ── BATASAN ──────────────────────────────────────────────────────────────
+# Kalimatnya dia sendiri. Dibaca ulang sebelum tiap saran.
+# Saran yang melanggar REFUSE itu gagal, sebagus apa pun sarannya.
+batasan:
+  REFUSE:                       # nggak mau, titik
+    - "nggak mau rekaman muka di video"
+  CAP:                          # batas jam, duit, jumlah kirim
+    - "cuma sempet 30 menit tiap malam"
+    - "budget iklan 0"
+  ACCESS:                       # yang benar-benar dia punya
+    - "HP android, WhatsApp biasa (bukan Business)"
+    - "IG @laundrymbaksri, 180 follower"
+  PERMISSION:                   # yang nggak boleh dipakai
+    - "nggak boleh pakai foto pelanggan tanpa izin"

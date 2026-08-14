@@ -1,0 +1,316 @@
+# options.yaml — tujuh jalur untuk memposting ke media sosial, dengan biayanya.
+#
+# Ini yang dibaca `lib/advisor.py` saat kamu bertanya "sebaiknya pakai apa?".
+# Tidak ada jalur yang dilarang di sini. Yang ada: apa konsekuensinya, untuk
+# siapa cocok, dan apa alternatif yang bentuknya lebih baik.
+#
+# Field yang perlu dijelaskan:
+#   risk           risiko akun kena batasi/blokir. bukan risiko teknis.
+#   tos            compliant | gray | violation — status terhadap syarat layanan
+#   skill_required 1 (bisa pakai HP) .. 5 (nyaman baca log server)
+#   tier           tier tata kelola dari references/tiers.md di skill email
+#   reversible     kalau salah, seberapa mudah dibatalkan
+
+version: 1
+updated: 2026-08-14
+
+options:
+
+  # =========================================================================
+  - id: manual-native
+    name: "Manual + penjadwal bawaan platform"
+    tagline: "Hermes menulis, kamu yang menekan tombol post."
+    tier: T3
+    risk: none
+    tos: compliant
+    skill_required: 1
+    setup_hours: [0, 0.5]
+    cost_usd_month: {min: 0, max: 0, note: "gratis selamanya"}
+    platforms: [instagram, threads, facebook, x, tiktok, linkedin]
+    volume_ceiling_per_week: 15
+    reversible: "penuh — kamu melihat setiap post sebelum tayang"
+    what_hermes_does:
+      - "menulis draft caption dari arsip konten + suara brand kamu"
+      - "menyiapkan kalender terbit dan mengingatkan lewat Telegram"
+      - "mengecek pengulangan: 'kalimat pembuka ini sudah kamu pakai 3x bulan lalu'"
+      - "menyimpan setiap post yang tayang ke arsip untuk analisis"
+    drawbacks:
+      - "kamu tetap harus buka aplikasi dan menempel manual"
+      - "tidak jalan saat kamu tidur atau sedang tidak pegang HP"
+      - "di atas ~15 post/minggu ini melelahkan dan mulai bolong"
+    implications:
+      - "waktu kamu jadi bottleneck — itu jujur, dan kadang memang benar begitu"
+      - "tidak ada satu pun risiko akun. nol."
+    when_to_pick:
+      - "audiens kamu kecil dan kenal kamu secara personal"
+      - "akun ini tidak tergantikan (satu-satunya kanal jualan)"
+      - "kamu baru mulai dan belum tahu konten apa yang jalan"
+    when_not_to:
+      - "kamu mengelola 5+ akun klien"
+      - "volume di atas 15 post/minggu"
+    alternatives: [saas-scheduler, selfhost-scheduler]
+    evidence: []
+    persona_fit: [P2, P3, P6]
+
+  # =========================================================================
+  - id: saas-scheduler
+    name: "Penjadwal SaaS (Buffer, Later, Publer, Metricool)"
+    tagline: "Jalur main aman. Bayar orang lain untuk menanggung risikonya."
+    tier: T3
+    risk: none
+    tos: compliant
+    skill_required: 1
+    setup_hours: [0.5, 2]
+    cost_usd_month: {min: 0, max: 30, note: "Buffer Free 3 kanal; Essentials $5/KANAL/bulan"}
+    platforms: [instagram, threads, facebook, x, tiktok, linkedin, youtube, pinterest, bluesky, mastodon]
+    volume_ceiling_per_week: 100
+    reversible: "penuh — antrian bisa diedit/dibatalkan sebelum tayang"
+    what_hermes_does:
+      - "menulis draft, kamu tempel ke antrian penjadwal"
+      - "menjaga kalender dan arsip di sisi kamu, bukan di SaaS-nya"
+      - "mengingatkan kalau antrian mau habis"
+    drawbacks:
+      - "harga per KANAL. 3 kanal Buffer Essentials = $15/bulan, bukan $5"
+      - "gratisannya 10 post terjadwal per kanal — habis cepat"
+      - "kalender, arsip, dan data audiens kamu ada di server mereka"
+      - "kalau harga naik atau fiturnya dipotong, kamu tidak bisa apa-apa"
+      - "tidak ada jalur API untuk Hermes di paket murah — tetap tempel manual"
+    implications:
+      - "biaya naik seiring jumlah kanal, bukan jumlah post"
+      - "vendor lock-in ringan: memindahkan kalender keluar itu manual"
+      - "untuk UU PDP: data audiens diproses pihak ketiga, dan kamu tetap pengendalinya"
+    when_to_pick:
+      - "kamu ingin mulai minggu ini tanpa memikirkan server"
+      - "1–3 kanal, volume sedang"
+      - "kamu tidak nyaman dengan terminal, dan itu tidak apa-apa"
+    when_not_to:
+      - "kamu punya 5+ kanal (biayanya jadi tidak masuk akal)"
+      - "kamu ingin Hermes benar-benar menekan tombol publish"
+    alternatives: [selfhost-scheduler, official-api]
+    evidence: [buffer-pricing]
+    persona_fit: [P3, P4, P6]
+
+  # =========================================================================
+  # Ditambahkan 2026-08-14. Fakta harga & fitur dari halaman yang benar-benar
+  # dibuka: https://repliz.com/ dan https://repliz.com/pricing (13 Agu 2026).
+  # Halaman /documentation GAGAL dibuka saat itu, jadi tidak ada satu pun nama
+  # endpoint di sini — lihat references/repliz.md sebelum menulis integrasi.
+  - id: repliz
+    name: "Repliz (lokal Indonesia — komentar, DM, jadwal)"
+    tagline: "Pintu depan yang harganya di bawah segelas kopi."
+    tier: T2
+    risk: none
+    tos: compliant
+    skill_required: 1
+    setup_hours: [0.5, 1.5]
+    cost_usd_month: {min: 0, max: 4, note: "Rp0 Free (1 akun, TANPA API); Rp18.000 Standard (20 akun, API limited + webhook); Rp29.000 Premium; Rp49.000 Gold (API full). Sekali bayar, klaim tanpa perpanjangan otomatis"}
+    platforms: [instagram, facebook, threads, tiktok, youtube]
+    volume_ceiling_per_week: 200
+    reversible: "penuh — aturan otomasi bisa dimatikan kapan saja, per akun"
+    what_hermes_does:
+      - "menulis draft balasan & caption pakai suara brand dari profile.yaml"
+      - "menyiapkan aturan otomasi, pemiliknya yang menyalakan"
+      - "menarik pertanyaan yang naik ke antrean handoff.py supaya dijawab sekali"
+      - "TIDAK menulis ulang apa yang sudah disediakan Repliz — tidak ada poller komentar buatan sendiri"
+    drawbacks:
+      - "paket Free TIDAK punya Public API maupun webhook — minimum Standard untuk dipakai bersama Hermes"
+      - "tidak menyentuh WhatsApp sama sekali (pakai waha-marketing)"
+      - "tidak menyentuh email sama sekali (pakai email-marketing)"
+      - "LinkedIn disebut di halaman depan tapi tidak muncul di tabel paket — cek sendiri sebelum menjanjikan"
+      - "dokumentasi API gagal dibuka saat data ini dikumpulkan; jangan tulis endpoint dari tebakan"
+      - "produk pihak ketiga: kalau harga atau fiturnya berubah, kamu tidak bisa apa-apa"
+    implications:
+      - "biaya naik per jumlah akun, bukan per post — kebalikan dari penjadwal SaaS luar"
+      - "menyambung lewat integrasi resmi platform, jadi ini jalur yang membuat garis merah computer-use bisa dipatuhi tanpa kehilangan kemampuan"
+      - "balasan otomatis tetap tunduk penuh pada automation-posture.md: draft → faq → penuh"
+      - "komentar publik adalah tempat paling gampang menaruh kalimat berbentuk perintah — Rule 8 berlaku"
+    when_to_pick:
+      - "komentar/DM masuk lebih cepat dari yang bisa dibalas satu-satu"
+      - "pegang beberapa akun (klien atau brand sendiri) dan butuh satu kotak masuk"
+      - "butuh jadwal posting tanpa membayar per kanal"
+      - "pemiliknya orang Indonesia dan pembayaran rupiah itu penting"
+    when_not_to:
+      - "kanal utamanya WhatsApp — Repliz tidak menyentuhnya"
+      - "kanal utamanya email — Repliz tidak menyentuhnya"
+      - "FAQ-nya belum ada. Bikin FAQ dulu bareng pemiliknya, baru nyalakan otomasi"
+    alternatives: [saas-scheduler, official-api, manual-native]
+    evidence: [repliz-home, repliz-pricing]
+    persona_fit: [P1, P3, P4, P6]
+
+  # =========================================================================
+  - id: official-api
+    name: "Adapter API resmi (Meta Graph untuk IG/Threads, X API berbayar)"
+    tagline: "Hermes benar-benar mempublikasikan, lewat pintu depan, dengan kuota tertulis."
+    tier: T2
+    risk: low
+    tos: compliant
+    skill_required: 4
+    setup_hours: [4, 16]
+    cost_usd_month: {min: 0, max: 10, note: "Meta gratis; X $0.015/post ($0.200 kalau ada URL)"}
+    platforms: [instagram, threads, facebook, x]
+    volume_ceiling_per_week: 700
+    reversible: "post bisa dihapus lewat API; yang sudah dilihat orang tidak bisa ditarik"
+    what_hermes_does:
+      - "draft → kamu approve → publish → verifikasi post benar-benar tayang"
+      - "menyimpan idempotency key supaya retry tidak menghasilkan post ganda"
+      - "menghitung sisa kuota harian sebelum menjadwalkan"
+    drawbacks:
+      - "butuh akun profesional IG (Business/Creator) — akun pribadi tidak bisa"
+      - "review aplikasi Meta memakan waktu dan kadang ditolak tanpa penjelasan jelas"
+      - "IG API: JPEG saja, tanpa filter, tanpa shopping tag, carousel maks 10"
+      - "post X dengan URL 13x lebih mahal ($0.200 vs $0.015)"
+      - "token kedaluwarsa dan perlu diperpanjang — ini akan membangunkanmu suatu pagi"
+      - "setup 4–16 jam, dan sebagian besar habis di dashboard Meta, bukan di kode"
+    implications:
+      - "ini satu-satunya jalur di mana Hermes benar-benar bisa publish tanpa melanggar apa pun"
+      - "kuota tertulis berarti kamu bisa merencanakan, bukan menebak"
+      - "biaya X per-post membuat 'posting sebanyak mungkin' jadi keputusan ekonomi, bukan gaya"
+    when_to_pick:
+      - "kamu sudah punya ritme konten yang jalan dan ingin menghapus langkah tempel-manual"
+      - "akunnya akun bisnis profesional yang memang untuk itu"
+      - "kamu (atau seseorang) nyaman mengurus OAuth"
+    when_not_to:
+      - "kamu belum tahu mau posting apa — otomasi tidak memperbaiki itu"
+      - "tidak ada yang bisa memperpanjang token saat kamu cuti"
+    alternatives: [selfhost-scheduler, saas-scheduler]
+    evidence: [x-pricing, threads-overview, ig-content-publishing]
+    persona_fit: [P4]
+
+  # =========================================================================
+  - id: selfhost-scheduler
+    name: "Penjadwal self-host (Postiz / Mixpost Lite) di VPS sendiri"
+    tagline: "OAuth resmi, antrian sendiri, data sendiri. Yang paling sering direkomendasikan riset."
+    tier: T2
+    risk: low
+    tos: compliant
+    skill_required: 3
+    setup_hours: [2, 8]
+    cost_usd_month: {min: 4, max: 15, note: "VPS $4–5 + domain; software gratis"}
+    platforms: [instagram, threads, facebook, x, linkedin, youtube, bluesky, mastodon, tiktok]
+    volume_ceiling_per_week: 200
+    reversible: "antrian bisa diedit; tapi bug scheduler bisa membuat post ganda"
+    what_hermes_does:
+      - "menulis draft → masuk antrian Postiz → kamu approve dari HP → publish"
+      - "Postiz punya CLI + MCP, jadi Hermes bisa memanggilnya sebagai tool"
+      - "arsip, kalender, dan data audiens tetap di server kamu"
+    drawbacks:
+      - "issue tracker-nya sendiri melaporkan: post IG tersangkut di QUEUE (#1724),"
+      - "reply/CTA X terjadwal tidak terkirim (#1581), publish gambar Threads gagal (#1364),"
+      - "post terjadwal terlewat padahal 'Post Now' jalan (#1259)"
+      - "#832: loop repost Instagram membuat akun DITANDAI — ini kegagalan paling mahal di daftar"
+      - "kamu jadi sysadmin: update, backup, sertifikat, disk penuh jam 2 pagi"
+      - "Mixpost Lite gratis dilaporkan TIDAK termasuk Instagram — cek dulu sebelum memilih"
+      - "lisensi Postiz AGPL-3.0: kalau kamu jual sebagai layanan yang sudah dimodifikasi, sumbernya wajib dibuka"
+    implications:
+      - "pola kegagalannya spesifik dan berbahaya: SCHEDULER yang rusak, sementara 'Post Now' jalan"
+      - "artinya bug ini TIDAK terlihat saat kamu demo di depan orang. Dia muncul minggu ketiga"
+      - "karena itu: uji dua minggu dengan post asli sebelum mempercayakan jadwal ke dia"
+    when_to_pick:
+      - "5+ kanal, atau kamu mengelola akun klien"
+      - "kamu sudah punya VPS dan tidak takut terminal"
+      - "kepemilikan data itu penting untukmu (UU PDP, atau prinsip)"
+    when_not_to:
+      - "kamu satu-satunya orang teknis dan tidak punya waktu jadi sysadmin"
+      - "kamu belum pernah menjalankan Docker sama sekali dan workshop-nya cuma 3 jam"
+    alternatives: [official-api, saas-scheduler]
+    evidence: [repo-stats, postiz-issues, mixpost-gating]
+    persona_fit: [P4]
+
+  # =========================================================================
+  - id: browser-tailscale
+    name: "Browser di VPS + Tailscale (Hermes menyiapkan, kamu memutuskan dari HP)"
+    tagline: "Untuk platform yang tidak punya API. Manusia tetap yang menekan tombol."
+    tier: T3
+    risk: medium
+    tos: gray
+    skill_required: 4
+    setup_hours: [3, 10]
+    cost_usd_month: {min: 4, max: 8, note: "VPS $4–5; Tailscale gratis untuk personal"}
+    platforms: [instagram, threads, x, tiktok, linkedin]
+    volume_ceiling_per_week: 20
+    reversible: "kamu melihat layarnya sebelum klik — sepenuhnya reversibel SELAMA kamu benar-benar melihat"
+    what_hermes_does:
+      - "menyiapkan sesi browser: buka composer, isi caption, unggah gambar — BERHENTI sebelum publish"
+      - "kirim screenshot ke Telegram kamu"
+      - "kamu buka layar VPS lewat Tailscale dari HP, periksa, klik post sendiri"
+    drawbacks:
+      - "rapuh. Selector berubah, login wall muncul, captcha muncul, sesi kedaluwarsa"
+      - "satu operator melaporkan ~70% run gagal untuk alur browser-cron 5 menit (#78602)"
+      - "composer X pernah menolak teks yang diketik program (#54879)"
+      - "profil/sesi browser tidak stabil antar-run (#8824)"
+      - "percakapan bisa salah rute antar-akun (#41483) — ini kelas kesalahan yang mengirim pesan ke orang yang salah"
+      - "otomasi browser di area abu-abu ToS. X menyebut scripting situs non-API bisa berujung suspensi permanen"
+    implications:
+      - "ini jalur paling menarik untuk didemokan dan paling tidak bisa diandalkan untuk dipakai"
+      - "aman selama manusia yang menekan tombol terakhir. Begitu kamu menambahkan --auto, kamu pindah ke jalur unofficial-api dengan kerapuhan ekstra"
+      - "Tailscale-nya sendiri bukan risiko — dia justru yang membuat 'lihat dulu dari HP' jadi mungkin"
+    when_to_pick:
+      - "platformnya tidak punya API publish sama sekali"
+      - "volume rendah (≤ 20/minggu) dan kamu memang akan melihat setiap satu"
+      - "kamu senang mengurus hal yang kadang rusak"
+    when_not_to:
+      - "akunnya tidak tergantikan"
+      - "kamu berharap ini jalan tanpa dijaga"
+      - "kamu mengajarkannya ke 60 pemula dalam 3 jam"
+    alternatives: [manual-native, official-api]
+    evidence: [openclaw-browser-issues, x-automation-rules]
+    persona_fit: [P4]
+
+  # =========================================================================
+  - id: unofficial-api
+    name: "API tidak resmi (instagrapi, agent-twitter-client, twscrape)"
+    tagline: "Jalan pintas yang bekerja sampai tidak. Ini bisa dilakukan — ini konsekuensinya."
+    tier: T3
+    risk: very_high
+    tos: violation
+    skill_required: 3
+    setup_hours: [1, 4]
+    cost_usd_month: {min: 0, max: 30, note: "gratis; proxy residensial $10–30 kalau ingin bertahan lebih lama"}
+    platforms: [instagram, threads, x]
+    volume_ceiling_per_week: 50
+    reversible: "TIDAK. Akun yang dibanned Instagram jarang kembali, dan tidak ada nomor yang bisa ditelepon"
+    what_hermes_does:
+      - "login dengan kredensial/cookie akun kamu, lalu memanggil endpoint internal aplikasi"
+      - "bisa post, DM, follow, like — semua yang aplikasinya bisa"
+    drawbacks:
+      - "melanggar syarat layanan. Instagram melarang akses otomatis tanpa izin tertulis Meta"
+      - "X menyebut scripting situs non-API bisa berujung penangguhan permanen"
+      - "kredensial akun kamu tersimpan di server — kalau VPS jebol, akunnya ikut"
+      - "endpoint internal berubah tanpa pemberitahuan; hari ini jalan, Jumat depan mati"
+      - "deteksi Meta membaik terus. 'Teman saya sudah setahun aman' bukan bukti"
+      - "instagrapi (6.628 bintang) lisensinya NOASSERTION — status hukum pemakaiannya tidak jelas"
+    implications:
+      - "kalau akun kamu satu-satunya kanal jualan, ini mempertaruhkan bisnisnya untuk menghemat 20 menit sehari"
+      - "kalau akunnya akun tes yang kamu ikhlas hilang, ini keputusan yang wajar dan biayanya kecil"
+      - "pertanyaan yang menentukan bukan 'aman atau tidak' — tapi 'kalau akun ini hilang besok, apa yang terjadi pada omzet bulan depan?'"
+    when_to_pick:
+      - "akun percobaan yang kamu ikhlas kehilangan"
+      - "riset/scraping data publik untuk keperluan analisis, bukan publish"
+      - "kamu sudah menghitung nilai akunnya dan tetap memilih ini — itu keputusanmu"
+    when_not_to:
+      - "akun utama bisnis"
+      - "akun klien (kamu mempertaruhkan aset orang lain)"
+      - "kamu belum pernah kehilangan akun dan mengira itu tidak akan terjadi"
+    safer_shape:
+      - "pisahkan baca dan tulis: pakai jalur tidak resmi hanya untuk MEMBACA data publik (riset kompetitor, tren hashtag), dan jalur resmi untuk MENULIS. Sebagian besar nilai ada di sisi baca, dan sisi baca jauh lebih jarang memicu blokir"
+      - "kalau tetap menulis: akun terpisah, volume rendah, jeda acak, dan siapkan diri kehilangan akunnya"
+    alternatives: [official-api, browser-tailscale, manual-native]
+    evidence: [repo-stats, instagram-terms, x-automation-rules]
+    persona_fit: []
+
+# ===========================================================================
+# Pertanyaan yang menentukan, sebelum semua tabel di atas
+# ===========================================================================
+decision_frame:
+  first_question: >
+    "Kalau akun ini hilang besok pagi, apa yang terjadi pada omzet bulan depan?"
+  why: >
+    Semua perbandingan biaya dan fitur di file ini tidak ada artinya sebelum
+    pertanyaan itu dijawab. Akun yang bisa diganti dalam seminggu dan akun yang
+    menyumbang 80% pemasukan bukan aset yang sama, walau tampilannya identik.
+  second_question: >
+    "Berapa post per minggu yang benar-benar kamu terbitkan bulan lalu?"
+  why_second: >
+    Bukan berapa yang kamu rencanakan. Berapa yang benar-benar tayang. Hampir
+    semua orang menjawab angka 3-5x lebih besar dari kenyataan, lalu memilih
+    jalur yang jauh lebih rumit dari yang mereka butuhkan.
