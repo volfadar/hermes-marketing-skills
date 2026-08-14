@@ -25,13 +25,14 @@ HOME_DIR="${HERMES_HOME:-$HOME/.hermes}"
 ONLY=()
 WITH_GUARD=0
 MODE=install
+HOME_EXPLICIT=0
 
 die() { echo "ERROR: $*" >&2; exit 1; }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --only)       IFS=',' read -ra ONLY <<< "$2"; shift 2 ;;
-    --home)       HOME_DIR="$2"; shift 2 ;;
+    --home)       HOME_DIR="$2"; HOME_EXPLICIT=1; shift 2 ;;
     --list)       MODE=list; shift ;;
     --with-guard) WITH_GUARD=1; shift ;;
     -h|--help)    sed -n '2,14p' "$0"; exit 0 ;;
@@ -62,8 +63,11 @@ else
   SELECTED=("${SKILLS[@]}")
 fi
 
-[[ -d "$HOME_DIR" ]] || [[ "$(basename "$HOME_DIR")" == ".hermes" ]] \
-  || die "$HOME_DIR bukan tampak seperti Hermes home. Pakai --home <dir> yang benar."
+# --home eksplisit = keputusan sadar; buat kalau belum ada. Tanpa itu,
+# home yang tidak ada kemungkinan besar salah ketik / Hermes belum terpasang.
+if [[ ! -d "$HOME_DIR" && $HOME_EXPLICIT -eq 0 && "$(basename "$HOME_DIR")" != ".hermes" ]]; then
+  die "$HOME_DIR tidak ada. Kalau ini memang Hermes home-mu, pakai --home <dir>.\nKalau Hermes belum terpasang, pasang dulu lalu ulangi."
+fi
 mkdir -p "$HOME_DIR/skills"
 
 ok=0
@@ -84,11 +88,14 @@ for s in "${SELECTED[@]}"; do
 done
 [[ $ok -gt 0 ]] || die "tidak ada skill yang terpasang"
 
-# Verifikasi lewat Hermes sendiri kalau binary-nya ada
+# Verifikasi lewat Hermes sendiri kalau binary-nya ada.
+# Tanpa `pipefail`+`grep -q`: grep -q menutup pipe lebih awal, hermes kena
+# SIGPIPE, dan pipeline dilaporkan gagal padahal skill terlihat.
 if command -v hermes >/dev/null 2>&1; then
+  listing="$(HERMES_HOME="$HOME_DIR" hermes skills list 2>/dev/null || true)"
   missing=0
   for s in "${SELECTED[@]}"; do
-    if ! HERMES_HOME="$HOME_DIR" hermes skills list 2>/dev/null | grep -q "$s"; then
+    if ! grep -q "$s" <<<"$listing"; then
       echo "  ✗ $s tidak terlihat oleh 'hermes skills list'" >&2
       missing=$((missing+1))
     fi

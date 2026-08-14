@@ -37,10 +37,24 @@ find "$STAGE/$NAME" -path '*/hooks/*' -type f -exec chmod +x {} +
 chmod +x "$STAGE/$NAME/installer/"*.sh
 
 rm -f "$DIST/$NAME.zip"
-( cd "$STAGE" && zip -qr "$DIST/$NAME.zip" "$NAME" )
+if command -v zip >/dev/null 2>&1; then
+  ( cd "$STAGE" && zip -qr "$DIST/$NAME.zip" "$NAME" )
+else
+  python3 - "$STAGE" "$DIST/$NAME.zip" "$NAME" <<'PY'
+import os, sys, zipfile
+stage, out, name = sys.argv[1], sys.argv[2], sys.argv[3]
+with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+    for root, _dirs, files in os.walk(os.path.join(stage, name)):
+        for f in sorted(files):
+            full = os.path.join(root, f)
+            z.write(full, os.path.relpath(full, stage))
+PY
+fi
 
 if command -v sha256sum >/dev/null 2>&1; then
   ( cd "$DIST" && sha256sum "$NAME.zip" > "$NAME.zip.sha256" )
+elif command -v shasum >/dev/null 2>&1; then
+  ( cd "$DIST" && shasum -a 256 "$NAME.zip" > "$NAME.zip.sha256" )
 fi
 
 size=$(du -h "$DIST/$NAME.zip" | cut -f1)
