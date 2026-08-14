@@ -38,8 +38,8 @@ fi
 
 hdr "3. CDP endpoint (port ${PORT})"
 if VER=$(curl -sf --max-time 3 "http://127.0.0.1:${PORT}/json/version" 2>/dev/null); then
-  BROWSER=$(echo "$VER" | python3 -c "import sys,json;print(json.load(sys.stdin).get('Browser','?'))" 2>/dev/null)
-  UA=$(echo "$VER" | python3 -c "import sys,json;print(json.load(sys.stdin).get('User-Agent','?'))" 2>/dev/null)
+  BROWSER=$(printf '%s' "$VER" | python3 -c "import sys,json;print(json.load(sys.stdin).get('Browser','?'))" 2>/dev/null)
+  UA=$(printf '%s' "$VER" | python3 -c "import sys,json;print(json.load(sys.stdin).get('User-Agent','?'))" 2>/dev/null)
   p_ok "CDP reachable — ${BROWSER}"
   p_ok "User-Agent: ${UA}"
 else

@@ -45,6 +45,28 @@ EOF
 chmod 600 "$CFG_DIR/config.env"   # api key is sensitive
 ok "Config saved: $CFG_DIR/config.env (chmod 600)"
 
+# HTTP helper - python3 urllib: header, body, dan timeout di satu tempat.
+http_req() {  # http_req METHOD BASE_URL PATH [API_KEY] [JSON_BODY]
+  python3 - "$@" <<'PYEOF'
+import sys, urllib.request, urllib.error
+method, base, path = sys.argv[1], sys.argv[2].rstrip("/"), sys.argv[3]
+key = sys.argv[4] if len(sys.argv) > 4 else ""
+body = sys.argv[5] if len(sys.argv) > 5 else ""
+req = urllib.request.Request(base + path, method=method)
+if key: req.add_header("X-Api-Key", key)
+if body:
+    req.add_header("Content-Type", "application/json")
+    req.data = body.encode()
+try:
+    with urllib.request.urlopen(req, timeout=30) as r:
+        sys.stdout.write(r.read().decode())
+except urllib.error.HTTPError as e:
+    try: sys.stdout.write(e.read().decode())
+    except Exception: pass
+except Exception as e:
+    print(f"http error: {e}", file=sys.stderr); sys.exit(1)
+PYEOF
+}
 section "1/4  Cek WAHA server reachable"
 CODE=$(curl -s -o /dev/null -w "%{http_code}" "$WAHA_URL/health" \
        -H "X-Api-Key: $API_KEY" --max-time 10 || echo "000")
@@ -56,9 +78,9 @@ else
 fi
 
 section "2/4  Cek WAHA version + tier"
-VER=$(curl -s "$WAHA_URL/" -H "X-Api-Key: $API_KEY" --max-time 10 2>/dev/null || \
-      curl -s "$WAHA_URL/api/version" -H "X-Api-Key: $API_KEY" --max-time 10 2>/dev/null || echo "{}")
-echo "$VER" | python3 -c "
+VER=$(http_req GET "$WAHA_URL" "/" "$API_KEY" 2>/dev/null || \
+      http_req GET "$WAHA_URL" "/api/version" "$API_KEY" 2>/dev/null || echo "{}")
+printf '%s' "$VER" | python3 -c "
 import sys, json
 try:
     d = json.loads(sys.stdin.read())
@@ -67,12 +89,12 @@ except: print('  \033[1;33m⚠\033[0m tidak bisa parse version response')
 "
 
 section "3/4  Cek session '$SESSION'"
-SESS=$(curl -s "$WAHA_URL/api/sessions/$SESSION" -H "X-Api-Key: $API_KEY" --max-time 10 2>/dev/null)
-STATUS=$(echo "$SESS" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status','?'))" 2>/dev/null || echo "?")
+SESS=$(http_req GET "$WAHA_URL" "/api/sessions/$SESSION" "$API_KEY" 2>/dev/null)
+STATUS=$(printf '%s' "$SESS" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status','?'))" 2>/dev/null || echo "?")
 if [[ "$STATUS" == "WORKING" ]]; then
   ok "Session '$SESSION': WORKING"
-  ME=$(curl -s "$WAHA_URL/api/sessions/$SESSION/me" -H "X-Api-Key: $API_KEY" --max-time 10 2>/dev/null)
-  echo "$ME" | python3 -c "
+  ME=$(http_req GET "$WAHA_URL" "/api/sessions/$SESSION/me" "$API_KEY" 2>/dev/null)
+  printf '%s' "$ME" | python3 -c "
 import sys,json
 d=json.load(sys.stdin)
 print(f'  \033[1;32m✓\033[0m akun: {d.get(\"pushName\",\"?\")} ({d.get(\"id\",\"?\")})')
@@ -86,8 +108,8 @@ else
 fi
 
 section "4/4  Cek labels (butuh WhatsApp Business account)"
-LBL=$(curl -s "$WAHA_URL/api/$SESSION/labels" -H "X-Api-Key: $API_KEY" --max-time 10 2>/dev/null)
-NL=$(echo "$LBL" | python3 -c "import sys,json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
+LBL=$(http_req GET "$WAHA_URL" "/api/$SESSION/labels" "$API_KEY" 2>/dev/null)
+NL=$(printf '%s' "$LBL" | python3 -c "import sys,json; print(len(json.load(sys.stdin)))" 2>/dev/null || echo "0")
 if [[ "$NL" -gt 0 ]]; then
   ok "Labels tersedia: $NL (WhatsApp Business)"
 else

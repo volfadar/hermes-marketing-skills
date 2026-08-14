@@ -59,7 +59,7 @@ if command -v hermes >/dev/null 2>&1; then
   ok "Hermes: $(hermes --version 2>/dev/null | head -1)"
 else
   warn "Hermes tidak di PATH. Skill masih bisa setup browser, tapi auto-wire dilewati."
-  warn "Install Hermes: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"
+  warn "Install Hermes: lihat https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
 fi
 
 # --- Optional Tailscale awareness (do not require) ---
@@ -118,7 +118,8 @@ else
 fi
 
 # Report what fingerprint it presents as
-UA=$(curl -sf "http://127.0.0.1:${PORT}/json/version" 2>/dev/null | python3 -c "import sys,json;print(json.load(sys.stdin).get('User-Agent','?'))" 2>/dev/null || echo "?")
+UA_RAW=$(curl -sf "http://127.0.0.1:${PORT}/json/version" 2>/dev/null || echo "{}")
+UA=$(printf '%s' "$UA_RAW" | python3 -c "import sys,json;print(json.load(sys.stdin).get('User-Agent','?'))" 2>/dev/null || echo "?")
 ok "User-Agent fingerprint: ${UA}"
 
 section "4/5  Wire Hermes ke CDP endpoint"

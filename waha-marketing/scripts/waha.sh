@@ -211,20 +211,36 @@ MSG
   return 0
 }
 
-# Helper for GET
-get() {
-  local path="$1"
-  curl -s "${WAHA_URL}${path}" -H "X-Api-Key: ${WAHA_API_KEY}" --max-time 30
+# HTTP helper - python3 urllib: header, body, dan timeout di satu tempat.
+http_req() {  # http_req METHOD BASE_URL PATH [API_KEY] [JSON_BODY]
+  python3 - "$@" <<'PYEOF'
+import sys, urllib.request, urllib.error
+method, base, path = sys.argv[1], sys.argv[2].rstrip("/"), sys.argv[3]
+key = sys.argv[4] if len(sys.argv) > 4 else ""
+body = sys.argv[5] if len(sys.argv) > 5 else ""
+req = urllib.request.Request(base + path, method=method)
+if key: req.add_header("X-Api-Key", key)
+if body:
+    req.add_header("Content-Type", "application/json")
+    req.data = body.encode()
+try:
+    with urllib.request.urlopen(req, timeout=30) as r:
+        sys.stdout.write(r.read().decode())
+except urllib.error.HTTPError as e:
+    try: sys.stdout.write(e.read().decode())
+    except Exception: pass
+except Exception as e:
+    print(f"http error: {e}", file=sys.stderr); sys.exit(1)
+PYEOF
 }
+
+# Helper for GET
+get() { http_req GET "$WAHA_URL" "$1" "$WAHA_API_KEY"; }
 
 # Helper for POST/PUT with body
 post() {
   local method="$1" path="$2" body="$3"
-  curl -s -X "$method" "${WAHA_URL}${path}" \
-    -H "X-Api-Key: ${WAHA_API_KEY}" \
-    -H "Content-Type: application/json" \
-    --max-time 30 \
-    ${body:+-d "$body"}
+  http_req "$method" "$WAHA_URL" "$path" "$WAHA_API_KEY" ${body:+"$body"}
 }
 
 pp() { python3 -m json.tool 2>/dev/null || cat; }

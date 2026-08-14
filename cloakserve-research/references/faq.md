@@ -55,12 +55,7 @@ Model ini **murah** (~$0.30/M token) tapi **lemah di multi-step abstrak**. Strat
 2. **Prompt eksplisit bertingkat** (lihat `templates/`) → model lemah bisa ikuti.
 3. **Memory + skill** → workflow ter-store, tidak perlu di-re-explain.
 
-Mau model lebih pintar? Edit `~/.hermes/config.yaml`:
-```yaml
-model:
-  default: "anthropic/claude-sonnet-4.5"   # atau nous/hermes-4-pro, gpt-5, dll.
-  provider: "openrouter"                    # atau anthropic, openai, nous
-```
+Mau model lebih pintar? Set lewat `hermes config`: `model.default` = mis. `anthropic/claude-sonnet-4.5` (atau nous/hermes-4-pro, gpt-5, dll.), `model.provider` = `openrouter` (atau anthropic, openai, nous).
 Tapi biaya naik 10-30x. Untuk riset pasar, deepseek-v4-flash **cukup** kalau pakai templates kami.
 
 ## Q: `initialize.sh` gagal di "Pull image CloakBrowser". Kenapa?
@@ -79,12 +74,7 @@ Config kamu kehilangan `model.default`. Ini pernah jadi bug `wire-hermes.sh` ver
 ```bash
 bash scripts/doctor.sh   # akan tunjukkan kalau model.default hilang
 ```
-Atau edit manual `~/.hermes/config.yaml`:
-```yaml
-model:
-  default: "deepseek/deepseek-v4-flash-0731"
-  provider: "openrouter"
-```
+Atau set lewat `hermes config`: `model.default` = `deepseek/deepseek-v4-flash-0731`, `model.provider` = `openrouter`.
 
 ## Q: Bisakah setup tanpa Docker (install CloakBrowser langsung di Python)?
 
@@ -112,5 +102,5 @@ Lihat `cost.md` untuk breakdown detail + strategi minimize.
 bash scripts/stop.sh                            # stop container
 docker rmi cloakhq/cloakbrowser:latest          # remove image
 hermes skills uninstall cloakserve-research     # remove skill
-# Hapus baris browser.cdp_url dari ~/.hermes/config.yaml
+# Hapus setting browser.cdp_url lewat `hermes config`
 ```

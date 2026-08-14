@@ -43,8 +43,9 @@ echo "=== Step 1: Install Tailscale di mesin ini ==="
 if command -v tailscale >/dev/null 2>&1; then
   echo "tailscale sudah terinstall: $(tailscale version 2>/dev/null | head -1)"
 else
-  echo "Install via script resmi..."
-  curl -fsSL https://tailscale.com/install.sh | sh
+  echo "Install dulu mengikuti panduan resmi: https://tailscale.com/download"
+  echo "lalu jalankan script ini lagi."
+  exit 1
 fi
 
 echo ""

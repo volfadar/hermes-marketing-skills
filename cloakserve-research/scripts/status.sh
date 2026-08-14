@@ -18,7 +18,7 @@ echo ""
 echo "=== CDP endpoint (port ${PORT}) ==="
 if VER=$(curl -sf --max-time 3 "http://127.0.0.1:${PORT}/json/version" 2>/dev/null); then
   echo "cdp: reachable"
-  echo "$VER" | python3 -c "import sys,json; d=json.load(sys.stdin); print('browser:', d.get('Browser')); print('user-agent:', d.get('User-Agent'))" 2>/dev/null
+  printf '%s' "$VER" | python3 -c "import sys,json; d=json.load(sys.stdin); print('browser:', d.get('Browser')); print('user-agent:', d.get('User-Agent'))" 2>/dev/null
   echo "cdp_url: ws://127.0.0.1:${PORT}"
 else
   echo "cdp: NOT reachable on port ${PORT}"

@@ -55,12 +55,7 @@ Urut berdasarkan gejala. Jalankan `bash scripts/doctor.sh` dulu untuk diagnosis 
 
 ### Error "404 No endpoints found that support tool use"
 **Sebab:** Config kehilangan `model.default`. Bug versi awal `wire-hermes.sh` — sudah diperbaiki.
-**Fix:** Jalankan `bash scripts/doctor.sh` — akan tunjukkan kalau model.default hilang. Atau edit manual `~/.hermes/config.yaml`:
-```yaml
-model:
-  default: "deepseek/deepseek-v4-flash-0731"
-  provider: "openrouter"
-```
+**Fix:** Jalankan `bash scripts/doctor.sh` — akan tunjukkan kalau model.default hilang. Atau set lewat `hermes config`: `model.default` = `deepseek/deepseek-v4-flash-0731`, `model.provider` = `openrouter`.
 
 ### Hermes timeout 300s saat disuruh "ikuti SKILL.md"
 **Sebab:** Model lemah (deepseek-v4-flash) tidak kuat multi-step abstrak.
