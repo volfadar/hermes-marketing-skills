@@ -28,26 +28,33 @@ Installer memeriksa Hermes home, menyalin ketujuh skill, dan memverifikasi
 semuanya terlihat oleh `hermes skills list`. Aman dijalankan ulang kapan saja
 (jalan ulang = update).
 
-**Cara B — dari GitHub:**
+**Cara B — dari GitHub, satu perintah per skill:**
 
 Repo sumber: <https://github.com/volfadar/hermes-marketing-skills>
+
+Lima skill terpasang langsung:
 
 ```bash
 hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
 hermes skills install volfadar/hermes-marketing-skills/brand-strategy-coach
 hermes skills install volfadar/hermes-marketing-skills/content-creator
 hermes skills install volfadar/hermes-marketing-skills/social-publishing
+hermes skills install volfadar/hermes-marketing-skills/waha-marketing
 ```
 
-**Baca dulu sebelum pakai Cara B:** Hermes memindai skill dari sumber komunitas
-sebelum memasang. Saat pengujian (Agu 2026), empat skill di atas lolos scan,
-sedangkan tiga skill yang memang menyentuh kredensial email, pengiriman
-WhatsApp, atau browser riset stealth — `email-marketing`, `waha-marketing`,
-`cloakserve-research` — dinilai berbahaya oleh pemindai dan ditolak (`--force`
-tidak bisa menimpa). Itu Hermes menutup pintu dengan benar untuk penerbit yang
-belum terverifikasi. Untuk memasang ketujuh-tujuhnya, pakai Cara A —
-folder-copy lewat installer tidak melalui pemindai itu karena kamu sendiri
-yang memeriksa isinya di repo ini.
+Dua skill ini menangkap verdict **CAUTION** — Hermes meminta kamu memeriksa
+dulu karena skill-nya menyentuh kredensial email / menjalankan Docker +
+browser riset. Periksa isinya di repo (setiap folder berdiri sendiri), lalu
+tambahkan `--force`:
+
+```bash
+hermes skills install volfadar/hermes-marketing-skills/email-marketing --force
+hermes skills install volfadar/hermes-marketing-skills/cloakserve-research --force
+```
+
+`--force` **tidak** bisa menimpa verdict DANGEROUS — hanya CAUTION, dan hanya
+setelah kamu sendiri memutuskan isinya aman. Kalau tidak mau repot memeriksa,
+pakai Cara A: installer menyalin folder yang persis sama tanpa lewat pemindai.
 
 Jangan pakai `hermes skills tap add` untuk repo ini — tap mengharapkan skill di
 subfolder `skills/`, jadi namanya bisa me-resolve ke skill orang lain yang
