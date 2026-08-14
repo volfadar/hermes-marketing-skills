@@ -4,6 +4,39 @@ Untuk penyelenggara. Tiga varian pesan siap tempel + checklist + FAQ.
 Prinsipnya: **satu jalur utama, dua langkah, satu prompt pertama.**
 Semakin banyak pilihan di pesan, semakin sedikit yang mencoba.
 
+## Prasyarat peserta — apa yang harus mereka punya DULU
+
+Zip skill tidak berguna tanpa dua hal ini. Diverifikasi ke dokumen resmi
+Hermes (<https://hermes-agent.nousresearch.com/docs/getting-started/quickstart>,
+14 Agu 2026):
+
+**1. Hermes Agent terpasang** (pilih satu):
+
+| Cara | Perintah |
+|---|---|
+| Installer Desktop macOS/Windows (**resmi justru merekomendasikan ini**) | unduh dari dokumen quickstart |
+| Linux / macOS / WSL2 / Termux | `curl -fsSL https://hermes-agent.nousresearch.com/install.sh \| bash` |
+| Windows native (PowerShell) | `iex (irm https://hermes-agent.nousresearch.com/install.ps1)` |
+
+**2. Model aktif** — jalur termudah, tanpa API key:
+
+```bash
+hermes setup --portal
+```
+
+Satu OAuth login → model + Tool Gateway aktif sekaligus (jalur "Quick Setup"
+yang direkomendasikan docs). Alternatif: `hermes model` untuk pakai key
+sendiri (OpenRouter, dsb.). Verifikasi: kirim satu chat sungguhan dan pastikan
+dijawab, BARU pasang skill.
+
+⚠️ **Jangan pilih mode "Blank Slate" saat setup** — mode itu mematikan
+toolset skills bawaan; kalau sudah terlanjur, nyalakan lagi dengan
+`hermes skills opt-in --sync`.
+
+Setelah itu baru: unzip → `bash installer/install.sh` → `hermes skills list`
+→ 7 skill. Ekstra per skill (opsional): App Password Gmail untuk
+email-marketing; server WAHA untuk waha-marketing; `pip3 install pyyaml`.
+
 ## Checklist sebelum kirim
 
 - [ ] Upload `dist/hermes-marketing-skills-<tanggal>.zip` ke Drive / file
@@ -96,8 +129,9 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 
 | Pertanyaan | Jawaban singkat |
 |---|---|
-| `hermes: command not found` | Hermes Agent-nya belum terpasang — pasang dulu, baru jalankan installer lagi. |
-| Skill tidak muncul di list | Jangan ubah nama folder hasil unzip; jalan ulang `bash installer/install.sh`. |
+| `hermes: command not found` | Hermes Agent-nya belum terpasang — `curl -fsSL https://hermes-agent.nousresearch.com/install.sh \| bash` (Windows PowerShell: `iex (irm https://hermes-agent.nousresearch.com/install.ps1)`). |
+| Hermes jalan tapi tidak menjawab / jawaban aneh | Model belum aktif — `hermes setup --portal` (login sekali, tanpa API key). |
+| Skill tidak muncul di list padahal terpasang | Cek apakah setup-nya dulu memilih "Blank Slate" (mematikan toolset skills) — `hermes skills opt-in --sync`. Kalau bukan: jangan ubah nama folder hasil unzip; jalan ulang installer. |
 | `hermes skills install` ditolak (email/waha/cloakserve) | Memang — pakai zip + installer (Varian A). Kebijakan scan untuk skill komunitas yang memegang kredensial. |
 | Profile tidak kebaca | `pip3 install pyyaml` |
 | Pakai Windows? | Hermes berjalan di WSL/macOS/Linux — jalankan installer dari terminal Hermes-mu berjalan. |
