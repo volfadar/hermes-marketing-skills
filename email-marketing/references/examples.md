@@ -129,7 +129,7 @@ mengungkitnya lagi.
 # Tiap 30 menit jam kerja — jawab FAQ, sisanya kirim ke HP kamu. T2.
 */30 7-21 * * * cd ~/.hermes/skills/email-marketing && \
   bash scripts/autoreply.sh respond --mode faq --confirm --holding \
-    --notify-cmd 'curl -s -X POST "https://api.telegram.org/bot'"$TG_TOKEN"'/sendMessage" -d chat_id='"$TG_CHAT"' -d text={msg} >/dev/null'
+    --notify-cmd 'bash ~/bin/notif-telegram.sh {msg}'
 
 # 21:30 — ringkasan hari ini
 30 21 * * * cd ~/.hermes/skills/email-marketing && \
