@@ -38,7 +38,6 @@ WARN never fails the run: it is advice, and advice must not block a send.
 
     python3 copycheck.py templates.txt
     python3 copycheck.py --text "Halo {name}, promo hari ini..."
-    echo "..." | python3 copycheck.py -
 """
 from __future__ import annotations
 
