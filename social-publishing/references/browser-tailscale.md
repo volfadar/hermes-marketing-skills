@@ -72,8 +72,8 @@ Gratis untuk pemakaian pribadi, dan setup-nya sekitar 10 menit.
 ### 1. Tailscale di VPS dan HP
 
 ```bash
-# di VPS
-curl -fsSL https://tailscale.com/install.sh | sh
+# di VPS: pasang Tailscale mengikuti panduan resmi
+# https://tailscale.com/download (pilih distro VPS-mu)
 sudo tailscale up
 # ikuti link login yang muncul
 

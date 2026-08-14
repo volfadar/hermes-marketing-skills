@@ -13,16 +13,9 @@ cp -R brand-strategy-coach ~/.hermes/skills/brand-strategy-coach
 ## Pemakaian (1-on-1 per peserta)
 
 Untuk sesi produksi yang harus reproducible, matikan background
-skill review. Hermes secara default dapat mencoba mengedit skill di tengah sesi:
-
-```yaml
-# ~/.hermes/config.yaml
-skills:
-  creation_nudge_interval: 0
-  write_approval: true
-provider_routing:
-  data_collection: deny
-```
+skill review — Hermes secara default dapat mencoba mengedit skill di tengah
+sesi. Lewat `hermes config`, set `skills.creation_nudge_interval: 0` dan
+`skills.write_approval: true`, lalu `provider_routing.data_collection: deny`.
 
 Jalankan review/improvement skill sebagai sesi terpisah setelah coaching. Opsi
 `write_approval` juga menahan perubahan skill lain sampai pengguna menyetujuinya.
