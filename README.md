@@ -34,17 +34,20 @@ Repo sumber: <https://github.com/volfadar/hermes-marketing-skills>
 
 ```bash
 hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
+hermes skills install volfadar/hermes-marketing-skills/brand-strategy-coach
 hermes skills install volfadar/hermes-marketing-skills/content-creator
+hermes skills install volfadar/hermes-marketing-skills/social-publishing
 ```
 
 **Baca dulu sebelum pakai Cara B:** Hermes memindai skill dari sumber komunitas
-sebelum memasang. Saat pengujian (Agu 2026), `marketing-orchestrator` dan
-`content-creator` lolos scan, sedangkan lima skill lain — yang memang menyentuh
-kredensial email, pengiriman WhatsApp, atau browser riset — dinilai
-DANGEROUS oleh pemindai dan ditolak (`--force` tidak bisa menimpa). Itu Hermes
-menutup pintu dengan benar untuk penerbit yang belum terverifikasi. Untuk
-memasang ketujuh-tujuhnya, pakai Cara A — folder-copy lewat installer tidak
-melalui pemindai itu karena kamu sendiri yang memeriksa isinya di repo ini.
+sebelum memasang. Saat pengujian (Agu 2026), empat skill di atas lolos scan,
+sedangkan tiga skill yang memang menyentuh kredensial email, pengiriman
+WhatsApp, atau browser riset stealth — `email-marketing`, `waha-marketing`,
+`cloakserve-research` — dinilai berbahaya oleh pemindai dan ditolak (`--force`
+tidak bisa menimpa). Itu Hermes menutup pintu dengan benar untuk penerbit yang
+belum terverifikasi. Untuk memasang ketujuh-tujuhnya, pakai Cara A —
+folder-copy lewat installer tidak melalui pemindai itu karena kamu sendiri
+yang memeriksa isinya di repo ini.
 
 Jangan pakai `hermes skills tap add` untuk repo ini — tap mengharapkan skill di
 subfolder `skills/`, jadi namanya bisa me-resolve ke skill orang lain yang
