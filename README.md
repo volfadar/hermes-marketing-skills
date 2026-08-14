@@ -28,15 +28,27 @@ Installer memeriksa Hermes home, menyalin ketujuh skill, dan memverifikasi
 semuanya terlihat oleh `hermes skills list`. Aman dijalankan ulang kapan saja
 (jalan ulang = update).
 
-**Cara B — dari GitHub (kalau repo ini sudah di-publish):**
+**Cara B — dari GitHub:**
+
+Repo sumber: <https://github.com/volfadar/hermes-marketing-skills>
 
 ```bash
-# semua sekaligus, repo sebagai sumber skill:
-hermes skills tap add volfadar/hermes-marketing-skills
-
-# atau satu per satu:
-hermes skills install volfadar/hermes-marketing-skills/email-marketing
+hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
+hermes skills install volfadar/hermes-marketing-skills/content-creator
 ```
+
+**Baca dulu sebelum pakai Cara B:** Hermes memindai skill dari sumber komunitas
+sebelum memasang. Saat pengujian (Agu 2026), `marketing-orchestrator` dan
+`content-creator` lolos scan, sedangkan lima skill lain — yang memang menyentuh
+kredensial email, pengiriman WhatsApp, atau browser riset — dinilai
+DANGEROUS oleh pemindai dan ditolak (`--force` tidak bisa menimpa). Itu Hermes
+menutup pintu dengan benar untuk penerbit yang belum terverifikasi. Untuk
+memasang ketujuh-tujuhnya, pakai Cara A — folder-copy lewat installer tidak
+melalui pemindai itu karena kamu sendiri yang memeriksa isinya di repo ini.
+
+Jangan pakai `hermes skills tap add` untuk repo ini — tap mengharapkan skill di
+subfolder `skills/`, jadi namanya bisa me-resolve ke skill orang lain yang
+kebetulan sama. Cukup pakai identifier lengkap di atas.
 
 **Cara C — salin manual (tanpa installer):**
 
