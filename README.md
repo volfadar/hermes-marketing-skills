@@ -32,10 +32,10 @@ semuanya terlihat oleh `hermes skills list`. Aman dijalankan ulang kapan saja
 
 ```bash
 # semua sekaligus, repo sebagai sumber skill:
-hermes skills tap add <user>/hermes-marketing-skills
+hermes skills tap add volfadar/hermes-marketing-skills
 
 # atau satu per satu:
-hermes skills install <user>/hermes-marketing-skills/email-marketing
+hermes skills install volfadar/hermes-marketing-skills/email-marketing
 ```
 
 **Cara C — salin manual (tanpa installer):**

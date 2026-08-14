@@ -46,14 +46,14 @@ yang sempit di `audit.sh` — jangan matikan audit.
 
 ## Push ke GitHub (sewaktu-waktu dibutuhkan)
 
-Repo ini sudah `git init` + commit awal. Untuk mengaktifkan jalur install
-online:
+Repo sudah live di https://github.com/volfadar/hermes-marketing-skills.
+Jalur install online aktif. Untuk mengirim pembaruan:
 
 ```bash
-git remote add origin git@github.com:<user>/hermes-marketing-skills.git
+git push (remote sudah dikonfigurasi: https://github.com/volfadar/hermes-marketing-skills)
 git push -u origin main
 ```
 
-Lalu README peserta (Cara B) tinggal mengganti `<user>` dengan nama akun.
+README peserta (Cara B) sudah memakai nama akun `volfadar`.
 Tidak ada perubahan struktur yang dibutuhkan — setiap folder skill sudah
 berdiri sendiri dengan SKILL.md di akar folder.
