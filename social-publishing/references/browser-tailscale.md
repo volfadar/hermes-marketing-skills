@@ -74,7 +74,8 @@ Gratis untuk pemakaian pribadi, dan setup-nya sekitar 10 menit.
 ```bash
 # di VPS: pasang Tailscale mengikuti panduan resmi
 # https://tailscale.com/download (pilih distro VPS-mu)
-sudo tailscale up
+# lalu jalankan sebagai root/admin:
+tailscale up
 # ikuti link login yang muncul
 
 # di HP: pasang aplikasi Tailscale, login dengan akun yang sama
@@ -91,7 +92,8 @@ Catat nama VPS-nya (mis. `hermes-vps`). Itu yang kamu pakai, bukan IP publik.
 ### 2. Browser dengan layar yang bisa dilihat
 
 ```bash
-sudo apt install -y xvfb x11vnc chromium-browser novnc websockify
+# sebagai root/admin di VPS:
+apt install -y xvfb x11vnc chromium-browser novnc websockify
 
 # layar virtual
 Xvfb :99 -screen 0 1280x900x24 &
