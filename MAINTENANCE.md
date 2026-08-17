@@ -79,6 +79,12 @@ nama `ibras-*`, sedangkan sesi yang mem-preload ketujuh skill mengembalikan
 7/7 nama serta rute fungsinya. Credential hanya diberikan melalui environment
 proses uji dan tidak ditulis ke profile Hermes.
 
+Catatan indeks: identifier langsung dan ketujuh halaman detail skills.sh sudah
+aktif, tetapi pencarian teks `hermes skills search ... --source skills-sh`
+masih mengembalikan kosong tepat setelah publikasi. Anggap ini keterlambatan
+indeks pencarian, bukan kegagalan install; uji release tetap memakai identifier
+lengkap seperti tabel di atas.
+
 False-positive yang diredam di sumber (semua lossless, 52/52 tes lolos,
 waha diuji fungsional terhadap mock server): contoh pipe-ke-python di
 docstring copycheck; kalimat injeksi literal di hermes-discipline.md dan
