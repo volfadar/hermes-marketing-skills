@@ -59,4 +59,3 @@ the branch and install all seven canonical identifiers into a blank Incus Hermes
 profile. Compare installed file manifests with the public commit, run security
 audits and representative doctors/smoke commands, then perform model-awareness
 tests once the temporary OpenRouter key is supplied.
-
