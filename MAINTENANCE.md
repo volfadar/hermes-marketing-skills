@@ -66,10 +66,17 @@ Repo live: https://github.com/volfadar/hermes-marketing-skills
 | ibras-email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
 | ibras-cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
 
-Semua 7 bisa dipasang lewat GitHub. Verifikasi bersih memakai Hermes Agent
-v0.20.2 (2026.8.16) di container Incus Ubuntu: lima SAFE dipasang langsung,
-dua CAUTION dipasang dengan `--force`, 7/7 berstatus `enabled`, dan 269 file
-terpasang identik dengan `SKILL.md` + 262 file pendukung yang dimanifestasikan.
+Bundle semua 7 bisa dipasang lewat URL GitHub. Verifikasi bersih memakai
+Hermes Agent v0.20.2 (2026.8.16) di container Incus Ubuntu dan URL `SKILL.md`
+yang dipatok ke commit rebrand: lima SAFE dipasang langsung, dua CAUTION
+dipasang dengan `--force`, 7/7 berstatus `enabled`, dan 269 file terpasang
+identik dengan `SKILL.md` + 262 file pendukung yang dimanifestasikan.
+
+Status identifier pendek `volfadar/hermes-marketing-skills/ibras-*`:
+**menunggu rebrand masuk `master`**. Setelah merge, kosongkan profil uji lalu
+pasang ulang ketujuh identifier persis seperti tabel di atas. Jangan ubah
+status ini menjadi “terverifikasi” sebelum lock Hub menunjuk repo/path yang
+benar dan bukan skill pihak ketiga dengan nama mirip.
 False-positive yang diredam di sumber (semua lossless, 52/52 tes lolos,
 waha diuji fungsional terhadap mock server): contoh pipe-ke-python di
 docstring copycheck; kalimat injeksi literal di hermes-discipline.md dan

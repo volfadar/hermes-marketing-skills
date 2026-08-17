@@ -108,6 +108,9 @@ peserta benar-benar memasang.
 
 Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 
+> **Catatan penyelenggara:** jangan kirim varian ini sebelum rebrand sudah
+> masuk branch `master` dan tujuh identifier di bawah selesai diuji ulang.
+
 > Lima skill mendapat verdict SAFE dan bisa langsung dipasang tanpa download:
 >
 > ```
@@ -128,7 +131,9 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 >
 > Email membaca kredensial IMAP/SMTP dari environment dan dapat mengirim email;
 > cloakserve menjalankan Docker/Tailscale untuk browser riset. Keduanya CAUTION,
-> bukan DANGEROUS, dan telah diuji terpasang di Hermes Agent v0.20.2.
+> bukan DANGEROUS. Bundle keduanya telah diuji terpasang di Hermes Agent
+> v0.20.2 lewat URL commit-pinned; identifier pendeknya diuji ulang setelah
+> rebrand masuk `master`.
 
 ---
 

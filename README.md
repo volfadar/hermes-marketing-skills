@@ -52,10 +52,13 @@ hermes skills install volfadar/hermes-marketing-skills/ibras-email-marketing --f
 hermes skills install volfadar/hermes-marketing-skills/ibras-cloakserve-research --force
 ```
 
-Matriks ini diverifikasi pada Hermes Agent v0.20.2 (2026.8.16) di container
-Incus Ubuntu yang bersih pada 17 Agustus 2026. Lima skill mendapat verdict
-`SAFE`; email dan cloakserve mendapat `CAUTION` tanpa temuan `CRITICAL`.
-Ketujuh bundle terpasang lengkap dan muncul `enabled` di `hermes skills list`.
+Matriks scanner dan kelengkapan bundle ini diverifikasi pada Hermes Agent
+v0.20.2 (2026.8.16) di container Incus Ubuntu yang bersih pada 17 Agustus
+2026, memakai URL `SKILL.md` yang dipatok ke commit rebrand. Lima skill
+mendapat verdict `SAFE`; email dan cloakserve mendapat `CAUTION` tanpa temuan
+`CRITICAL`. Ketujuh bundle terpasang lengkap dan muncul `enabled` di
+`hermes skills list`. Verifikasi ulang tujuh identifier pendek di atas adalah
+release gate setelah nama baru mencapai branch `master`.
 
 `--force` **tidak** bisa menimpa verdict DANGEROUS — hanya CAUTION, dan hanya
 setelah kamu sendiri memutuskan isinya aman. Kalau tidak mau repot memeriksa,
