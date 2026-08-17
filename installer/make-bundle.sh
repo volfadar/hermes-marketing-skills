@@ -17,13 +17,15 @@ DIST="$ROOT/dist"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
-# Gerbang: jangan pernah membungkus repo yang bocor.
+# Gerbang: regenerasi manifest Hub, uji kontrak, lalu audit kebocoran.
+python3 "$ROOT/installer/update-hermes-manifests.py"
+python3 "$ROOT/installer/test-hermes-marketplace.py"
 bash "$ROOT/installer/audit.sh"
 
 mkdir -p "$DIST" "$STAGE/$NAME"
 
-for s in brand-strategy-coach cloakserve-research content-creator \
-         email-marketing marketing-orchestrator social-publishing waha-marketing; do
+for s in ibras-brand-strategy-coach ibras-cloakserve-research ibras-content-creator \
+         ibras-email-marketing ibras-marketing-orchestrator ibras-social-publishing ibras-waha-marketing; do
   cp -R "$ROOT/$s" "$STAGE/$NAME/$s"
 done
 mkdir -p "$STAGE/$NAME/installer"

@@ -35,7 +35,7 @@ toolset skills bawaan; kalau sudah terlanjur, nyalakan lagi dengan
 
 Setelah itu baru: unzip → `bash installer/install.sh` → `hermes skills list`
 → 7 skill. Ekstra per skill (opsional): App Password Gmail untuk
-email-marketing; server WAHA untuk waha-marketing; `pip3 install pyyaml`.
+ibras-email-marketing; server WAHA untuk ibras-waha-marketing; `pip3 install pyyaml`.
 
 ## Checklist sebelum kirim
 
@@ -111,14 +111,14 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 > Empat skill bisa langsung dipasang tanpa download:
 >
 > ```
-> hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
-> hermes skills install volfadar/hermes-marketing-skills/brand-strategy-coach
-> hermes skills install volfadar/hermes-marketing-skills/content-creator
-> hermes skills install volfadar/hermes-marketing-skills/social-publishing
+> hermes skills install volfadar/hermes-marketing-skills/ibras-marketing-orchestrator
+> hermes skills install volfadar/hermes-marketing-skills/ibras-brand-strategy-coach
+> hermes skills install volfadar/hermes-marketing-skills/ibras-content-creator
+> hermes skills install volfadar/hermes-marketing-skills/ibras-social-publishing
 > ```
 >
-> Tiga skill yang menyentuh email/WhatsApp/browser (email-marketing,
-> waha-marketing, cloakserve-research) hanya bisa dipasang lewat zip +
+> Tiga skill yang menyentuh email/WhatsApp/browser (ibras-email-marketing,
+> ibras-waha-marketing, ibras-cloakserve-research) hanya bisa dipasang lewat zip +
 > installer — pemindai keamanan Hermes menolaknya dari sumber komunitas
 > karena skill itu memegang kredensial. Itu perilaku yang benar; zip-nya
 > kamu periksa sendiri isinya di repo.
@@ -132,7 +132,7 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 | `hermes: command not found` | Hermes Agent-nya belum terpasang — `curl -fsSL https://hermes-agent.nousresearch.com/install.sh \| bash` (Windows PowerShell: `iex (irm https://hermes-agent.nousresearch.com/install.ps1)`). |
 | Hermes jalan tapi tidak menjawab / jawaban aneh | Model belum aktif — `hermes setup --portal` (login sekali, tanpa API key). |
 | Skill tidak muncul di list padahal terpasang | Cek apakah setup-nya dulu memilih "Blank Slate" (mematikan toolset skills) — `hermes skills opt-in --sync`. Kalau bukan: jangan ubah nama folder hasil unzip; jalan ulang installer. |
-| `hermes skills install` menolak email-marketing/cloakserve | Itu verdict CAUTION, bukan bahaya: skill-nya memegang kredensial email/Docker. Periksa isinya di repo lalu tambahkan `--force`. Atau pakai zip + installer (Varian A) — tanpa scan. |
+| `hermes skills install` menolak ibras-email-marketing/cloakserve | Itu verdict CAUTION, bukan bahaya: skill-nya memegang kredensial email/Docker. Periksa isinya di repo lalu tambahkan `--force`. Atau pakai zip + installer (Varian A) — tanpa scan. |
 | Profile tidak kebaca | `pip3 install pyyaml` |
 | Pakai Windows? | Hermes berjalan di WSL/macOS/Linux — jalankan installer dari terminal Hermes-mu berjalan. |
 | Data saya aman? | Semua berjalan lokal di Hermes kamu sendiri; tidak ada SaaS baru. Skill email/WhatsApp hanya bertindak dengan konfirmasi. |

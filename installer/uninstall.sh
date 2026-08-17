@@ -2,7 +2,7 @@
 # uninstall.sh — hapus skill pemasaran dari Hermes home.
 #
 #   bash installer/uninstall.sh                  # hapus semua 7
-#   bash installer/uninstall.sh --only email-marketing
+#   bash installer/uninstall.sh --only ibras-email-marketing
 #   bash installer/uninstall.sh --home /path/hermes
 #
 # Yang TIDAK disentuh: ~/.hermes/business/ (profile.yaml, FAQ, log kamu),
@@ -11,12 +11,14 @@
 # manual dari blok `hooks:` di config.yaml.
 set -euo pipefail
 
-SKILLS=(brand-strategy-coach cloakserve-research content-creator
-        email-marketing marketing-orchestrator social-publishing
-        waha-marketing)
+SKILLS=(ibras-brand-strategy-coach ibras-cloakserve-research ibras-content-creator
+        ibras-email-marketing ibras-marketing-orchestrator ibras-social-publishing
+        ibras-waha-marketing)
 
 HOME_DIR="${HERMES_HOME:-$HOME/.hermes}"
 ONLY=()
+
+die() { echo "ERROR: $*" >&2; exit 1; }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -30,7 +32,9 @@ done
 SELECTED=()
 if [[ ${#ONLY[@]} -gt 0 ]]; then
   for want in "${ONLY[@]}"; do
-    SELECTED+=("${want#skill-}")
+    want="${want#skill-}"
+    [[ " ${SKILLS[*]} " == *" $want "* ]] || die "skill tidak dikenal: $want (pilihan: ${SKILLS[*]})"
+    SELECTED+=("$want")
   done
 else
   SELECTED=("${SKILLS[@]}")
@@ -49,4 +53,6 @@ done
 
 echo
 echo "$removed skill dihapus dari $HOME_DIR/skills/"
-[[ -d "$HOME_DIR/business" ]] && echo "Data bisnismu di $HOME_DIR/business/ tidak disentuh."
+if [[ -d "$HOME_DIR/business" ]]; then
+  echo "Data bisnismu di $HOME_DIR/business/ tidak disentuh."
+fi

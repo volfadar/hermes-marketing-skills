@@ -11,10 +11,17 @@ menjaga itu.
 # 1. Setelah mengubah skill di repo workshop:
 cd ~/hermes-for-marketing && bash shared/sync.sh
 
-# 2. Tarik ke repo distribusi ini (bersihkan + audit otomatis):
+# 2. Tarik ke repo distribusi ini. Script ini juga membuat ulang manifest
+#    Hub, menjalankan contract test, lalu mengaudit distribusi:
 cd ~/hermes-marketing-skills && bash installer/sync-from-source.sh
 
-# 3. Commit + push, lalu bangun bundel untuk peserta:
+# 3. Opsional: jalankan ulang gate secara eksplisit sebelum commit:
+python3 installer/update-hermes-manifests.py
+python3 installer/test-hermes-marketplace.py
+bash installer/audit.sh
+
+# 4. Commit + push, lalu bangun bundel untuk peserta. make-bundle.sh
+#    menjalankan ketiga gate di atas lagi sebelum membuat ZIP:
 git add -A && git commit -m "..." && git push
 bash installer/make-bundle.sh     # → dist/hermes-marketing-skills-<tanggal>.zip
 ```
@@ -51,13 +58,13 @@ Repo live: https://github.com/volfadar/hermes-marketing-skills
 
 | Skill | `hermes skills install volfadar/hermes-marketing-skills/<skill>` |
 |---|---|
-| marketing-orchestrator | ✅ SAFE — langsung |
-| brand-strategy-coach | ✅ SAFE — langsung |
-| content-creator | ✅ SAFE — langsung |
-| social-publishing | ✅ SAFE — langsung |
-| waha-marketing | ✅ SAFE — langsung |
-| email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
-| cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
+| ibras-marketing-orchestrator | ✅ SAFE — langsung |
+| ibras-brand-strategy-coach | ✅ SAFE — langsung |
+| ibras-content-creator | ✅ SAFE — langsung |
+| ibras-social-publishing | ✅ SAFE — langsung |
+| ibras-waha-marketing | ✅ SAFE — langsung |
+| ibras-email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
+| ibras-cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
 
 Semua 7 jadi bisa dipasang lewat registry (verifikasi penuh 14 Agu 2026).
 False-positive yang diredam di sumber (semua lossless, 52/52 tes lolos,
