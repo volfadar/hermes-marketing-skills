@@ -41,6 +41,9 @@ for readme in sorted(pathlib.Path('.').glob('*/README.md')):
         print('  ✓ README disesuaikan:', readme)
 PY
 
+python3 "$HERE/installer/update-hermes-manifests.py"
+python3 "$HERE/installer/test-hermes-marketplace.py"
 bash "$HERE/installer/audit.sh"
 echo
-echo "Sinkron selesai. Commit perubahan, lalu bangun bundel: bash installer/make-bundle.sh"
+echo "Sinkron selesai; manifest, kontrak Hermes Hub, dan audit lulus."
+echo "Commit perubahan, lalu bangun bundel: bash installer/make-bundle.sh"

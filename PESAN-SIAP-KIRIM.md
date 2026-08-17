@@ -35,7 +35,7 @@ toolset skills bawaan; kalau sudah terlanjur, nyalakan lagi dengan
 
 Setelah itu baru: unzip → `bash installer/install.sh` → `hermes skills list`
 → 7 skill. Ekstra per skill (opsional): App Password Gmail untuk
-email-marketing; server WAHA untuk waha-marketing; `pip3 install pyyaml`.
+ibras-email-marketing; server WAHA untuk ibras-waha-marketing; `pip3 install pyyaml`.
 
 ## Checklist sebelum kirim
 
@@ -104,24 +104,36 @@ peserta benar-benar memasang.
 >
 > — [Nama kamu]
 
-## Varian C — tanpa download (4 skill perencanaan)
+## Varian C — tanpa download (langsung dari GitHub)
 
 Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 
-> Empat skill bisa langsung dipasang tanpa download:
+> **Catatan penyelenggara:** jangan kirim varian ini sebelum rebrand sudah
+> masuk branch `master` dan tujuh identifier di bawah selesai diuji ulang.
+
+> Lima skill mendapat verdict SAFE dan bisa langsung dipasang tanpa download:
 >
 > ```
-> hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
-> hermes skills install volfadar/hermes-marketing-skills/brand-strategy-coach
-> hermes skills install volfadar/hermes-marketing-skills/content-creator
-> hermes skills install volfadar/hermes-marketing-skills/social-publishing
+> hermes skills install volfadar/hermes-marketing-skills/ibras-marketing-orchestrator
+> hermes skills install volfadar/hermes-marketing-skills/ibras-brand-strategy-coach
+> hermes skills install volfadar/hermes-marketing-skills/ibras-content-creator
+> hermes skills install volfadar/hermes-marketing-skills/ibras-social-publishing
+> hermes skills install volfadar/hermes-marketing-skills/ibras-waha-marketing
 > ```
 >
-> Tiga skill yang menyentuh email/WhatsApp/browser (email-marketing,
-> waha-marketing, cloakserve-research) hanya bisa dipasang lewat zip +
-> installer — pemindai keamanan Hermes menolaknya dari sumber komunitas
-> karena skill itu memegang kredensial. Itu perilaku yang benar; zip-nya
-> kamu periksa sendiri isinya di repo.
+> Dua skill mendapat verdict CAUTION karena fungsinya memang sensitif. Periksa
+> isinya di repo, lalu pasang dengan override yang eksplisit:
+>
+> ```
+> hermes skills install volfadar/hermes-marketing-skills/ibras-email-marketing --force
+> hermes skills install volfadar/hermes-marketing-skills/ibras-cloakserve-research --force
+> ```
+>
+> Email membaca kredensial IMAP/SMTP dari environment dan dapat mengirim email;
+> cloakserve menjalankan Docker/Tailscale untuk browser riset. Keduanya CAUTION,
+> bukan DANGEROUS. Bundle keduanya telah diuji terpasang di Hermes Agent
+> v0.20.2 lewat URL commit-pinned; identifier pendeknya diuji ulang setelah
+> rebrand masuk `master`.
 
 ---
 
@@ -132,7 +144,7 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 | `hermes: command not found` | Hermes Agent-nya belum terpasang — `curl -fsSL https://hermes-agent.nousresearch.com/install.sh \| bash` (Windows PowerShell: `iex (irm https://hermes-agent.nousresearch.com/install.ps1)`). |
 | Hermes jalan tapi tidak menjawab / jawaban aneh | Model belum aktif — `hermes setup --portal` (login sekali, tanpa API key). |
 | Skill tidak muncul di list padahal terpasang | Cek apakah setup-nya dulu memilih "Blank Slate" (mematikan toolset skills) — `hermes skills opt-in --sync`. Kalau bukan: jangan ubah nama folder hasil unzip; jalan ulang installer. |
-| `hermes skills install` menolak email-marketing/cloakserve | Itu verdict CAUTION, bukan bahaya: skill-nya memegang kredensial email/Docker. Periksa isinya di repo lalu tambahkan `--force`. Atau pakai zip + installer (Varian A) — tanpa scan. |
+| `hermes skills install` menolak `ibras-email-marketing` / `ibras-cloakserve-research` | Itu verdict CAUTION, bukan DANGEROUS: skill-nya memegang kredensial email atau menjalankan Docker/Tailscale. Periksa isinya di repo lalu tambahkan `--force`. Atau pakai zip + installer (Varian A) — tanpa scan. |
 | Profile tidak kebaca | `pip3 install pyyaml` |
 | Pakai Windows? | Hermes berjalan di WSL/macOS/Linux — jalankan installer dari terminal Hermes-mu berjalan. |
 | Data saya aman? | Semua berjalan lokal di Hermes kamu sendiri; tidak ada SaaS baru. Skill email/WhatsApp hanya bertindak dengan konfirmasi. |

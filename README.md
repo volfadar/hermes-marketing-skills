@@ -6,13 +6,13 @@ baru, tidak ada data keluar dari laptop/HP-mu.
 
 | Skill | Buat apa | Butuh apa selain Hermes |
 |---|---|---|
-| `marketing-orchestrator` | "Mulai dari mana?" — router yang milih skill mana yang jalan | — |
-| `brand-strategy-coach` | Lab posisi merek 5 tahap (sikap → funnel) | — |
-| `content-creator` | Ide, caption, hook, kalender, repurpose konten | — |
-| `cloakserve-research` | Riset produk/kompetitor/niche sebelum jual | — |
-| `email-marketing` | Baca-tulis email (IMAP/SMTP) + balasan otomatis bertingkat | App Password Gmail + `pip3 install pyyaml` |
-| `social-publishing` | Rencana & keputusan posting sosmed (pilot 2 minggu) | `pip3 install pyyaml` |
-| `waha-marketing` | Broadcast & balasan WhatsApp lewat WAHA (self-host) | Server WAHA sendiri |
+| `ibras-marketing-orchestrator` | "Mulai dari mana?" — router yang milih skill mana yang jalan | — |
+| `ibras-brand-strategy-coach` | Lab posisi merek 5 tahap (sikap → funnel) | — |
+| `ibras-content-creator` | Ide, caption, hook, kalender, repurpose konten | — |
+| `ibras-cloakserve-research` | Riset produk/kompetitor/niche sebelum jual | — |
+| `ibras-email-marketing` | Baca-tulis email (IMAP/SMTP) + balasan otomatis bertingkat | App Password Gmail + `pip3 install pyyaml` |
+| `ibras-social-publishing` | Rencana & keputusan posting sosmed (pilot 2 minggu) | `pip3 install pyyaml` |
+| `ibras-waha-marketing` | Broadcast & balasan WhatsApp lewat WAHA (self-host) | Server WAHA sendiri |
 
 Empat skill pertama langsung jalan tanpa setup apa pun — cukup chat.
 
@@ -35,11 +35,11 @@ Repo sumber: <https://github.com/volfadar/hermes-marketing-skills>
 Lima skill terpasang langsung:
 
 ```bash
-hermes skills install volfadar/hermes-marketing-skills/marketing-orchestrator
-hermes skills install volfadar/hermes-marketing-skills/brand-strategy-coach
-hermes skills install volfadar/hermes-marketing-skills/content-creator
-hermes skills install volfadar/hermes-marketing-skills/social-publishing
-hermes skills install volfadar/hermes-marketing-skills/waha-marketing
+hermes skills install volfadar/hermes-marketing-skills/ibras-marketing-orchestrator
+hermes skills install volfadar/hermes-marketing-skills/ibras-brand-strategy-coach
+hermes skills install volfadar/hermes-marketing-skills/ibras-content-creator
+hermes skills install volfadar/hermes-marketing-skills/ibras-social-publishing
+hermes skills install volfadar/hermes-marketing-skills/ibras-waha-marketing
 ```
 
 Dua skill ini menangkap verdict **CAUTION** — Hermes meminta kamu memeriksa
@@ -48,9 +48,17 @@ browser riset. Periksa isinya di repo (setiap folder berdiri sendiri), lalu
 tambahkan `--force`:
 
 ```bash
-hermes skills install volfadar/hermes-marketing-skills/email-marketing --force
-hermes skills install volfadar/hermes-marketing-skills/cloakserve-research --force
+hermes skills install volfadar/hermes-marketing-skills/ibras-email-marketing --force
+hermes skills install volfadar/hermes-marketing-skills/ibras-cloakserve-research --force
 ```
+
+Matriks scanner dan kelengkapan bundle ini diverifikasi pada Hermes Agent
+v0.20.2 (2026.8.16) di container Incus Ubuntu yang bersih pada 17 Agustus
+2026, memakai URL `SKILL.md` yang dipatok ke commit rebrand. Lima skill
+mendapat verdict `SAFE`; email dan cloakserve mendapat `CAUTION` tanpa temuan
+`CRITICAL`. Ketujuh bundle terpasang lengkap dan muncul `enabled` di
+`hermes skills list`. Verifikasi ulang tujuh identifier pendek di atas adalah
+release gate setelah nama baru mencapai branch `master`.
 
 `--force` **tidak** bisa menimpa verdict DANGEROUS — hanya CAUTION, dan hanya
 setelah kamu sendiri memutuskan isinya aman. Kalau tidak mau repot memeriksa,
@@ -63,7 +71,7 @@ kebetulan sama. Cukup pakai identifier lengkap di atas.
 **Cara C — salin manual (tanpa installer):**
 
 ```bash
-cp -R email-marketing ~/.hermes/skills/
+cp -R ibras-email-marketing ~/.hermes/skills/
 ```
 
 Nama folder di repo ini sudah = nama skill, jadi salin apa adanya.
@@ -73,7 +81,7 @@ berdasarkan nama folder yang sama dengan `name:` di SKILL.md.
 **Pilih sebagian saja:**
 
 ```bash
-bash installer/install.sh --only email-marketing,social-publishing
+bash installer/install.sh --only ibras-email-marketing,ibras-social-publishing
 ```
 
 ## Cek berhasil
@@ -93,23 +101,23 @@ Ganti dengan nama bisnismu sendiri.
    > Halo, saya Joko, pemilik kedai kopi di Ende. Pelanggan saya 600-an kontak
    > WhatsApp tapi saya tidak pernah Follow up. Mulai dari mana?
 
-2. **Riset dulu sebelum jual** (`cloakserve-research`):
+2. **Riset dulu sebelum jual** (`ibras-cloakserve-research`):
    > Saya mau jual binder plug ke fotografer wedding. Riset dulu: ada nggak
    > yang jual ini di marketplace, dan apa keluhan mereka di forum?
 
-3. **Lab posisi merek** (`brand-strategy-coach`):
+3. **Lab posisi merek** (`ibras-brand-strategy-coach`):
    > Bisnis saya keripik pedas frozen, pembeli ibu-ibu muda di Bandung. Bawa
    > saya lewat tahap sikap dulu — jangan loncat ke funnel.
 
-4. **Konten** (`content-creator`):
+4. **Konten** (`ibras-content-creator`):
    > Buat 5 hook Instagram untuk konten "behind the scene produksi keripik",
    > bahasa santai, bukan marketer-an.
 
-5. **Baca inbox (aman, read-only)** (`email-marketing`, setelah setup Gmail):
+5. **Baca inbox (aman, read-only)** (`ibras-email-marketing`, setelah setup Gmail):
    > Baca inbox saya, mana email yang perlu dibalas hari ini? Jangan balas,
    > tunjukin dulu daftarnya.
 
-6. **Rencana sosmed tanpa auto-posting nekat** (`social-publishing`):
+6. **Rencana sosmed tanpa auto-posting nekat** (`ibras-social-publishing`):
    > Saya posting IG 4x sebulan, hasil sepi. Bikin pilot 2 minggu yang bisa
    > saya hentikan kapan saja.
 
@@ -120,22 +128,22 @@ dan jelaskan kenapa — itu fitur, bukan error.
 
 ## Setup tambahan (hanya kalau pakai skill itu)
 
-**email-marketing** — satu perintah, butuh App Password 16 digit
+**ibras-email-marketing** — satu perintah, butuh App Password 16 digit
 (bukan password akun; aktifkan 2FA dulu di
 <https://myaccount.google.com/apppasswords>):
 
 ```bash
 pip3 install pyyaml   # sekali
-bash ~/.hermes/skills/email-marketing/scripts/initialize.sh \
+bash ~/.hermes/skills/ibras-email-marketing/scripts/initialize.sh \
   --email kamu@gmail.com \
   --app-password "abcd efgh ijkl mnop" \
   --name "Nama Bisnismu"
 ```
 
-**waha-marketing** — hanya kalau kamu sudah punya server WAHA:
+**ibras-waha-marketing** — hanya kalau kamu sudah punya server WAHA:
 
 ```bash
-bash ~/.hermes/skills/waha-marketing/scripts/initialize.sh \
+bash ~/.hermes/skills/ibras-waha-marketing/scripts/initialize.sh \
   --url https://waha-kamu.example --key KUNCI --session all-in-one-device
 ```
 

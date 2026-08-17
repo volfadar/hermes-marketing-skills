@@ -11,10 +11,17 @@ menjaga itu.
 # 1. Setelah mengubah skill di repo workshop:
 cd ~/hermes-for-marketing && bash shared/sync.sh
 
-# 2. Tarik ke repo distribusi ini (bersihkan + audit otomatis):
+# 2. Tarik ke repo distribusi ini. Script ini juga membuat ulang manifest
+#    Hub, menjalankan contract test, lalu mengaudit distribusi:
 cd ~/hermes-marketing-skills && bash installer/sync-from-source.sh
 
-# 3. Commit + push, lalu bangun bundel untuk peserta:
+# 3. Opsional: jalankan ulang gate secara eksplisit sebelum commit:
+python3 installer/update-hermes-manifests.py
+python3 installer/test-hermes-marketplace.py
+bash installer/audit.sh
+
+# 4. Commit + push, lalu bangun bundel untuk peserta. make-bundle.sh
+#    menjalankan ketiga gate di atas lagi sebelum membuat ZIP:
 git add -A && git commit -m "..." && git push
 bash installer/make-bundle.sh     # → dist/hermes-marketing-skills-<tanggal>.zip
 ```
@@ -33,7 +40,7 @@ Audit gagal = bundel tidak boleh dibagikan. Kalau ada hit yang menurutmu sah
 (mis. nama model di tabel biaya sebagai rekomendasi), tambahkan pengecualian
 yang sempit di `audit.sh` — jangan matikan audit.
 
-## Fakta platform yang sudah diverifikasi (14 Agu 2026)
+## Fakta platform yang sudah diverifikasi (17 Agu 2026)
 
 - Hermes menemukan skill lokal dari `~/.hermes/skills/<nama>/` dengan
   **nama folder == `name:` frontmatter**. Folder berprefiks `skill-` TIDAK
@@ -44,22 +51,32 @@ yang sempit di `audit.sh` — jangan matikan audit.
   distribusi offline.
 - `hermes skills list` di profile lain: `HERMES_HOME=/path hermes skills list`.
 
-## Jalur install GitHub — hasil scan per skill (14 Agu 2026)
+## Jalur install GitHub — hasil scan per skill (17 Agu 2026)
 
 Repo live: https://github.com/volfadar/hermes-marketing-skills
 (branch `master`; remote `origin` sudah dikonfigurasi — `git push` saja.)
 
 | Skill | `hermes skills install volfadar/hermes-marketing-skills/<skill>` |
 |---|---|
-| marketing-orchestrator | ✅ SAFE — langsung |
-| brand-strategy-coach | ✅ SAFE — langsung |
-| content-creator | ✅ SAFE — langsung |
-| social-publishing | ✅ SAFE — langsung |
-| waha-marketing | ✅ SAFE — langsung |
-| email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
-| cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
+| ibras-marketing-orchestrator | ✅ SAFE — langsung |
+| ibras-brand-strategy-coach | ✅ SAFE — langsung |
+| ibras-content-creator | ✅ SAFE — langsung |
+| ibras-social-publishing | ✅ SAFE — langsung |
+| ibras-waha-marketing | ✅ SAFE — langsung |
+| ibras-email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
+| ibras-cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
 
-Semua 7 jadi bisa dipasang lewat registry (verifikasi penuh 14 Agu 2026).
+Bundle semua 7 bisa dipasang lewat URL GitHub. Verifikasi bersih memakai
+Hermes Agent v0.20.2 (2026.8.16) di container Incus Ubuntu dan URL `SKILL.md`
+yang dipatok ke commit rebrand: lima SAFE dipasang langsung, dua CAUTION
+dipasang dengan `--force`, 7/7 berstatus `enabled`, dan 269 file terpasang
+identik dengan `SKILL.md` + 262 file pendukung yang dimanifestasikan.
+
+Status identifier pendek `volfadar/hermes-marketing-skills/ibras-*`:
+**menunggu rebrand masuk `master`**. Setelah merge, kosongkan profil uji lalu
+pasang ulang ketujuh identifier persis seperti tabel di atas. Jangan ubah
+status ini menjadi “terverifikasi” sebelum lock Hub menunjuk repo/path yang
+benar dan bukan skill pihak ketiga dengan nama mirip.
 False-positive yang diredam di sumber (semua lossless, 52/52 tes lolos,
 waha diuji fungsional terhadap mock server): contoh pipe-ke-python di
 docstring copycheck; kalimat injeksi literal di hermes-discipline.md dan

@@ -7,7 +7,7 @@
 # konsistensinya di sini.)
 #
 #   bash installer/install.sh                      # pasang semua 7 skill
-#   bash installer/install.sh --only email-marketing,social-publishing
+#   bash installer/install.sh --only ibras-email-marketing,ibras-social-publishing
 #   bash installer/install.sh --list               # daftar + status
 #   bash installer/install.sh --home /path/hermes  # Hermes home lain
 #   bash installer/install.sh --with-guard         # pasang juga artifact-guard hook
@@ -17,9 +17,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILLS=(brand-strategy-coach cloakserve-research content-creator
-        email-marketing marketing-orchestrator social-publishing
-        waha-marketing)
+SKILLS=(ibras-brand-strategy-coach ibras-cloakserve-research ibras-content-creator
+        ibras-email-marketing ibras-marketing-orchestrator ibras-social-publishing
+        ibras-waha-marketing)
 
 HOME_DIR="${HERMES_HOME:-$HOME/.hermes}"
 ONLY=()
@@ -79,8 +79,7 @@ for s in "${SELECTED[@]}"; do
   cp -R "$src" "$dst.new"
   find "$dst.new" -name '__pycache__' -type d -exec rm -rf {} + 2>/dev/null || true
   find "$dst.new" -name '*.pyc' -delete 2>/dev/null || true
-  chmod +x "$dst.new"/scripts/* 2>/dev/null || true
-  chmod +x "$dst.new"/hooks/*   2>/dev/null || true
+  find "$dst.new/scripts" -type f -exec chmod +x {} + 2>/dev/null || true
   if installed "$s"; then verb="diperbarui"; else verb="terpasang"; fi
   rm -rf "$dst" && mv "$dst.new" "$dst"
   echo "  ✓ $s — $verb"
@@ -105,13 +104,13 @@ else
   echo "Catatan: 'hermes' tidak ada di PATH — lewati verifikasi otomatis."
 fi
 
-# pyyaml dibutuhkan lib/profile.py (fail-open tanpa itu, tapi lebih baik ada)
+# pyyaml dibutuhkan scripts/lib/profile.py (fail-open tanpa itu, tapi lebih baik ada)
 if ! python3 -c "import yaml" >/dev/null 2>&1; then
   echo "Saran: pip3 install pyyaml  (untuk membaca profile.yaml)"
 fi
 
 if [[ $WITH_GUARD -eq 1 ]]; then
-  guard="$ROOT/marketing-orchestrator/scripts/install-guard.sh"
+  guard="$ROOT/ibras-marketing-orchestrator/scripts/install-guard.sh"
   if [[ -f "$guard" ]]; then
     HOME_DIR="$HOME_DIR" bash "$guard" --home "$HOME_DIR" \
       || echo "  ! artifact-guard gagal dipasang — skill tetap jalan, hanya tanpa hook" >&2
