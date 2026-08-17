@@ -40,7 +40,7 @@ Audit gagal = bundel tidak boleh dibagikan. Kalau ada hit yang menurutmu sah
 (mis. nama model di tabel biaya sebagai rekomendasi), tambahkan pengecualian
 yang sempit di `audit.sh` — jangan matikan audit.
 
-## Fakta platform yang sudah diverifikasi (14 Agu 2026)
+## Fakta platform yang sudah diverifikasi (17 Agu 2026)
 
 - Hermes menemukan skill lokal dari `~/.hermes/skills/<nama>/` dengan
   **nama folder == `name:` frontmatter**. Folder berprefiks `skill-` TIDAK
@@ -51,7 +51,7 @@ yang sempit di `audit.sh` — jangan matikan audit.
   distribusi offline.
 - `hermes skills list` di profile lain: `HERMES_HOME=/path hermes skills list`.
 
-## Jalur install GitHub — hasil scan per skill (14 Agu 2026)
+## Jalur install GitHub — hasil scan per skill (17 Agu 2026)
 
 Repo live: https://github.com/volfadar/hermes-marketing-skills
 (branch `master`; remote `origin` sudah dikonfigurasi — `git push` saja.)
@@ -66,7 +66,10 @@ Repo live: https://github.com/volfadar/hermes-marketing-skills
 | ibras-email-marketing | ⚠️ CAUTION — `--force` (HIGH: baca kredensial IMAP dari env, kirim email, regex deteksi injeksi) |
 | ibras-cloakserve-research | ⚠️ CAUTION — `--force` (HIGH: sudo Docker/Tailscale intrinsik ke setup browser riset) |
 
-Semua 7 jadi bisa dipasang lewat registry (verifikasi penuh 14 Agu 2026).
+Semua 7 bisa dipasang lewat GitHub. Verifikasi bersih memakai Hermes Agent
+v0.20.2 (2026.8.16) di container Incus Ubuntu: lima SAFE dipasang langsung,
+dua CAUTION dipasang dengan `--force`, 7/7 berstatus `enabled`, dan 269 file
+terpasang identik dengan `SKILL.md` + 262 file pendukung yang dimanifestasikan.
 False-positive yang diredam di sumber (semua lossless, 52/52 tes lolos,
 waha diuji fungsional terhadap mock server): contoh pipe-ke-python di
 docstring copycheck; kalimat injeksi literal di hermes-discipline.md dan
