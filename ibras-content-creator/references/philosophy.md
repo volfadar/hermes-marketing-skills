@@ -48,7 +48,7 @@ like talking to people." Bahkan unicorn sadar bot kehilangan trust.
    bukan soal terjadwalnya. `repurpose.sh` bikin varian yang beda per platform.
 3. **API tidak resmi = risiko akun**, dan itu risiko yang beda dari
    penjadwalan. Jalur resmi (Meta Business Suite, Buffer) menjadwalkan tanpa
-   risiko itu sama sekali — lihat `ibras-social-publishing` untuk enam jalur
+   risiko itu sama sekali — lihat `ibras-social-publishing` untuk tujuh jalur
    beserta kerugiannya masing-masing.
 4. **30 post lemah < 3 post kuat.** Reach turun kalau volume naik tapi
    sinyalnya rendah.

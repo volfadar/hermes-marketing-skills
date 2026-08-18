@@ -1,9 +1,50 @@
 ---
 name: ibras-brand-strategy-coach
-description: Build the business profile every other marketing skill reads — prices and what may be promised, why this seller and not the one next door, her actual voice, and what she has ruled out. Use when an Indonesian owner is starting out, deciding what to sell or how to promote it, picking a channel she will actually sustain, or when a promo comes out generic. Works with no test result and no CV; decodes TemuBakat/Big Five/O*NET when she happens to have one.
+description: Use for funnels, positioning, offers, channels, pricing hypotheses, or business/marketing strategy. Builds an evidence-based business profile, constraints, buyer fit, experiments, and budget-aware route for an owner starting, fixing, or expanding a business. Works without a CV or personality test.
 ---
 
 # Brand Strategy Coach
+
+## Market-fit gate — before any commercial recommendation
+
+Read `references/market-adaptation.md`. If a money figure is ambiguous, first
+separate **personal salary**, **business revenue**, profit/take-home, buyer
+budget, and experiment cap; ask only the distinction that changes the next
+action. **Supply is not demand:** a seller page proves an offer exists, not
+that this buyer segment pays. Match geography, buyer/scale, purchase context,
+current alternative, category language, and buyer-side evidence; then label
+the route validated, plausible-test-only, unverified, or contradicted. Never
+hardcode one country, channel, income band, or expert-method offer.
+
+**First-turn stop rule.** “Short” means one short question, not permission to
+skip the gate. When `income`, `penghasilan`, `earnings`, or another money word
+could mean personal salary, business revenue, profit/take-home, or buyer
+budget, **do not produce the plan yet**—ask which one it is. Do not invent
+prices, margin, volume, conversion, cadence, speed, or impact. A past buyer or
+chat history is not marketing consent; never turn it into proactive WA/email.
+Ask naturally. Never mention the skill, rule, gate, market-fit card, or internal
+labels to the owner.
+
+**Unverified-offer stop.** If the only evidence is seller-side supply or a
+different buyer segment, the paid category is unverified. Do not propose a
+price, funnel, channel, or renamed version and do not invent how that segment
+usually behaves. State the gap, define a buyer-side commercial test, and compare
+the direct outcome, bundled diagnosis, and separately paid diagnosis. A catchy
+local label that preserves the same work and buying reason still fails.
+The response is limited to the evidence gap, one buyer-side test, and those
+three shapes. Do not continue into a “helpful” generic plan while waiting.
+Do not assert the target segment's budget, margin, awareness, channel, or
+behaviour. Turn those into test questions, and leave sample, time, and price
+caps for the user to set. When explaining a mismatch, state only that the
+segment match is unproven; do not fill the gap with stereotyped reasons. Ask
+for the missing reach, time, cash, or price constraint before sizing the test.
+
+**Validated positive control.** Matching buyer-side payment is evidence to keep
+the offer provisionally; never ban it by country or category. Check outcomes and
+renewal or referral, delivery economics and capacity, plus contradictions before
+scaling. Ask only the missing item that changes the next decision.
+Name all four check areas in the response, then ask only the highest-priority
+missing question.
 
 ## Standard
 
@@ -336,9 +377,11 @@ Purpose: learn before scaling and assign tools to specific jobs.
    | none of those, but has the product | product photos + one line, reposting a happy customer's chat | WA + marketplace |
 
    Two constraints intersect and the space is small: what she will sustain,
-   and where her buyers already are. **For Indonesian UMKM the second is
-   WhatsApp first, nearly always** — the question is almost never "should I do
-   LinkedIn." That last row is the one that gets ignored: reposting a customer's
+   and where her buyers already discover, ask, compare, order, and pay. Do not
+   infer the answer from nationality or business size. Start with the last real
+   buyers and the market-fit card in `references/market-adaptation.md`; WhatsApp,
+   a marketplace, a physical location, Instagram, LinkedIn, or a partner may win.
+   That last row is the one that gets ignored: reposting a customer's
    own message is legitimate, sustainable and converts well for someone who
    can't write, can't design and won't go on camera, and no trend article will
    ever suggest it.
@@ -425,6 +468,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [references/funnel-ethics.md](references/funnel-ethics.md)
 - [references/hermes-discipline.md](references/hermes-discipline.md)
 - [references/hermes-runtime.md](references/hermes-runtime.md)
+- [references/market-adaptation.md](references/market-adaptation.md)
 - [references/niche-down.md](references/niche-down.md)
 - [references/personality-interests.md](references/personality-interests.md)
 - [references/philosophy.md](references/philosophy.md)

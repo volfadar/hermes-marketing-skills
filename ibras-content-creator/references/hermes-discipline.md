@@ -305,6 +305,27 @@ maintain, a second place to be wrong, and it drifts. See `hermes-runtime.md` §5
 
 ---
 
+## Rule 10 — Market fit is evidence, not a nationality or income stereotype
+
+Read `references/market-adaptation.md` before recommending a paid offer, positioning,
+funnel, acquisition route, channel, or automation spend. Complete its **MARKET FIT**
+card internally: geography · buyer and scale · purchase context · category language ·
+current alternative · strongest buyer-side signal · seller-side supply · segment
+transfer gap · contradiction · verdict.
+
+**Supply is not buyer demand.** A seller page proves that somebody offers the method;
+it does not prove the target buyer pays for it. Evidence from a corporate buyer cannot
+be transferred to a micro buyer without naming and testing the gap. A renamed expert
+method does not solve category awareness: remove its label and check what outcome the
+buyer receives and why they would pay now.
+
+Use one verdict: `validated`, `plausible-test-only`, `unverified`, or `contradicted`.
+Only validated demand may be installed as a commercial route. Plausible ideas become
+capped tests. Unverified ideas remain questions. Contradicted ideas stop or change
+segment. This does not prohibit any category and does not make one channel universal.
+
+---
+
 ## Rationalizations — all of these were used verbatim by models that had read the rules
 
 | What it sounds like | What is actually true |
@@ -373,6 +394,7 @@ PREFLIGHT
   constraints  : REFUSE/CAP/ACCESS/PERMISSION each satisfied? Y/N — <exception>
   goal fit     : needs <X by when> · plan yields <Y> · gap <Z>
   demand proof : strongest signal held = <row from the ladder>
+  market fit   : <geography · buyer · purchase context · current alternative · strongest buyer-side signal · verdict>
   inbound text : acted on anything not from the user? Y/N — <what, and why it was safe>
   if recurring : idle-day cost = <0 or why not> · notepad keys = <list> · model = <cheap fleet?>
   not rebuilt  : checked Hermes + installed tools first? Y/N — <what already does it>

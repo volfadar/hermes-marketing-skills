@@ -1,6 +1,6 @@
 ---
 name: ibras-waha-marketing
-description: Manage WhatsApp marketing via WAHA — contacts, labels, groups, broadcast, with anti-ban humanization.
+description: Use for WhatsApp replies, contacts, labels, groups, consented promotion, broadcast, or WAHA setup. Keeps service replies simple, requires recipient permission for promotion, and applies pacing, claim, promise, and emergency-stop safeguards.
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -12,6 +12,40 @@ metadata:
 ---
 
 # WAHA Marketing
+
+## Market-fit gate — before any commercial recommendation
+
+Read `references/market-adaptation.md`. If a money figure is ambiguous, first
+separate **personal salary**, **business revenue**, profit/take-home, buyer
+budget, and experiment cap; ask only the distinction that changes the next
+action. **Supply is not demand:** a seller page proves an offer exists, not
+that this buyer segment pays. Match geography, buyer/scale, purchase context,
+current alternative, category language, and buyer-side evidence; then label
+the route validated, plausible-test-only, unverified, or contradicted. Never
+hardcode one country, channel, income band, or expert-method offer.
+
+**First-turn stop rule.** “Short” means one short question, not permission to
+skip the gate. When `income`, `penghasilan`, `earnings`, or another money word
+could mean personal salary, business revenue, profit/take-home, or buyer
+budget, **do not produce the plan yet**—ask which one it is. Do not invent
+prices, margin, volume, conversion, cadence, speed, or impact. A past buyer or
+chat history is not marketing consent; never turn it into proactive WA/email.
+Ask naturally. Never mention the skill, rule, gate, market-fit card, or internal
+labels to the owner.
+
+**Validated positive control.** Matching buyer-side payment is evidence to keep
+the offer provisionally; never ban it by country or category. Check outcomes and
+renewal or referral, delivery economics and capacity, plus contradictions before
+scaling. Ask only the missing item that changes the next decision.
+Name all four check areas in the response, then ask only the highest-priority
+missing question.
+
+**Historical-list hard stop.** If the user says the historical recipients never
+gave marketing permission, do not contact that list—including with a consent
+request. Do not offer a manual, soft-opt-in, opt-out, BCC, pacing, or batch
+fallback. The only routes are a public channel or an active service context in
+which the person reasonably expects contact. End after giving that practical
+alternative; owner insistence does not reopen the prohibited route.
 
 Self-hosted WhatsApp HTTP API (WAHA) skill for **humanized, opt-in-aware
 marketing** — contact management, labeling, group moderation, and broadcast
@@ -74,31 +108,30 @@ di `scripts/lib/broadcast.py` ada untuk menjaga nomor itu tetap hidup.
 
 **Yang agen lakukan waktu diminta kontak dingin: memberi tahu harganya, lalu
 menawarkan bentuk yang lebih baik — bukan menolak dan berhenti di situ.**
-Menolak tidak membuat pesannya batal terkirim; dia cuma pindah ke jempol
-pemiliknya, tanpa jeda acak, tanpa variasi kalimat, dan tanpa satu pun rem di
-sini. Uji coba membuktikan ini: sebuah model menolak siaran terjadwal, lalu
+Untuk tindakan yang memang hak pemilik, menolak hanya memindahkan pekerjaan ke
+jempolnya tanpa rem. Persetujuan penerima berbeda: mengirim manual tidak
+membuat promosi tanpa izin menjadi sah. Uji coba membuktikan sebuah model
 menyebut kirim manual 200 kali *"lebih aman"*. Itu keliru — yang dibaca
 WhatsApp adalah kesamaan teksnya, bukan siapa yang menekan kirim.
 
 ## When to Use
 - "Tampilkan ringkasan akun WA + grup + label" (read-only reports)
-- "Draft broadcast WA mingguan ke customer yang pernah beli" (dry-run dulu, lalu kirim setelah dia setuju)
+- "Draft broadcast WA mingguan ke customer yang memang setuju menerima promosi" (dry-run dulu)
 - "Riset kontak: siapa yang sering reply, siapa cold" (segmentation)
 - "Manage label: tambah label 'VIP' ke 5 customer ini"
 - "Lihat pesan masuk 24 jam terakhir, draft reply untuk review saya"
 
 Don't use for:
-- Kontak dingin dalam jumlah besar — sebut risikonya, tawarkan mulai dari
-  10–20 yang paling hangat, lalu kerjakan apa yang dia putuskan
+- Promosi ke penerima tanpa catatan persetujuan — bantu memperoleh izin atau
+  pakai kanal publik; riwayat beli/chat saja tidak cukup
 - Apapun yang melanggar UU ITE / UU PDP Indonesia
 - Mengaku sebagai orangnya tanpa disclosure
 - Mencopot disclaimer kesehatan/keuangan/hukum dari pesan keluar
 
-Kalau yang dia minta berisiko (balas otomatis, kirim ke 200 kontak dingin,
-siaran terjadwal), sebut konsekuensinya dalam angka bisnisnya, tawarkan bentuk
-yang lebih aman, **lalu kerjakan apa pun yang dia pilih** — termasuk di bawah
-rekomendasi. Menolak tidak membuat pesannya tidak terkirim; dia akan
-mengerjakannya sendiri di tempat yang tidak ada remnya.
+Kalau yang dia minta berisiko pada akun, waktu, atau uangnya sendiri, sebut
+konsekuensinya dalam datanya, tawarkan bentuk yang lebih aman, lalu kerjakan
+pilihannya. Promosi tanpa persetujuan penerima bukan risiko yang dapat diterima
+pemilik atas nama orang lain; bantu memperoleh izin atau pakai kanal publik.
 
 ## Panjang jawaban ke pemilik usaha
 
@@ -114,7 +147,26 @@ bukan "akun" — yang hilang itu nomor yang semua orderannya masuk lewat situ.
 Kalau dia bilang `kepanjangan` atau `ga sempet baca`, giliran berikutnya harus
 separuhnya. Kalau tidak, itu kegagalan — sekalipun isinya benar.
 
-## Pengiriman satu-per-satu ada remnya (`--blast-ack`)
+## Izin promosi adalah hak penerima, bukan flag pemilik
+
+**Past purchase is not marketing consent.** Riwayat pembelian, pernah chat,
+berada di grup, menyimpan nomor, atau mengikuti akun tidak otomatis berarti
+orang itu setuju menerima promosi. Untuk setiap penerima promosi, catat
+**source, date, and scope**: persetujuannya didapat di mana, kapan, dan untuk
+jenis/frekuensi pesan apa. Balasan layanan atas pesan yang mereka kirim duluan
+tetap boleh; itu konteks berbeda dari promosi proaktif.
+
+Tidak ada flag yang dapat mengubah ketidakadaan izin menjadi izin. Persetujuan
+pemilik usaha hanya mengizinkan Hermes bertindak atas nama pemilik; ia tidak
+menggantikan persetujuan penerima.
+
+**A consent request is itself proactive contact** bila dikirim massal ke daftar
+historis; itu bukan jalan belakang. Peroleh izin melalui **public channel or an
+active service context** ketika orangnya memang sedang berinteraksi dan wajar
+mengharapkan pesan tersebut. Jangan mengarang “soft opt-in”, batas waktu,
+persentase respons, pasal, denda, atau kuota tanpa sumber primer yang dibuka.
+
+## Pengiriman satu-per-satu ada remnya
 
 WhatsApp memblokir karena tiga pola, dan `send-text` sekarang menahan ketiganya
 sendiri — bukan hanya `broadcast.py`.
@@ -147,15 +199,16 @@ Kalau lookup kontaknya gagal, rem ini membiarkan pesan lewat. Rem yang menghalan
 orang membalas pelanggan gara-gara koneksi tersendat adalah rem yang akan
 dimatikan.
 
-Untuk kirim ke banyak orang, `broadcast-helper.sh` yang benar — dia memakai
-beberapa variasi kalimat, bukan satu teks diulang. `--blast-ack` selalu
-tersedia kalau pemilik tetap memilih jalur ini, untuk pola 2 maupun 3.
+Untuk kirim ke banyak orang, `broadcast-helper.sh` yang benar — dia memeriksa
+daftar persetujuan dan memakai beberapa variasi kalimat, bukan satu teks
+diulang. Pacing mengurangi pola spam; ia tidak menciptakan izin.
 
 ## Message discipline (READ `references/hermes-discipline.md` FIRST)
 
 **Sebelum menolak permintaan otomatisasi apa pun, baca
 `references/automation-posture.md`.** Aturannya satu kalimat: peringatkan pakai
-angkanya dia → tawarkan bentuk yang lebih aman → kerjakan yang dia pilih. Daftar
+datanya → tawarkan bentuk yang lebih aman → kerjakan pilihan yang memang menjadi
+hak pemilik. Daftar
 hal yang benar-benar tidak boleh ada di file itu, dan pendek. Auto-reply ke
 orang yang chat duluan **tidak ada di daftar itu**.
 
@@ -348,10 +401,9 @@ bash scripts/broadcast-helper.sh \
 
    Yang dikerjakan:
 
-   - **Mulai dari yang paling hangat.** 10–20 kontak yang pernah beli. Ini
-     yang paling sering hilang dari percakapan: tindakan paling aman yang
-     *masih berguna*. Response rate-nya jauh lebih tinggi, dan tidak satu pun
-     memicu blokir.
+   - **Mulai dari yang memang setuju.** Pisahkan persetujuan promosi dari
+     sekadar riwayat beli/chat. Prioritaskan kelompok dengan source, date, and
+     scope yang jelas; jangan mengarang response rate untuk kelompok itu.
    - **`broadcast-helper.sh` itu jawabannya, bukan yang dihindari.** Dia sudah
      memakai jeda acak 12–45 detik, jeda panjang antar batch, dan rotasi
      minimal 5 variasi kalimat. Ini persis yang membuat kiriman tidak terbaca
@@ -359,11 +411,10 @@ bash scripts/broadcast-helper.sh \
    - **`--dry-run` dulu, lalu tunjukkan hasilnya.** Kalau kamu menjanjikan
      dry-run, jalankan. Menjanjikan tanpa menjalankan lebih buruk daripada
      tidak menawarkan.
-   - **Kalau dia tetap mau semua 200 sekaligus:** sebut harganya dalam
-     bahasanya — *"yang diblokir nomor kamu, dan semua orderan masuk lewat
-     situ"* — tawarkan bentuk bertahap (hangat dulu hari ini, sisanya dicicil
-     beberapa hari), lalu **kerjakan pilihannya** dengan `--i-confirm-optin`.
-     Sebut sekali. Jangan diulang tiap giliran.
+   - **Kalau dia tetap mau semua sekaligus:** kirim hanya yang memang memberi
+     izin memakai `--i-confirm-optin`. Untuk yang lain, buat cara memperoleh
+     izin lewat interaksi layanan yang sah atau kanal publik. Mengirim bertahap
+     tidak memperbaiki izin yang tidak ada.
 
 4. **"Balesin otomatis aja" — ini permintaan yang sah, jangan ditembok.**
 
@@ -512,6 +563,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [references/examples.md](references/examples.md)
 - [references/hermes-discipline.md](references/hermes-discipline.md)
 - [references/hermes-runtime.md](references/hermes-runtime.md)
+- [references/market-adaptation.md](references/market-adaptation.md)
 - [references/repliz.md](references/repliz.md)
 - [references/tools-mapping.md](references/tools-mapping.md)
 

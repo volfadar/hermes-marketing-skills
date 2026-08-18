@@ -1,6 +1,6 @@
 ---
 name: ibras-content-creator
-description: Plan, ideate, repurpose, and schedule social content with human review.
+description: Use for content ideas, captions, posts, calendars, repurposing, or reviewing content performance. Works from posts, a voice note, customer chats, product photos, or a short interview; starts with one sustainable channel and human review.
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -13,9 +13,43 @@ metadata:
 
 # Content Creator
 
-Helps a solo creator (TikTok/Instagram/YouTube/X/LinkedIn) **plan, ideate,
-repurpose, and schedule** social content — draft-first by default, and it does
-what the owner decides after hearing the trade-off.
+## Market-fit gate — before any commercial recommendation
+
+Read `references/market-adaptation.md`. If a money figure is ambiguous, first
+separate **personal salary**, **business revenue**, profit/take-home, buyer
+budget, and experiment cap; ask only the distinction that changes the next
+action. **Supply is not demand:** a seller page proves an offer exists, not
+that this buyer segment pays. Match geography, buyer/scale, purchase context,
+current alternative, category language, and buyer-side evidence; then label
+the route validated, plausible-test-only, unverified, or contradicted. Never
+hardcode one country, channel, income band, or expert-method offer.
+
+**First-turn stop rule.** “Short” means one short question, not permission to
+skip the gate. When `income`, `penghasilan`, `earnings`, or another money word
+could mean personal salary, business revenue, profit/take-home, or buyer
+budget, **do not produce the plan yet**—ask which one it is. Do not invent
+prices, margin, volume, conversion, cadence, speed, or impact. A past buyer or
+chat history is not marketing consent; never turn it into proactive WA/email.
+Ask naturally. Never mention the skill, rule, gate, market-fit card, or internal
+labels to the owner.
+
+**Validated positive control.** Matching buyer-side payment is evidence to keep
+the offer provisionally; never ban it by country or category. Check outcomes and
+renewal or referral, delivery economics and capacity, plus contradictions before
+scaling. Ask only the missing item that changes the next decision.
+Name all four check areas in the response, then ask only the highest-priority
+missing question.
+
+**Unknown-channel stop.** If the buyer channel is unknown, ask one question and
+stop: where did the last real buyers discover, ask, order, and pay? Do not output
+a generic platform schedule while waiting. After the answer, use only the
+owner's stated capacity and account evidence; do not import posting times,
+counts, ratios, hashtags, formats, or engagement benchmarks.
+
+Helps a solo operator, small business, freelancer, staff member with a side
+business, or creator **plan, ideate, repurpose, and schedule** useful content —
+draft-first by default, and it does what the owner decides after hearing the
+trade-off.
 
 **Philosophy (read `references/philosophy.md` and
 `references/automation-posture.md`):** AI assists production, the human owns
@@ -93,12 +127,14 @@ Before delivering a batch: `python3 scripts/check-numbers.py <draft.md>`
 ## Prerequisites
 - Hermes Agent with memory enabled (for brand voice retention).
 - (Optional) ibras-cloakserve-research skill — for trend/topic research.
-- The human's existing content samples (3-5) — to extract voice profile.
+- Any truthful raw material available: existing posts if they have them, or a
+  voice note, customer chat, product photo, order question, interview, catalogue,
+  or the owner's spoken answers. A new business is not blocked for lacking posts.
 
 ## Quick Start
 
 ```bash
-# 1. (Once) Build the brand voice profile — feed 3-5 of your existing posts
+# 1. (Once) Build the voice profile from any real samples you have
 bash "${HERMES_SKILL_DIR}/scripts/voice-profile.sh" ~/my-samples/
 
 # 2. (Once) Set your content pillars
@@ -129,14 +165,17 @@ bash "${HERMES_SKILL_DIR}/scripts/calendar.sh" --weeks 2 --platform instagram > 
 
 ## Procedure (steps the agent follows)
 
-1. **First time with a creator:** run `voice-profile.sh` to learn their voice.
-   This is non-negotiable — content without voice match = AI-sounding slop.
+1. **First time:** learn their voice from the richest material available. Use
+   existing posts when present; otherwise use a voice note, customer chat,
+   product photo plus their explanation, or a short interview. State what is
+   still inferred and let the profile improve after real replies arrive.
 2. **For ideation:** use `ideate.sh` which pulls from pillars + recent trends
    (via ibras-cloakserve-research if available). Always offer 5+ options, never 1.
 3. **For repurposing:** use `repurpose.sh` template — one source → distinct
    platform variants. NEVER identical text across platforms (algorithm penalty).
-4. **For calendar:** use `calendar.sh` — respects 5:1 ratio (5 value : 1 promo),
-   platform cadence, and the human's stated capacity.
+4. **For calendar:** start with one channel where real buyers already act and
+   cap the workload at the human's stated capacity. Choose the value/promo mix
+   from the buying cycle and evidence; there is no universal ratio or cadence.
 5. **Every draft ends with:** "Review, edit the parts that don't sound like you,
    then post." Default is draft-first — say why once, not every turn.
 6. **Baca `references/automation-posture.md` sebelum menolak apa pun.**
@@ -156,7 +195,7 @@ membuat skill ini menolak hal yang sebenarnya aman, dan itu yang bikin alatnya
 ditinggal.
 
 Yang berisiko akun adalah **API tidak resmi**, dan itu masalah yang berbeda
-lagi — `ibras-social-publishing` punya enam jalur lengkap dengan kerugian
+lagi — `ibras-social-publishing` punya tujuh jalur lengkap dengan kerugian
 masing-masing, termasuk yang melanggar syarat layanan. Tidak ada yang dilarang
 di sana; yang ada konsekuensinya.
 
@@ -167,8 +206,9 @@ isi komentar atau DM orang lain.
 ## Pitfalls
 - **Voice mismatch:** if you skip `voice-profile.sh`, output sounds generic AI.
   Always start there. Re-run after every 20 posts (voice evolves).
-- **Over-production:** "make 30 posts" → burnout + low quality. The skill
-  defaults to sustainable cadence (3-5/week per platform, max).
+- **Over-production:** "make 30 posts" → burnout + low quality. Start with one
+  channel and the smallest cadence the operator can actually sustain; increase
+  only after the posts create a business signal.
 - **Cross-platform identical text:** don't refuse — reshape. Each platform has
   different conventions, so `repurpose.sh` produces distinct variants for the
   same idea. Same work for them, better result.
@@ -176,11 +216,12 @@ isi komentar atau DM orang lain.
   before generating content. Volume without goal = waste.
 
 ## Verification
-- [ ] Voice profile exists (check `~/.hermes/memories/USER.md`).
-- [ ] Pillars are set (3-5, specific to the creator).
+- [ ] Voice profile uses real owner/customer material and marks any inference.
+- [ ] Topics are specific to the current buyer decision; their number follows capacity.
 - [ ] Every draft is marked as DRAFT, with a note to review + post natively.
 - [ ] No cron job auto-publishes. All scheduled tasks deliver drafts for review.
-- [ ] 5:1 value-to-promo ratio is respected in calendars.
+- [ ] Measurement includes inquiries, quotes, orders, and gross profit—not only
+  reach, likes, saves, or engagement.
 
 ## Documentation (`references/`)
 - **`hermes-discipline.md`** — claim/number provenance and red flags (READ FIRST)
@@ -213,6 +254,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [references/calendar-template.md](references/calendar-template.md)
 - [references/hermes-discipline.md](references/hermes-discipline.md)
 - [references/hermes-runtime.md](references/hermes-runtime.md)
+- [references/market-adaptation.md](references/market-adaptation.md)
 - [references/philosophy.md](references/philosophy.md)
 - [references/platforms.md](references/platforms.md)
 - [references/repliz.md](references/repliz.md)

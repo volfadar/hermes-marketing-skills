@@ -46,13 +46,11 @@ CMD="${1:-status}"; shift || true
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 CONFIRM="no"
-BLAST_ACK="no"
 BINDING_ACK="no"
 _args=()
 for _a in "$@"; do
   case "$_a" in
     --confirm)      CONFIRM="yes" ;;
-    --blast-ack)    BLAST_ACK="yes" ;;
     --binding-ack)  BINDING_ACK="yes" ;;
     *)              _args+=("$_a") ;;
   esac
@@ -148,7 +146,7 @@ pace_and_check() {   # pace_and_check <chatId> <text>
   if [[ "$cold" == "1" ]]; then
     streak=$(awk -F'\t' '{ if ($4 == "1") n++; else n=0 } END { print n+0 }' "$SEND_STATE")
     streak=$(( streak + 1 ))
-    if (( streak >= COLD_THRESHOLD )) && [[ "$BLAST_ACK" != "yes" ]]; then
+    if (( streak >= COLD_THRESHOLD )); then
       cat >&2 <<MSG
 
   ⚠  Ini nomor ke-$streak berturut-turut yang belum pernah chat duluan.
@@ -158,13 +156,9 @@ pace_and_check() {   # pace_and_check <chatId> <text>
      tetap kena. Yang berhenti nomor WhatsApp Anda, berikut semua orderan yang
      masuk lewat situ.
 
-     Yang jauh lebih aman: kirim dulu ke orang yang pernah beli atau pernah
-     chat duluan. Lihat daftarnya:
-       bash scripts/waha.sh chats
-
-     Kalau memang harus ke nomor baru, selingi dengan balasan ke pelanggan
-     lama, atau tambahkan --blast-ack kalau Anda sudah paham risikonya.
-     Belum ada yang dikirim.
+     Riwayat chat atau pembelian lama bukan izin promosi. Untuk promosi banyak
+     penerima, gunakan broadcast-helper.sh dengan daftar yang mencatat sumber,
+     tanggal, dan cakupan persetujuan. Belum ada yang dikirim.
 
 MSG
       return 1
@@ -174,7 +168,7 @@ MSG
   # 1. Identical text to many different chats = the pattern WhatsApp reads as a
   #    blast, regardless of how slowly you send it.
   same=$(awk -F'\t' -v h="$hash" -v c="$cid" '$3==h && $2!=c {print $2}' "$SEND_STATE" | sort -u | wc -l)
-  if [[ "$same" -ge "$BLAST_THRESHOLD" && "$BLAST_ACK" != "yes" ]]; then
+  if [[ "$same" -ge "$BLAST_THRESHOLD" ]]; then
     cat >&2 <<MSG
 
   ⚠  Teks yang sama sudah dikirim ke $same nomor berbeda.
@@ -189,7 +183,8 @@ MSG
      Dia memakai beberapa variasi kalimat, jeda 12-45 detik, dan berhenti
      sendiri kalau ada yang tidak beres. Belum ada yang dikirim.
 
-     Kalau tetap mau lewat perintah ini, tambahkan --blast-ack.
+     Tidak ada flag yang melewati rem ini. Balasan normal tetap bisa dikirim;
+     promosi massal memakai daftar persetujuan di broadcast-helper.sh.
 
 MSG
     return 1

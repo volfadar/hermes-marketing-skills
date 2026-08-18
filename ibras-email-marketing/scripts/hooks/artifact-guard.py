@@ -72,6 +72,10 @@ SKIP_LINE_RE = re.compile(r"^\s*(?:#{1,6}\s|\|[\s:-]+\||>?\s*\[?\d+\]?[.)]\s*$|<
 
 # A deliverable that draws a route to a purchase must first say what it earns.
 PLAN_RE = re.compile(r"\b(journey|funnel|jalur|rute|graph|roadmap|rencana|plan)\b", re.I)
+MARKET_FIT_RE = re.compile(
+    r"\b(market[\s-]*fit|kecocokan pasar|buyer[\s-]*side|sinyal pembeli)\b",
+    re.I,
+)
 GOAL_FIT_RE = re.compile(
     r"(goal[\s-]*(fit|reconciliation)|rekonsiliasi|butuh.*rencana.*hasil"
     r"|gap\s*[:=]|needs\s*[:=]|target bulan|bulan 1 .*(realistis|tidak akan))",
@@ -224,6 +228,15 @@ def check(path: str, content: str, session_id: str = "") -> list[str]:
             "GOAL FIT: this plan never reconciles against the goal. State three lines "
             "before the route — what the user needs and by when, what this plan yields "
             "in that window, and the gap."
+        )
+
+    if PLAN_RE.search(content) and len(content) > 600 and not MARKET_FIT_RE.search(content):
+        problems.append(
+            "MARKET FIT: this commercial route has no market-fit record. Before "
+            "installing an offer or channel, state the geography, buyer/scale, "
+            "purchase context, current alternative, strongest buyer-side signal, "
+            "segment-transfer gap, and verdict (validated / plausible-test-only / "
+            "unverified / contradicted). Seller pages prove supply, not demand."
         )
 
     if STOPRULE_RE.search(content) and not MONEY_SIGNAL_RE.search(content):

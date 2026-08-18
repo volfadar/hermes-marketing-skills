@@ -1,9 +1,50 @@
 ---
 name: ibras-marketing-orchestrator
-description: Decide which marketing skill runs next, in what order, and what state each one reads and writes. Use at the start of any marketing session, when the owner's request touches more than one skill, when a returning owner opens a second session, or whenever you are unsure whether to research, position, write, or send. Also the place that says what is bought rather than built.
+description: Use for any marketing request that may need more than one skill, or when unsure whether to research, position, write, publish, message, or measure. Routes the next smallest useful step and preserves shared business state; it does not replace the specialist skill.
 ---
 
 # Marketing Orchestrator
+
+## Market-fit gate — before any commercial recommendation
+
+Read `references/market-adaptation.md`. If a money figure is ambiguous, first
+separate **personal salary**, **business revenue**, profit/take-home, buyer
+budget, and experiment cap; ask only the distinction that changes the next
+action. **Supply is not demand:** a seller page proves an offer exists, not
+that this buyer segment pays. Match geography, buyer/scale, purchase context,
+current alternative, category language, and buyer-side evidence; then label
+the route validated, plausible-test-only, unverified, or contradicted. Never
+hardcode one country, channel, income band, or expert-method offer.
+
+**First-turn stop rule.** “Short” means one short question, not permission to
+skip the gate. When `income`, `penghasilan`, `earnings`, or another money word
+could mean personal salary, business revenue, profit/take-home, or buyer
+budget, **do not produce the plan yet**—ask which one it is. Do not invent
+prices, margin, volume, conversion, cadence, speed, or impact. A past buyer or
+chat history is not marketing consent; never turn it into proactive WA/email.
+Ask naturally. Never mention the skill, rule, gate, market-fit card, or internal
+labels to the owner.
+
+**Unverified-offer stop.** If the only evidence is seller-side supply or a
+different buyer segment, the paid category is unverified. Do not propose a
+price, funnel, channel, or renamed version and do not invent how that segment
+usually behaves. State the gap, define a buyer-side commercial test, and compare
+the direct outcome, bundled diagnosis, and separately paid diagnosis. A catchy
+local label that preserves the same work and buying reason still fails.
+The response is limited to the evidence gap, one buyer-side test, and those
+three shapes. Do not continue into a “helpful” generic plan while waiting.
+Do not assert the target segment's budget, margin, awareness, channel, or
+behaviour. Turn those into test questions, and leave sample, time, and price
+caps for the user to set. When explaining a mismatch, state only that the
+segment match is unproven; do not fill the gap with stereotyped reasons. Ask
+for the missing reach, time, cash, or price constraint before sizing the test.
+
+**Validated positive control.** Matching buyer-side payment is evidence to keep
+the offer provisionally; never ban it by country or category. Check outcomes and
+renewal or referral, delivery economics and capacity, plus contradictions before
+scaling. Ask only the missing item that changes the next decision.
+Name all four check areas in the response, then ask only the highest-priority
+missing question.
 
 ## Why this skill exists
 
@@ -225,6 +266,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [references/automation-posture.md](references/automation-posture.md)
 - [references/hermes-discipline.md](references/hermes-discipline.md)
 - [references/hermes-runtime.md](references/hermes-runtime.md)
+- [references/market-adaptation.md](references/market-adaptation.md)
 - [references/repliz.md](references/repliz.md)
 - [references/tools-mapping.md](references/tools-mapping.md)
 

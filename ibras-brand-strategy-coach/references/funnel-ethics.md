@@ -113,9 +113,11 @@ For high-friction core offers, use multiple bridges only when each removes a dif
 
 **Every bridge carries a price or a stated reason it is free.** A ladder without prices is a
 content plan. A free bridge is legitimate to build proof; it cannot measure willingness to pay.
-The strongest ladder observed in testing priced every rung — free qualifying question → paid
-audit → paid pilot → recurring service only if the pilot proved out — so each step bought a
-different kind of evidence.
+Do not turn an expert method into a paid rung merely because suppliers sell it elsewhere. Read
+`market-adaptation.md`: compare a direct paid outcome, diagnosis bundled inside implementation,
+and a separately paid diagnosis. The third shape is justified only by matching buyer-side demand
+or a purchase context that requires it. Each priced step must buy a distinct outcome or decision,
+not the same work under a new name.
 
 **Stop/scale rules key on the top of the demand ladder** (`hermes-discipline.md` Rule 5): money
 received, a deposit, a scheduled paid pilot, or a written commitment naming scope and price.
@@ -212,7 +214,10 @@ Track the smallest set that reveals the broken link:
 - contribution margin and payback;
 - opt-out, complaint, refund, and block rates.
 
-Pre-register kill and scale rules. Example: “After 20 qualified diagnostics, stop this message if fewer than 4 book the paid pilot; interview non-buyers before spending on traffic.”
+Pre-register kill and scale rules against the user's real volume and economics. Example: after
+the agreed test cap, stop this message if no matching buyer makes the agreed commercial
+commitment; interview non-buyers before spending on traffic. Numbers are inputs from the user or
+tagged test assumptions, never imported defaults.
 
 ## Consent and human control
 

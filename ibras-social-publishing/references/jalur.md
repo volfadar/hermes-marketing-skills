@@ -111,7 +111,8 @@ kehati-hatian — itu cuma memindahkan orangnya ke Jalur F.
 ### Yang harus disebut apa adanya
 
 - **Tidak menyentuh WhatsApp.** Sama sekali. WhatsApp tetap Jalur WAHA
-  (`ibras-waha-marketing`), dan untuk UMKM Indonesia WhatsApp biasanya kanal nomor satu.
+  (`ibras-waha-marketing`). Pilih WhatsApp hanya bila data buyer menunjukkan mereka
+  memang menemukan, bertanya, memesan, atau meminta tindak lanjut di sana.
 - **Tidak menyentuh email.** Email tetap Gmail SMTP/IMAP (`ibras-email-marketing`).
 - **LinkedIn** disebut di halaman depan tapi tidak muncul di tabel paket. Cek
   sendiri di akunnya sebelum menjanjikan.

@@ -1,7 +1,7 @@
 # ibras-social-publishing
 
 Hermes skill untuk memilih **jalur publishing media sosial** dari riset yang
-sudah dikompilasi — enam jalur, dari manual sampai API tidak resmi, masing-masing
+sudah dikompilasi — tujuh jalur, dari manual sampai API tidak resmi, masing-masing
 dengan biaya terverifikasi, kuota resmi, kerugian, dan alternatif yang lebih aman.
 
 **Menasihati, tidak menerbitkan.** Tidak ada jalur yang dilarang di sini.
@@ -18,7 +18,7 @@ Tidak ada API key, tidak ada akun, tidak ada koneksi keluar. Skill ini offline.
 ## Pemakaian
 
 ```bash
-# Enam jalur, ringkas
+# Tujuh jalur, ringkas
 bash scripts/advise.sh options
 
 # Urutkan sesuai keadaanmu
@@ -46,7 +46,7 @@ bash scripts/research.sh "AGPL"
 bash scripts/doctor.sh
 ```
 
-## Enam jalur
+## Tujuh jalur
 
 | ID | Biaya | Risiko | ToS | Skill |
 |---|---|---|---|---|
@@ -68,7 +68,7 @@ mengubah rekomendasinya.
 ## Dokumen
 
 - `SKILL.md` — manifest + prosedur
-- `references/jalur.md` — enam jalur lengkap
+- `references/jalur.md` — tujuh jalur lengkap
 - `references/research-digest.md` — tiga laporan riset dibandingkan
 - `references/platform-limits.md` — angka resmi + kutipannya
 - `references/publishing-architecture.md` — arsitektur kalau Hermes benar-benar publish

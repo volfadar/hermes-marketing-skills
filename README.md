@@ -1,8 +1,9 @@
 # Skill Pemasaran untuk Hermes Agent
 
 Tujuh skill untuk pemilik usaha kecil — riset, posisi merek, konten, email,
-sosmed, WhatsApp — berjalan di Hermes Agent milikmu sendiri. Tidak ada SaaS
-baru, tidak ada data keluar dari laptop/HP-mu.
+sosmed, WhatsApp — berjalan di Hermes Agent milikmu sendiri. File skill tetap
+lokal. Data hanya keluar ketika kamu memilih model/provider atau tool eksternal;
+cek preview, izin, dan data sensitif sebelum melanjutkan.
 
 | Skill | Buat apa | Butuh apa selain Hermes |
 |---|---|---|
@@ -16,7 +17,24 @@ baru, tidak ada data keluar dari laptop/HP-mu.
 
 Empat skill pertama langsung jalan tanpa setup apa pun — cukup chat.
 
-## Install
+## Install paling gampang — dari Dashboard
+
+Tidak perlu GitHub atau terminal kalau Dashboard sudah disiapkan fasilitator:
+
+1. Buka **Hermes Dashboard** dan pilih profile yang benar.
+2. Klik **Skills → Browse hub**.
+3. Cari `ibras-`.
+4. Klik **Install** pada ketujuh skill di tabel atas.
+5. Kembali ke daftar skill terpasang, cari `ibras-`, dan pastikan 7/7 berstatus
+   aktif (toggle hijau).
+6. Buka **Chat → New chat** supaya perubahan aktif di sesi baru.
+
+Untuk OpenRouter, buka **API Keys → LLM Providers → OpenRouter**. Jangan taruh
+API key di chat, screenshot, atau dokumen. Dokumentasi resmi UI:
+[Web Dashboard](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard)
+dan [Skills System](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills).
+
+## Install alternatif untuk operator teknis
 
 **Cara A — dari folder ini / hasil unzip bundel:**
 
@@ -52,12 +70,10 @@ hermes skills install volfadar/hermes-marketing-skills/ibras-email-marketing --f
 hermes skills install volfadar/hermes-marketing-skills/ibras-cloakserve-research --force
 ```
 
-Ketujuh identifier di atas diverifikasi pada Hermes Agent v0.20.2 (2026.8.16)
-di container Incus Ubuntu yang bersih pada 18 Agustus 2026. Hermes
-meresolusinya sebagai source `skills.sh` dari repo ini pada merge commit
-`262abf4`: lima skill mendapat verdict `SAFE`; email dan cloakserve mendapat
-`CAUTION` tanpa temuan `CRITICAL`. Ketujuh bundle terpasang lengkap, muncul
-`enabled`, dan dapat ditemukan serta dipreload oleh model Hermes sungguhan.
+Ketujuh identifier di atas diuji pada Hermes Agent v0.20.2 di container Incus
+Ubuntu baru pada 18 Agustus 2026. Hermes meresolusinya sebagai source
+`skills.sh`; ketujuh bundle terpasang lengkap, muncul `enabled`, dan dapat
+ditemukan serta dimuat oleh model Hermes sungguhan.
 
 `--force` **tidak** bisa menimpa verdict DANGEROUS — hanya CAUTION, dan hanya
 setelah kamu sendiri memutuskan isinya aman. Kalau tidak mau repot memeriksa,
@@ -120,10 +136,11 @@ Ganti dengan nama bisnismu sendiri.
    > Saya posting IG 4x sebulan, hasil sepi. Bikin pilot 2 minggu yang bisa
    > saya hentikan kapan saja.
 
-Budaya kerja semua skill ini: **dulu dulu dan selalu draft dulu**. Tidak ada
-yang kirim/publish apa pun tanpa `--confirm` darimu. Kalau kamu minta hal
-yang berisiko (kirim massal, auto-kirim buta, API resmi), skill akan mengerem
-dan jelaskan kenapa — itu fitur, bukan error.
+Budaya kerja semua skill ini: **bukti dulu dan preview dulu**. Untuk promosi,
+persetujuan owner atau flag `confirm` tidak pernah menggantikan izin penerima.
+Kalau kamu minta hal yang berisiko—kirim massal, auto-kirim buta, atau memakai
+data sensitif—skill akan mengerem dan menjelaskan blocker. Itu fitur, bukan
+error.
 
 ## Setup tambahan (hanya kalau pakai skill itu)
 

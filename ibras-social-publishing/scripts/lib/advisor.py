@@ -217,7 +217,10 @@ def cmd_recommend(args):
         ranked = sorted(
             ((score_option(o, want, args.budget, args.risk, args.skill,
                            args.volume, args.account_value), o) for o in data["options"]),
-            key=lambda t: t[0][0], reverse=True)
+            # Manual/native wins a genuine tie: it buys the same learning with
+            # less setup. Automation must win on a measured bottleneck or
+            # business signal, not on novelty.
+            key=lambda t: (t[0][0], t[1]["id"] == "manual-native"), reverse=True)
         print(json.dumps({
             "decision_frame": frame,
             "constraints": {"budget": args.budget, "risk": args.risk,
@@ -256,7 +259,10 @@ def cmd_recommend(args):
         s, reasons = score_option(o, want, args.budget, args.risk, args.skill,
                                   args.volume, args.account_value)
         ranked.append((s, o, reasons))
-    ranked.sort(key=lambda t: t[0], reverse=True)
+    # Manual/native wins a genuine tie. This is a tie-breaker, not a universal
+    # default: coverage, risk, volume, capability and budget can still make a
+    # different route win clearly.
+    ranked.sort(key=lambda t: (t[0], t[1]["id"] == "manual-native"), reverse=True)
 
     print(f"\n{'='*80}")
     print("  URUTAN")
@@ -282,6 +288,11 @@ def cmd_recommend(args):
                      f"pendapat siapa pun. Ubah satu batasan dan urutannya berubah — "
                      f"coba jalankan lagi dengan --account-value low kalau akun ini "
                      f"sebenarnya bisa diganti.", 76):
+        print(f"  {line}")
+    print()
+    for line in wrap("Kalau dua jalur nilainya sama, manual + native menang. "
+                     "Naik ke otomasi setelah ada business signal atau bottleneck "
+                     "terukur yang memang dibayar oleh alat itu.", 76):
         print(f"  {line}")
     print()
     for line in wrap(f"Sebelum memakai '{top['name']}', baca kerugiannya lengkap: "

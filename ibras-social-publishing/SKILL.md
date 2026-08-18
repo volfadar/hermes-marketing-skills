@@ -1,6 +1,6 @@
 ---
 name: ibras-social-publishing
-description: Pick a social publishing path from compiled research — six options from manual to unofficial APIs, each with verified costs, quotas, drawbacks and safer alternatives. Advises, never blocks.
+description: Use to publish or schedule social posts and choose among seven paths, from manual/native and local tools to official or unofficial APIs. Compares budget, risk, skill, volume, buyer channel, drawbacks, and measured bottlenecks; advises without pretending one tool fits all.
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -13,6 +13,33 @@ metadata:
 
 # Social Publishing
 
+## Market-fit gate — before any commercial recommendation
+
+Read `references/market-adaptation.md`. If a money figure is ambiguous, first
+separate **personal salary**, **business revenue**, profit/take-home, buyer
+budget, and experiment cap; ask only the distinction that changes the next
+action. **Supply is not demand:** a seller page proves an offer exists, not
+that this buyer segment pays. Match geography, buyer/scale, purchase context,
+current alternative, category language, and buyer-side evidence; then label
+the route validated, plausible-test-only, unverified, or contradicted. Never
+hardcode one country, channel, income band, or expert-method offer.
+
+**First-turn stop rule.** “Short” means one short question, not permission to
+skip the gate. When `income`, `penghasilan`, `earnings`, or another money word
+could mean personal salary, business revenue, profit/take-home, or buyer
+budget, **do not produce the plan yet**—ask which one it is. Do not invent
+prices, margin, volume, conversion, cadence, speed, or impact. A past buyer or
+chat history is not marketing consent; never turn it into proactive WA/email.
+Ask naturally. Never mention the skill, rule, gate, market-fit card, or internal
+labels to the owner.
+
+**Validated positive control.** Matching buyer-side payment is evidence to keep
+the offer provisionally; never ban it by country or category. Check outcomes and
+renewal or referral, delivery economics and capacity, plus contradictions before
+scaling. Ask only the missing item that changes the next decision.
+Name all four check areas in the response, then ask only the highest-priority
+missing question.
+
 Skill ini **menasihati, tidak menerbitkan.**
 
 Waktu seseorang bertanya "gimana caranya posting otomatis ke Instagram?",
@@ -21,7 +48,7 @@ pertanyaan yang hampir tidak pernah ditanyakan: *kalau akun ini hilang besok,
 apa yang terjadi pada omzet bulan depan?*
 
 Skill ini menyimpan hasil tiga laporan riset mendalam dalam bentuk yang bisa
-dicari dan dihitung, lalu menyusun **enam jalur berurutan sesuai batasan orang
+dicari dan dihitung, lalu menyusun **tujuh jalur berurutan sesuai batasan orang
 yang bertanya — lengkap dengan kerugian tiap jalur, termasuk yang
 direkomendasikannya sendiri.**
 
@@ -52,7 +79,7 @@ Jangan menyarankan yang dia sudah bilang tidak akan dikerjakan.
 ## Quick Start
 
 ```bash
-# Enam jalur, ringkas
+# Tujuh jalur, ringkas
 bash "${HERMES_SKILL_DIR}/scripts/advise.sh" options
 
 # Urutkan sesuai keadaan orangnya
@@ -67,7 +94,7 @@ bash scripts/advise.sh show selfhost-scheduler
 bash scripts/research.sh "banned"
 ```
 
-## Enam jalur
+## Tujuh jalur
 
 | ID | Jalur | Biaya | Risiko akun | ToS | Skill |
 |---|---|---|---|---|---|
@@ -123,8 +150,10 @@ composer X menolak teks · #41483 percakapan salah rute · #8824 sesi tidak stab
 1. **Tanyakan dua pertanyaan penentu sebelum menyebut tool apa pun:**
    - "Kalau akun ini hilang besok, apa yang terjadi pada omzet bulan depan?"
    - "Berapa post per minggu yang **benar-benar tayang** bulan lalu?"
-   Jawaban kedua hampir selalu 3–5x lebih kecil dari yang orang kira, dan itu
+   Jangan menebak selisihnya. Pakai angka yang benar-benar terjadi; itu yang
    mengubah rekomendasinya.
+   - Tanyakan juga sinyal bisnis terakhir: pertanyaan serius, permintaan harga,
+     pesanan, laba kotor, atau waktu balas yang benar-benar terselamatkan.
 2. **Jalankan `advise.sh recommend`** dengan angka mereka, jangan menebak.
 3. **Sebutkan kerugian jalur yang kamu rekomendasikan**, bukan hanya jalur yang
    kamu tolak. Rekomendasi tanpa kerugian adalah iklan.
@@ -185,7 +214,7 @@ composer X menolak teks · #41483 percakapan salah rute · #8824 sesi tidak stab
 - **`tools-mapping.md`** — tool mana untuk pekerjaan mana, dan mana yang dibeli bukan dibangun
 - **`repliz.md`** — jalur resmi komentar/DM/jadwal untuk IG · FB · TikTok · YouTube · Threads (mulai Rp 18.000, sekali bayar). **Tidak** mencakup WhatsApp & email
 - **`automation-posture.md`** — cara menjawab permintaan otomatisasi: peringatkan, tawarkan, kerjakan. BACA SEBELUM MENOLAK APA PUN
-- **`jalur.md`** — enam jalur lengkap, harga sebenarnya masing-masing
+- **`jalur.md`** — tujuh jalur lengkap, harga sebenarnya masing-masing
 - **`research-digest.md`** — tiga laporan dibandingkan, termasuk yang salah dan kenapa
 - **`platform-limits.md`** — angka resmi per platform, dengan kutipannya
 - **`publishing-architecture.md`** — `draft→approved→due→leased→execute→verify`, idempotency, kuota
@@ -235,6 +264,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [references/hermes-discipline.md](references/hermes-discipline.md)
 - [references/hermes-runtime.md](references/hermes-runtime.md)
 - [references/jalur.md](references/jalur.md)
+- [references/market-adaptation.md](references/market-adaptation.md)
 - [references/platform-limits.md](references/platform-limits.md)
 - [references/publishing-architecture.md](references/publishing-architecture.md)
 - [references/repliz.md](references/repliz.md)

@@ -50,9 +50,9 @@ CONFUSION = re.compile(
     r"maksudnya gimana|apa itu|gimana maksudnya|ribet|kelamaan|lama amat)\b", re.I)
 
 JARGON = {
-    "opt-in": "yang pernah beli atau chat duluan",
-    "opt in": "yang pernah beli atau chat duluan",
-    "optin": "yang pernah beli atau chat duluan",
+    "opt-in": "yang memang setuju menerima pesan seperti ini",
+    "opt in": "yang memang setuju menerima pesan seperti ini",
+    "optin": "yang memang setuju menerima pesan seperti ini",
     "imap": "kotak masuk email",
     "smtp": "pengiriman email",
     "app password": "kode khusus dari Google",

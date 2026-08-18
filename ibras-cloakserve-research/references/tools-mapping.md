@@ -85,7 +85,9 @@ Risk: buyers may not value a fit-assurance service.
 Risk: economic buyers may not trust the user's proof.
 
 - Main: research buyer context and alternatives.
-- Support: create a scoped diagnostic or case-study asset.
+- Support: create a case-study asset or a small outcome sample. Use a scoped diagnosis only
+  when `market-adaptation.md` finds matching buyer-side demand; otherwise keep diagnosis inside
+  delivery rather than making it a paid funnel rung.
 - Defer: a large newsletter system until qualified prospects engage.
 
 ### Two-market/affiliate

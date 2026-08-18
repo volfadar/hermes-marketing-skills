@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # calendar.sh — build a content calendar (markdown table).
-# Usage: bash calendar.sh --weeks 2 --platform instagram [--ratio 5:1]
+# Usage: bash calendar.sh --weeks 2 --platform instagram --slots 3
 set -euo pipefail
 WEEKS=2
 PLATFORM="instagram"
-RATIO="5:1"
+SLOTS=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --weeks) WEEKS="$2"; shift 2 ;;
     --platform) PLATFORM="$2"; shift 2 ;;
-    --ratio) RATIO="$2"; shift 2 ;;
+    --slots) SLOTS="$2"; shift 2 ;;
     *) echo "Unknown: $1" >&2; exit 2 ;;
   esac
 done
+[[ "$SLOTS" =~ ^[0-9]+$ ]] || { echo "need --slots <capacity per week>" >&2; exit 2; }
 
 CFG_DIR="${CONTENT_CREATOR_DIR:-$HOME/.content-creator}"
 PILLARS_FILE="$CFG_DIR/pillars.json"
@@ -27,7 +28,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TEMPLATE=$(awk 'BEGIN{p=0} /^---$/{p=1; next} p{print}' "$SCRIPT_DIR/templates/calendar.txt")
 PROMPT="${TEMPLATE//<WEEKS>/$WEEKS}"
 PROMPT="${PROMPT//<PLATFORM>/$PLATFORM}"
-PROMPT="${PROMPT//<RATIO>/$RATIO}"
+PROMPT="${PROMPT//<SLOTS>/$SLOTS}"
 PROMPT="${PROMPT//<PILLARS>/$PILLARS}"
 PROMPT="${PROMPT//<DAYS>/$DAYS}"
 

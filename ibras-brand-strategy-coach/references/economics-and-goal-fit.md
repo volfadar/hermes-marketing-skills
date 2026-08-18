@@ -176,11 +176,11 @@ Then one of:
 - **Does not reach it in this segment** — say so, and offer the fork: revise the target, change
   segment, relax a cap, or extend the window.
 
-A pre-registered rule that can invalidate the user's *own goal* is a feature, not a failure:
-
-> "After three paid audits, ask openly what weekly upkeep is worth. If the median answer is
-> under Rp1jt, the Rp3–4jt retainer is not valid and Rp6–8jt is not reachable in this segment —
-> I will say the target needs revising rather than pretend it is selling."
+A pre-registered rule that can invalidate the user's *own goal* is a feature, not a failure.
+Use their units: after the capped set of real offers, compare money received and delivery effort
+with the required take-home. If the result cannot reach the target under the stated CAP, say so
+and offer the real fork—change the offer, segment, capacity, target, or time window—instead of
+pretending interest is revenue.
 
 **Observed failure.** One model was told Rp3 juta in 30 days was the threshold that kept the
 user out of a factory job, did arithmetic against that number, then delivered a plan whose first

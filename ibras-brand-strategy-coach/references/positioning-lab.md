@@ -37,6 +37,11 @@ else", it is not a territory. "Audit varian" renamed "Pengunci Varian" is a name
 "install the master table, validate on upload, review weekly, report preventable errors" is a
 territory. One model's own user caught this: *"A masih terasa audit yang diganti nama."*
 
+The operational change still needs a buying reason. A better process does not prove that the
+target segment will purchase a separately named expert method. Apply `market-adaptation.md`:
+seller pages are supply, cross-segment evidence keeps its transfer gap, and an unvalidated
+method is bundled into the outcome or tested—not installed as positioning.
+
 **Reject a territory that violates the constraint register.** A position the user has said they
 will not operate is not a candidate, however well it scores. Check `REFUSE` before scoring, not
 after.
