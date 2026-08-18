@@ -8,7 +8,7 @@ Quick start:
   bash pillars.sh "p1, p2, p3"          # sekali: set 3-5 pilar konten
   bash ideate.sh --week --platform X    # 10 ide konten
   bash repurpose.sh source.md           # 1 konten → N platform variant
-  bash calendar.sh --weeks 2            # kalender markdown
+  bash calendar.sh --weeks 2 --platform X --slots <capacity-per-week>  # kalender markdown
   bash caption.sh "topic" --platform X  # draft 1 caption
   bash audit.sh stats.csv --month       # review performa
   bash doctor.sh                        # diagnose

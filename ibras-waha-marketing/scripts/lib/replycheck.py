@@ -67,7 +67,6 @@ JARGON = {
     "disclaimer": "catatan tambahan",
     "binding": "janji yang mengikat",
     "--binding-ack": "",
-    "--blast-ack": "",
     "--confirm": "",
     "dry-run": "coba dulu tanpa kirim",
     "payload": "isi pesan",

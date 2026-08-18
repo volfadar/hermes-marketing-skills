@@ -285,8 +285,8 @@ profilnya belum ada, uji tukar dilewati — dan promonya memang akan generik,
 karena memang tidak ada bahan. Itu isyarat buat mengisi profilnya, bukan buat
 berhenti kirim.
 
-**Semua cek ini catatan, bukan larangan.** Kalau dia sudah tahu dan tetap mau
-kirim, kirim.
+**Cek gaya dan isi pesan ini bersifat catatan, bukan larangan.** Hard rule
+consent, opt-out, dan rem cold/identical-text tetap tidak boleh dilewati.
 
 ## Prerequisites
 - WAHA instance yang reachable (URL + API key)
@@ -365,6 +365,8 @@ bash scripts/broadcast-helper.sh \
 - Message variation (rotate templates, insert `{name}`, random double-space)
 - Batch pause every 20 messages (5-15 min)
 - Skip contacts without explicit opt-in flag in CSV
+- Consent record wajib punya source, date, dan scope; `yes` saja tidak cukup
+- Skip nomor di `opt_out.csv`, walau file kontak lama masih bertanda opt-in
 - Spam-risk estimator (low/moderate/high/block) based on account age + list size + variants
 - Error 463 detection → immediate halt + "DO NOT restart" warning
 - Kill-switch: `bash scripts/emergency-halt.sh` stops at next message boundary
@@ -513,7 +515,8 @@ Hari ini:
 - [ ] `bash scripts/doctor.sh` shows mostly ✓ (no ✗).
 - [ ] `bash scripts/waha.sh status` shows session WORKING + correct account.
 - [ ] `bash scripts/broadcast-helper.sh --dry-run` runs without sending.
-- [ ] Opt-in source is documented for every contact (audit trail).
+- [ ] Opt-in source, date, dan scope tercatat untuk setiap kontak.
+- [ ] `opt_out.csv` diperiksa dan semua nomor di dalamnya di-skip.
 - [ ] No broadcast has been auto-scheduled. All sends are human-triggered.
 
 ## Documentation (`references/`)

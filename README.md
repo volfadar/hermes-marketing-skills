@@ -19,15 +19,32 @@ Empat skill pertama langsung jalan tanpa setup apa pun — cukup chat.
 
 ## Install paling gampang — dari Dashboard
 
-Tidak perlu GitHub atau terminal kalau Dashboard sudah disiapkan fasilitator:
+Peserta tidak perlu membuka GitHub atau terminal. Indeks pencarian Hub kadang
+terlambat menemukan listing baru, jadi gunakan identifier exact lewat Chat:
 
-1. Buka **Hermes Dashboard** dan pilih profile yang benar.
-2. Klik **Skills → Browse hub**.
-3. Cari `ibras-`.
-4. Klik **Install** pada ketujuh skill di tabel atas.
-5. Kembali ke daftar skill terpasang, cari `ibras-`, dan pastikan 7/7 berstatus
-   aktif (toggle hijau).
-6. Buka **Chat → New chat** supaya perubahan aktif di sesi baru.
+1. Buka **Hermes Dashboard**, pilih profile yang benar, lalu **Chat → New chat**.
+2. Copy-paste prompt berikut dan kirim sekali:
+
+> Pasang 7 skill IBRAS ke profile Hermes aktif memakai identifier exact
+> `volfadar/hermes-marketing-skills/` + nama berikut:
+> `ibras-marketing-orchestrator`, `ibras-brand-strategy-coach`,
+> `ibras-content-creator`, `ibras-social-publishing`, `ibras-waha-marketing`,
+> `ibras-email-marketing`, `ibras-cloakserve-research`. Jangan pilih hasil
+> search yang namanya mirip. Pasang 5 SAFE normal. Untuk 2 CAUTION, force hanya
+> bila alasannya cocok: email = IMAP/SMTP; cloakserve = Docker/sudo/Tailscale.
+> Jangan bypass DANGEROUS. Instal saja—jangan setup, baca data, menjalankan
+> Docker, atau kirim apa pun. Akhiri dengan status exact 7/7.
+
+3. Tunggu scan keamanan selesai. Instalasi boleh diulang jika koneksi/batas sementara
+   terputus di tengah; skill yang sudah terpasang tidak perlu di-setup ulang.
+4. Buka **Skills → Installed**, cari `ibras-`, dan pastikan 7/7 aktif.
+5. Buka **Chat → New chat** lagi supaya skill baru aktif di sesi berikutnya.
+
+Alasan dua verdict CAUTION dijelaskan di prompt agar persetujuannya terbatas:
+instalasi tidak memberi izin untuk mengonfigurasi email, membaca data, memakai
+kredensial, menjalankan Docker, atau mengirim pesan. Verdict DANGEROUS tidak
+boleh dilewati. **Browse hub** tetap boleh dipakai setelah ketujuh nama sudah
+muncul di pencarian, tetapi jangan memilih skill hanya karena namanya mirip.
 
 Untuk OpenRouter, buka **API Keys → LLM Providers → OpenRouter**. Jangan taruh
 API key di chat, screenshot, atau dokumen. Dokumentasi resmi UI:

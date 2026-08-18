@@ -3,17 +3,18 @@
 ## Contoh contacts.csv
 
 ```csv
-phone,name,opt_in,opt_in_source,labels
-6281234567890,Andi,yes,form-landing-2026-08-01,customer,vip
-6281234567891,Budi,yes,form-event-pasarseni-2026-07-15,lead
-6281234567892,Citra,yes,wa-reply-subscribe-2026-08-05,customer
-6281234567893,Dewi,yes,checkout-consent,customer
-6281234567894,Eka,no,business-card-event,lead
+phone,name,opt_in,opt_in_source,opt_in_date,opt_in_scope,labels
+6281234567890,Andi,yes,landing-form,2026-08-01,weekly-offers,customer
+6281234567891,Budi,yes,event-form,2026-07-15,event-updates,lead
+6281234567892,Citra,yes,wa-reply-subscribe,2026-08-05,weekly-offers,customer
+6281234567893,Dewi,yes,checkout-checkbox,2026-08-06,order-and-offers,customer
+6281234567894,Eka,no,business-card-event,,,lead
 ```
 
 **Catatan:**
 - Baris Eka akan di-SKIP (`opt_in=no`) oleh broadcast.py
-- `opt_in_source` = audit trail, wajib diisi untuk transparansi
+- `opt_in_source`, `opt_in_date`, dan `opt_in_scope` wajib lengkap. Kalau salah
+  satunya kosong, runtime memperlakukan baris sebagai belum consent.
 - Format phone: digits only, kode negara dulu (62 untuk Indonesia)
 
 ## Contoh templates.txt (5+ variants)
@@ -73,9 +74,10 @@ hermes cron add "0 10 * * 1" "Draft broadcast WA mingguan. Pilih 1 dari 5 templa
 ```text
 Analisis daftar kontak WAHA saya. Langkah:
 1. GET /api/contacts/all?session=all-in-one-device&limit=100 via WAHA (pakai waha.sh wrapper).
-2. Klasifikasikan: customer (pernah chat 2-arah), lead (1x chat), cold (no interaction).
-3. Buat rekomendasi segmentasi: siapa layak dapat broadcast bulanan, siapa perlu nurture dulu.
-4. Jangan kirim apapun ke WAHA. Output tabel markdown + rekomendasi.
+2. Pakai riwayat chat hanya untuk konteks layanan (pelanggan aktif, pertanyaan terbuka, komplain), bukan untuk menyimpulkan consent marketing.
+3. Cocokkan nomor dengan record consent yang punya source, date, dan scope. Hanya record lengkap yang boleh masuk calon broadcast; opt_out.csv selalu menang.
+4. Untuk yang belum consent, sarankan cara meminta izin lewat kanal publik, form, checkout, atau percakapan layanan yang sedang aktif. Jangan menghubungi daftar itu untuk meminta consent.
+5. Jangan kirim apa pun ke WAHA. Output tabel markdown + rekomendasi.
 ```
 
 ## Contoh: struktur folder penggunaan sehari-hari

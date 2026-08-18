@@ -23,7 +23,7 @@ Usage:
   python3 broadcast.py \\
     --session all-in-one-device \\
     --contacts contacts.csv \\
-    --message-templates templates.txt \\
+    --templates templates.txt \\
     --waha-url https://your-waha.example \\
     --api-key XXX \\
     --dry-run            # plan only, no send
@@ -143,6 +143,8 @@ class Contact:
     name: str = ""           # first name (for personalization)
     opt_in: bool = False     # explicit opt-in flag from CSV
     opt_in_source: str = ""  # where they opted in (form, WA reply, etc.)
+    opt_in_date: str = ""    # when consent was recorded
+    opt_in_scope: str = ""   # what messages the person agreed to receive
     labels: list = field(default_factory=list)
 
 
@@ -351,8 +353,7 @@ def known_chats(waha_url: str, api_key: str, session: str) -> set:
     return set()
 
 
-def blast_guard(waha_url: str, api_key: str, session: str, chat_id: str, text: str,
-                blast_ack: bool):
+def blast_guard(waha_url: str, api_key: str, session: str, chat_id: str, text: str):
     """The three brakes from waha.sh `pace_and_check`, now on the broadcast path,
     sharing SEND_LOG so neither tool can be used to bypass the other. Returns
     (ok, reason). ok=False means HOLD this send (caller skips, does not POST)."""
@@ -374,12 +375,12 @@ def blast_guard(waha_url: str, api_key: str, session: str, chat_id: str, text: s
         for r in rows:
             streak = streak + 1 if r[3] == "1" else 0
         streak += 1
-        if streak >= COLD_THRESHOLD and not blast_ack:
+        if streak >= COLD_THRESHOLD:
             return False, ("cold-streak", streak)
 
     # 1. identical text to many distinct chats — WhatsApp reads sameness, not volume
     distinct = {r[1] for r in rows if len(r) > 2 and r[2] == h and r[1] != chat_id}
-    if len(distinct) >= BLAST_THRESHOLD and not blast_ack:
+    if len(distinct) >= BLAST_THRESHOLD:
         return False, ("identical-fanout", len(distinct))
 
     # 2. min-gap floor — sleep rather than refuse (make the safe thing default)
@@ -428,10 +429,13 @@ def estimate_spam_risk(n_contacts: int, account_age_days: int, opted_in_pct: flo
     return "low"
 
 
-def plan_broadcast(contacts: list, account_age_days: int, templates_count: int) -> BroadcastPlan:
-    opted = [c for c in contacts if c.opt_in]
-    skipped_no_optin = [c for c in contacts if not c.opt_in]
-    skipped_blacklist = []  # placeholder for future blacklist matching
+def plan_broadcast(contacts: list, account_age_days: int, templates_count: int,
+                   opt_out_phones: set[str] | None = None) -> BroadcastPlan:
+    """Build a plan where recorded opt-outs always override older consent."""
+    opted_out = opt_out_phones or set()
+    skipped_blacklist = [c for c in contacts if c.phone in opted_out]
+    opted = [c for c in contacts if c.opt_in and c.phone not in opted_out]
+    skipped_no_optin = [c for c in contacts if not c.opt_in and c.phone not in opted_out]
 
     n = len(opted)
     opted_in_pct = (n / len(contacts)) if contacts else 0
@@ -464,13 +468,39 @@ def load_contacts_csv(path: str) -> list:
             # normalize: digits only, keep leading country code
             phone = "".join(c for c in phone if c.isdigit() or c == "+").lstrip("+")
             opt = (row.get("opt_in") or row.get("OptIn") or "").strip().lower()
+            opt_in_source = (row.get("opt_in_source") or "").strip()
+            opt_in_date = (row.get("opt_in_date") or "").strip()
+            opt_in_scope = (row.get("opt_in_scope") or "").strip()
+            requested_opt_in = opt in ("yes", "true", "1", "y")
             out.append(Contact(
                 phone=phone,
                 name=(row.get("name") or row.get("Name") or "").strip(),
-                opt_in=opt in ("yes", "true", "1", "y"),
-                opt_in_source=(row.get("opt_in_source") or "").strip(),
+                opt_in=requested_opt_in and bool(opt_in_source and opt_in_date and opt_in_scope),
+                opt_in_source=opt_in_source,
+                opt_in_date=opt_in_date,
+                opt_in_scope=opt_in_scope,
                 labels=[l.strip() for l in (row.get("labels") or "").split(",") if l.strip()],
             ))
+    return out
+
+
+def load_opt_out_csv(path: str) -> set[str]:
+    """Load normalized phone numbers from an opt-out CSV.
+
+    A missing file is valid for a new installation. Blank or malformed phone
+    values are ignored rather than guessed.
+    """
+    source = Path(path).expanduser()
+    if not source.exists():
+        return set()
+    out: set[str] = set()
+    with source.open(newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            raw = (row.get("phone") or row.get("Phone") or "").strip()
+            phone = "".join(c for c in raw if c.isdigit() or c == "+").lstrip("+")
+            if phone:
+                out.add(phone)
     return out
 
 
@@ -543,13 +573,14 @@ def review_copy(rendered: list[tuple[str, str]]) -> int:
 def broadcast(args) -> int:
     contacts = load_contacts_csv(args.contacts)
     templates = load_templates(args.templates)
+    opted_out = load_opt_out_csv(args.opt_out_file)
 
     if not contacts:
         fatal("No contacts loaded from CSV.")
     if not templates:
         fatal("No templates loaded.")
 
-    plan = plan_broadcast(contacts, args.account_age_days, len(templates))
+    plan = plan_broadcast(contacts, args.account_age_days, len(templates), opted_out)
 
     print(f"\n{'='*60}")
     print(f"WAHA BROADCAST PLAN")
@@ -557,6 +588,7 @@ def broadcast(args) -> int:
     print(f"Contacts total:     {len(contacts)}")
     print(f"  Opted-in:         {len(plan.contacts)}")
     print(f"  No opt-in (skip): {len(plan.skipped_no_optin)}")
+    print(f"  Opted-out (skip): {len(plan.skipped_blacklist)}")
     print(f"Message templates: {len(templates)} (rotation)")
     print(f"Est. duration:     ~{plan.estimated_minutes} min")
     print(f"Spam risk:         {plan.daily_cap_risk.upper()}")
@@ -574,6 +606,9 @@ def broadcast(args) -> int:
         soft_warn(f"{len(plan.skipped_no_optin)} contacts have NO opt-in flag and will be SKIPPED. "
                   "Cold outreach to non-opted-in contacts is the #1 ban trigger. "
                   "Only message people who asked to hear from you.")
+    if len(plan.skipped_blacklist) > 0:
+        soft_warn(f"{len(plan.skipped_blacklist)} contacts previously opted out and will be "
+                  "SKIPPED even if an older opt-in remains in the contacts file.")
     if len(templates) < 3:
         soft_warn(f"Only {len(templates)} templates. WhatsApp flags identical messages across "
                   "recipients. Use 5+ variants with different wording + {name} personalization.")
@@ -587,7 +622,7 @@ def broadcast(args) -> int:
     rendered = [(c.name or c.phone, humanize_message(templates[i % len(templates)], c))
                 for i, c in enumerate(plan.contacts, 1)]
 
-    if not args.i_confirm_optin:
+    if args.dry_run or not args.i_confirm_optin:
         print("\nDRY RUN — no messages will be sent.")
         print("To actually send, re-run with --i-confirm-optin.\n")
         for i, (who, msg) in enumerate(rendered[:10], 1):
@@ -635,16 +670,16 @@ def broadcast(args) -> int:
         # These used to live only on send-text; the broadcast path bypassed
         # them and got numbers banned (a recorded finding).
         ok, reason = blast_guard(args.waha_url, args.api_key, args.session,
-                                 chat_id, msg, args.blast_ack)
+                                 chat_id, msg)
         if not ok:
             why, n = reason
             if why == "cold-streak":
                 log(f"  [{i}] {contact.phone}: HOLD — nomor ke-{n} berturut-turut "
                     f"yang belum pernah chat duluan. Selingi balasan ke pelanggan "
-                    f"lama, atau --blast-ack kalau sudah paham risikonya. Belum dikirim.", "HOLD")
+                    f"lama. Belum dikirim.", "HOLD")
             else:
                 log(f"  [{i}] {contact.phone}: HOLD — teks yang sama sudah ke {n} "
-                    f"nomor berbeda. Tambah variasi kalimat, atau --blast-ack. "
+                    f"nomor berbeda. Tambah variasi kalimat. "
                     f"Belum dikirim.", "HOLD")
             skipped_hold += 1
             continue
@@ -707,7 +742,7 @@ def broadcast(args) -> int:
     print(f"BROADCAST COMPLETE")
     print(f"{'='*60}")
     print(f"Sent:              {sent_count}")
-    print(f"Held by brakes:    {skipped_hold}  (cold-outreach/identical-text; --blast-ack to release)")
+    print(f"Held by brakes:    {skipped_hold}  (cold-outreach/identical-text)")
     print(f"Skipped (cooldown):{skipped_cooldown}")
     print(f"Errors:            {len(errors)}")
     if errors:
@@ -723,17 +758,21 @@ def main():
     p.add_argument("--waha-url", required=True, help="WAHA base URL")
     p.add_argument("--api-key", required=True, help="WAHA X-Api-Key")
     p.add_argument("--session", required=True, help="WAHA session name")
-    p.add_argument("--contacts", required=True, help="CSV: phone,name,opt_in,opt_in_source,labels")
+    p.add_argument("--contacts", required=True,
+                   help="CSV: phone,name,opt_in,opt_in_source,opt_in_date,opt_in_scope,labels")
     p.add_argument("--templates", required=True, help="TXT: one message template per line")
+    p.add_argument("--opt-out-file", default=os.path.join(WAHA_CFG_DIR, "opt_out.csv"),
+                   help="CSV blacklist; later opt-outs override older consent")
     p.add_argument("--account-age-days", type=int, default=30,
                    help="How old is the WhatsApp account? (affects daily cap)")
-    p.add_argument("--blast-ack", action="store_true",
-                   help="acknowledge cold-outreach/identical-text risk; releases the holds")
     p.add_argument("--typing", action="store_true", default=True,
                    help="Send typing indicator before each message (humanize)")
     p.add_argument("--no-typing", action="store_false", dest="typing")
-    p.add_argument("--i-confirm-optin", action="store_true",
-                   help="All contacts in CSV have explicitly opted in. Without this flag, dry-run.")
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument("--dry-run", action="store_true",
+                      help="Validate and preview the plan without sending")
+    mode.add_argument("--i-confirm-optin", action="store_true",
+                      help="Send only contacts whose source, date and scope are recorded")
     p.add_argument("--yes", action="store_true", help="Skip interactive confirmation")
     args = p.parse_args()
 

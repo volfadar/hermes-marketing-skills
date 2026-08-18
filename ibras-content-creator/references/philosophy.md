@@ -19,25 +19,18 @@ Jadi posisi skill ini: **sebutkan konsekuensinya, tawarkan bentuk yang lebih
 baik, lalu kerjakan pilihannya.** Baca `references/automation-posture.md` —
 aturannya sama untuk semua skill di workshop ini.
 
-## Bukti bahwa platform sudah memutuskan
+## Klaim platform harus dicek, bukan diwariskan
 
-**LinkedIn 2026**: Flagged 40%+ post panjang sebagai AI-written, sekarang
-suppress kategori tersebut. Reach halaman company turun 60-66%. Personal
-profile dapat ~65% feed allocation — platform sengaja route ke manusia.
+Aturan platform, batas format, dan perilaku distribusi berubah. Karena itu skill
+ini tidak memakai persentase reach, durasi, cadence, atau klaim "algoritma pasti
+menghukum X" sebagai hukum universal. Saat keputusan bergantung pada aturan
+platform, cek dokumentasi resmi terkini. Saat keputusan bergantung pada performa,
+pakai account insights dan hasil uji akun pengguna sendiri.
 
-**TikTok 2026**: Eksplisit mengutamakan "authentic human creators" atas
-AI-generated content. Watch time + completion rate + rewatch > raw views.
-Posting volume tinggi konten low-signal = reach turun.
-
-**YouTube 2026**: Demonetizing AI-slop channels massal. Policy: AI tools
-tidak dilarang, tapi konten *tanpa human creative input* di-demonetize.
-
-**Instagram/X**: Shadowban untuk automation/bot behavior. Beli followers =
-engagement rate mati, algoritma death spiral.
-
-**Klarna (2025 cautionary tale)**: Unicorn replace 700 human CS dengan AI,
-klaim $10M hemat. Lalu **U-turn publik**, rehire human. CEO: "customers
-like talking to people." Bahkan unicorn sadar bot kehilangan trust.
+Pisahkan tiga risiko: kualitas konten yang tidak direview, metode koneksi yang
+melanggar aturan, dan format yang tidak cocok dengan pembeli. Ketiganya punya
+solusi berbeda; jangan menyimpulkan bahwa semua penjadwalan atau semua konten
+berbantu AI otomatis dihukum.
 
 ## Kenapa default-nya draft dulu (bukan larangan, tapi urutan)
 
@@ -50,8 +43,8 @@ like talking to people." Bahkan unicorn sadar bot kehilangan trust.
    penjadwalan. Jalur resmi (Meta Business Suite, Buffer) menjadwalkan tanpa
    risiko itu sama sekali — lihat `ibras-social-publishing` untuk tujuh jalur
    beserta kerugiannya masing-masing.
-4. **30 post lemah < 3 post kuat.** Reach turun kalau volume naik tapi
-   sinyalnya rendah.
+4. **Volume mengikuti kapasitas review dan bukti akun.** Tambahan post hanya
+   berguna bila kualitas dan sinyal bisnisnya tetap terjaga.
 
 **Kalau dia sudah tahu semua ini dan tetap mau menjadwalkan otomatis:**
 kerjakan. Tawarkan bentuk yang paling aman untuk tujuan yang sama — jalur
@@ -77,15 +70,15 @@ ikuti keputusannya. Sebut sekali, jangan diulang tiap giliran.
 - ❌ Schedule auto-publish via cron
 - ❌ Integrasi platform API langsung (auto-post vector)
 
-## Pola yang benar: Hermes DRAFT → Telegram untuk review → manusia post native
+## Pola yang benar: Hermes DRAFT → review pemilik → jalur publish yang dipilih
 
 ```bash
-# Hermes kerja tiap Senin pagi: riset + draft konten mingguan
-hermes cron add "0 9 * * 1" "Pakai skill ibras-content-creator: ideate 5 konten dari pillars + riset tren minggu ini. Draft tiap konten untuk Instagram. Kirim DRAFT ke Telegram untuk saya review. JANGAN auto-publish ke Instagram." --name "Draft konten mingguan" --deliver telegram
+# Contoh saja: pengguna menentukan jadwal, kanal pembeli, dan jumlah sesuai kapasitas
+hermes cron add "<jadwal-pengguna>" "Pakai skill ibras-content-creator. Buat draft untuk <kanal-pembeli> dari bahan dan kapasitas yang sudah saya tetapkan. Kirim untuk review; jangan publish." --name "Draft konten" --deliver telegram
 ```
 
-Senin pagi kamu bangun, buka Telegram, ada 5 draft. Review saat ngopi,
-edit yang off-voice, pilih 3 yang post hari itu. Native. Manusia.
+Pada waktu yang pengguna pilih, draft masuk ke kanal review. Pemilik memeriksa
+fakta, voice, harga, dan kesiapan aset sebelum memilih mana yang layak publish.
 
 ## Kalau kamu MAU auto-post (meskipun kami tidak recommend)
 
@@ -96,8 +89,8 @@ yang **native/sanctioned** oleh platform:
 - **TikTok Studio** (native scheduling)
 - **YouTube Studio** (native scheduling)
 
-Tools ini pakai **API resmi** platform, bukan unofficial. Masih ada risk
-kalau kontennya AI-slop, tapi setidaknya tidak kena-ban untuk "connection method".
+Pilih jalur berdasarkan aturan platform terkini, kebutuhan approval, biaya, dan
+kapasitas. Lihat `ibras-social-publishing` untuk membandingkan tujuh jalur.
 
 ## Test filosofi (tanya diri sendiri)
 

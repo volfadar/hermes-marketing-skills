@@ -1,119 +1,75 @@
-# Sample Output — Repurpose 1 source → multi-platform
+# Sample output — repurpose dari bahan yang benar-benar ada
 
-Sumber: blog post pendek "3 tanda biji kopi sudah stale" (~400 kata, kopi specialty niche).
-Voice: santai, Indonesian context, first-person "saya".
+Contoh ini menunjukkan cara berpikir, bukan jumlah slide, durasi, hashtag,
+cadence, atau format wajib.
 
-## Hasil repurpose.sh (3 platform distinct)
+## Input pengguna
 
----
+- Usaha: frozen food rumahan.
+- Tujuan: mengurangi pertanyaan berulang tentang ukuran porsi.
+- Buyer channel: pembeli terakhir menemukan produk di Instagram lalu bertanya
+  dan memesan lewat WhatsApp.
+- Bahan: foto tiga ukuran kemasan, daftar harga terkini, voice note pemilik yang
+  menjelaskan isi per kemasan, dan enam chat pembeli yang menanyakan “cukup
+  untuk berapa orang?” (identitas sudah dihapus).
+- Kapasitas: pemilik sanggup mereview dua draft dan merekam satu voice-over.
+- Unknown: belum ada data account insights tentang format atau waktu terbaik.
 
-### 📱 Instagram Carousel (7 slide)
+## Keputusan sebelum menulis
 
-**Slide 1 (hook):** 3 TANDA BIJI KOPI SUDAH STALE ☠️
-(Simpan ini sebelum beli biji lagi)
+Gunakan Instagram untuk membantu discovery dan siapkan versi jawaban singkat
+untuk konteks chat. Jangan membuat thread di kanal yang tidak dipakai buyer.
+Jumlah frame mengikuti tiga foto + informasi yang tersedia; durasi video
+mengikuti panjang penjelasan yang natural dan batas platform terkini.
 
-**Slide 2:** #1 — WARNA PUDAR
-Biji specialty fresh: warna gelap merata, sedikit berminyak.
-Biji stale: warna kusam, ada white-yellow discoloration.
+## Draft A — carousel Instagram
 
-**Slide 3:** #2 — ARAOMA HILANG
-Pecah sedikit biji. Cium.
-Fresh: aroma strong, kompleks (cokelat, buah, floral).
-Stale: hambar, atau bau kardus.
+**Bukti dari source:** foto ukuran, daftar harga, dan pertanyaan pembeli.
 
-**Slide 4:** #3 — TANGGAL SANGAT LAMA
-"Roasted on" > 2 bulan? Kemungkinan besar stale.
-Specialty ideal: < 4 minggu dari roast.
+**Opening:** “Yang ini cukup buat makan berapa orang?”
 
-**Slide 5:** BONUS — KASUS FRAUD
-Pernah beli "specialty" Rp 200rb ternyata biji komersial di-label mahal.
-Cek: track record seller, reviews, minta sample.
+**Urutan frame:**
 
-**Slide 6:** KALAU SUDAH BELI YANG STALE?
-Buat cold brew! Extraction dingin lebih toleran ke biji agak stale.
-Jangan buang.
+1. Pertanyaan pembeli + foto tiga ukuran berdampingan.
+2. Ukuran kecil: isi/porsi sesuai catatan pemilik + `[HARGA TERKINI]`.
+3. Ukuran sedang: isi/porsi sesuai catatan pemilik + `[HARGA TERKINI]`.
+4. Ukuran besar: isi/porsi sesuai catatan pemilik + `[HARGA TERKINI]`.
+5. Cara pilih: jumlah orang, lauk pendamping, dan kondisi penyajian yang sudah
+   dikonfirmasi pemilik.
 
-**Slide 7 (CTA):** Komen: pernah kejadian beli biji stale?
-Atau save buat reminder beli biji berikutnya 🤎
+**Caption draft:**
 
----
+> Beberapa pembeli terakhir tanya ukuran mana yang pas. Kami rangkum tiga
+> pilihan dari kemasan dan catatan porsi kami. Lihat tiap foto, lalu kirim jumlah
+> orang + menu pendamping kalau masih ragu—kami bantu pilih tanpa melebihkan.
 
-### 🎵 TikTok Script (30s)
+**Tindakan pembeli:** kirim konteks porsi lewat kanal order yang memang dipakai.
 
-**Hook (3 detik):** "Cium biji kopi kamu. Kalau bau ini, BUANG." (close-up biji ke kamera, muka serius)
+**Status:** DRAFT — pemilik perlu mengisi harga dan mengonfirmasi klaim porsi.
 
-**0:03-0:10:** "Ini biji stale. Liat warnanya — kusam, ada white discoloration. Bandingin sama biji fresh ini — gelap, berminyak."
+## Draft B — video pendek dengan voice-over
 
-**0:10-0:20:** "Pecah sedikit. Cium. Fresh = aroma kompleks. Stale = bau kardus atau hambar."
+**Bukti dari source:** foto/kemasan nyata dan voice note pemilik.
 
-**0:20-0:28:** "Cek tanggal roast. > 2 bulan? Sudah stale. Specialty ideal < 4 minggu."
+**Opening visual:** tiga ukuran ditaruh berdampingan sambil pemilik berkata,
+“Bedanya bukan cuma besar kemasan—pilih dari jumlah orang yang makan.”
 
-**0:28-0:30 (CTA):** "Komen kalau pernah kejadian. Save buat reminder."
+**Alur:** tunjukkan tiap kemasan, sebut isi/porsi yang sudah dikonfirmasi, lalu
+beri satu contoh pemilihan dari pertanyaan pelanggan yang dianonimkan. Potong
+bagian berulang; jangan memperpanjang hanya untuk mengejar durasi tertentu.
 
-**Caption:** Jangan tertipu "specialty" mahal tapi stale 😭 Cek 3 hal ini sebelum beli. #kopispecialty #manualbrew #tips
+**Caption draft:**
 
----
+> Pilih ukuran dari kebutuhan makanmu, bukan dari tebakan. Harga dan stok
+> terbaru ada di katalog; kalau konteksnya beda, kirim jumlah orangnya.
 
-### 🧵 X Thread (7 tweet)
+**Status:** DRAFT — cek batas platform terkini, harga, stok, dan izin aset
+sebelum publish.
 
-**1/7:** Saya pernah beli biji "specialty" Rp 200rb, ternyata stale.
+## Cara mengukur
 
-Pelajaran mahal. Ini cara saya cek sekarang — siapkan sebelum beli biji lagi 🧵
-
-**2/7:** TANDA #1: WARNA
-
-Biji fresh: gelap merata, sedikit berminyak.
-Biji stale: kusam, white-yellow discoloration.
-
-Liat foto perbandingan ini 👇
-
-**3/7:** TANDA #2: AROMA
-
-Pecah sedikit biji. Cium.
-
-Fresh = kompleks (cokelat, buah, floral)
-Stale = hambar / bau kardus
-
-Kalau penjual tidak kasih cium = red flag.
-
-**4/7:** TANDA #3: TANGGAL ROAST
-
-"Roasted on" > 2 bulan? Kemungkinan stale.
-
-Specialty ideal: < 4 minggu dari roast date.
-
-"Best before" BUKAN indikator kesegaran.
-
-**5/7:** KASUS FRAUD yang sering:
-
-Label "specialty" + harga mahal, tapi biji komersial.
-
-Cek: track record seller, reviews verified, minta sample kecil dulu.
-
-**6/7:** KALAU SUDAH BELI STALE?
-
-Jangan buang. Bikin cold brew — extraction dingin lebih toleran.
-
-Atau brew untuk baking (cokelat cake, espresso martini mix).
-
-**7/7:** Specialty itu pengalaman, bukan label.
-
-Kalau penjual tidak transparan soal roast date + origin = skip.
-
-RT kalau pernah tertipu, atau follow untuk thread kopi berikutnya ☕
-
----
-
-## Catatan
-
-3 output di atas dari 1 sumber (400 kata blog post). **Angle berbeda**:
-- IG Carousel: visual check-list (saveable)
-- TikTok: demo close-up + hook visual (viral)
-- X Thread: story + thread progression (engagement)
-
-Tidak ada copy-paste identical. Reach audience berbeda per platform.
-
-Setelah Hermes generate draft seperti ini:
-1. Review tiap — edit yang tidak terdengar seperti kamu
-2. Tambah elemen visual (foto biji untuk IG, video close-up untuk TikTok)
-3. Post native (jangan auto-schedule crosspost)
+Catat pertanyaan ukuran yang masih berulang, pembukaan katalog/quote bila dapat
+diukur, order per ukuran, dan gross profit. Reach/save boleh membantu membaca
+creative, tetapi bukan bukti penjualan sendiri. Setelah satu periode yang
+ditetapkan pemilik, putuskan lanjut, sederhanakan, atau hentikan berdasarkan
+baseline akun dan beban produksi.

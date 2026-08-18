@@ -72,9 +72,48 @@ SKIP_LINE_RE = re.compile(r"^\s*(?:#{1,6}\s|\|[\s:-]+\||>?\s*\[?\d+\]?[.)]\s*$|<
 
 # A deliverable that draws a route to a purchase must first say what it earns.
 PLAN_RE = re.compile(r"\b(journey|funnel|jalur|rute|graph|roadmap|rencana|plan)\b", re.I)
-MARKET_FIT_RE = re.compile(
-    r"\b(market[\s-]*fit|kecocokan pasar|buyer[\s-]*side|sinyal pembeli)\b",
+INTERNAL_PERFORMANCE_RE = re.compile(
+    r"\b(?:internal\s+(?:content|konten|marketing|performance|performa)\s+"
+    r"(?:audit|review|evaluasi)|(?:audit|review|evaluasi)\s+(?:internal\s+)?"
+    r"(?:content|konten|marketing|performance|performa))\b",
     re.I,
+)
+OWN_RECORD_RE = re.compile(
+    r"\b(?:our own|operator['’]s own|owner['’]s own|milik (?:kami|saya|pemilik)|"
+    r"catatan (?:kami|saya|pemilik|sendiri)|data (?:kami|saya|sendiri)|"
+    r"konten (?:kami|saya|sendiri))\b",
+    re.I,
+)
+PERFORMANCE_INPUT_RE = re.compile(
+    r"\b(?:posts?|posting(?:an)?|content|konten|repl(?:y|ies)|balasan|enquir(?:y|ies)|"
+    r"inquir(?:y|ies)|pertanyaan|quotes?|penawaran|orders?|pesanan|gross profit|"
+    r"laba kotor|records?|catatan)\b",
+    re.I,
+)
+COMMERCIAL_ROUTE_RE = re.compile(
+    r"(?:^|\n)\s*#{1,6}\s*(?:funnel|journey|jalur|rute|roadmap)\b"
+    r"|\b(?:outbound\s+(?:email|wa|whatsapp|dm)|paid\s+(?:assessment|audit|"
+    r"diagnosis|diagnostic|offer|pilot|service)|(?:audit|asesmen|diagnosis|"
+    r"layanan|produk|pilot)\s+berbayar|core\s+offer|funnel\s+penjualan|"
+    r"sales\s+funnel|jalur\s+akuisisi|rute\s+komersial|menjual|menawarkan|"
+    r"selling|sell)\b",
+    re.I | re.M,
+)
+MARKET_FIT_FIELDS = (
+    ("geography", re.compile(r"\b(?:geography|geografi|wilayah|lokasi pasar)\s*[:=]", re.I)),
+    ("buyer/scale", re.compile(
+        r"\b(?:buyer(?:\s*(?:and|dan|&|/)\s*scale)?|pembeli(?:\s*(?:and|dan|&|/)\s*skala)?|"
+        r"segmen pembeli|skala usaha)\s*[:=]", re.I)),
+    ("purchase context", re.compile(
+        r"\b(?:purchase context|konteks pembelian|situasi membeli|pemicu pembelian)\s*[:=]", re.I)),
+    ("current alternative", re.compile(
+        r"\b(?:current alternative|alternatif saat ini|cara saat ini|pengganti saat ini)\s*[:=]", re.I)),
+    ("buyer-side signal", re.compile(
+        r"\b(?:buyer[\s-]*side signals?|sinyal(?: dari)? pembeli)\s*[:=]", re.I)),
+    ("segment-transfer gap", re.compile(
+        r"\b(?:segment[\s-]*transfer gap|gap transfer segmen|celah transfer segmen|"
+        r"kesenjangan segmen)\s*[:=]", re.I)),
+    ("verdict", re.compile(r"\b(?:verdict|putusan|status bukti)\s*[:=]", re.I)),
 )
 GOAL_FIT_RE = re.compile(
     r"(goal[\s-]*(fit|reconciliation)|rekonsiliasi|butuh.*rencana.*hasil"
@@ -223,20 +262,31 @@ def check(path: str, content: str, session_id: str = "") -> list[str]:
             % (len(untagged), "\n    ".join(untagged[:6]))
         )
 
-    if PLAN_RE.search(content) and len(content) > 600 and not GOAL_FIT_RE.search(content):
+    internal_performance_review = bool(
+        INTERNAL_PERFORMANCE_RE.search(content)
+        and OWN_RECORD_RE.search(content)
+        and PERFORMANCE_INPUT_RE.search(content)
+        and not COMMERCIAL_ROUTE_RE.search(content)
+    )
+    commercial_plan = bool(PLAN_RE.search(content) and not internal_performance_review)
+
+    if commercial_plan and len(content) > 600 and not GOAL_FIT_RE.search(content):
         problems.append(
             "GOAL FIT: this plan never reconciles against the goal. State three lines "
             "before the route — what the user needs and by when, what this plan yields "
             "in that window, and the gap."
         )
 
-    if PLAN_RE.search(content) and len(content) > 600 and not MARKET_FIT_RE.search(content):
+    missing_market_fit = [label for label, pattern in MARKET_FIT_FIELDS
+                          if not pattern.search(content)]
+    if commercial_plan and len(content) > 600 and missing_market_fit:
         problems.append(
-            "MARKET FIT: this commercial route has no market-fit record. Before "
-            "installing an offer or channel, state the geography, buyer/scale, "
-            "purchase context, current alternative, strongest buyer-side signal, "
-            "segment-transfer gap, and verdict (validated / plausible-test-only / "
-            "unverified / contradicted). Seller pages prove supply, not demand."
+            "MARKET FIT: this commercial route has an incomplete market-fit record. "
+            "Missing labeled fields: %s. Before installing an offer or channel, state "
+            "the geography, buyer/scale, purchase context, current alternative, "
+            "strongest buyer-side signal, segment-transfer gap, and verdict "
+            "(validated / plausible-test-only / unverified / contradicted). Seller "
+            "pages prove supply, not demand." % ", ".join(missing_market_fit)
         )
 
     if STOPRULE_RE.search(content) and not MONEY_SIGNAL_RE.search(content):

@@ -21,7 +21,7 @@ bash scripts/pillars.sh "p1, p2, p3"       # sekali: set pillars
 ```bash
 bash scripts/ideate.sh --week --platform instagram
 bash scripts/repurpose.sh source.md --platforms all
-bash scripts/calendar.sh --weeks 2 --platform instagram
+bash scripts/calendar.sh --weeks 2 --platform instagram --slots <capacity-per-week>
 bash scripts/caption.sh "topic" --platform tiktok
 bash scripts/audit.sh stats.csv --month
 ```

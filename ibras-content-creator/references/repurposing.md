@@ -1,104 +1,82 @@
-# Repurposing — Hub and Spoke Method
+# Repurposing — satu bahan, beberapa bentuk yang masuk akal
 
-> 1 konten panjang → N konten pendek per platform. **Tapi DISTINCT, bukan identical.**
+> Repurposing bukan kewajiban hadir di semua platform. Tujuannya memakai ulang
+> bahan nyata tanpa menambah beban yang tidak sanggup direview pemilik.
 
-## Prinsip dasar
+## Mulai dari empat cek
 
-**Hub** = 1 konten substantif (blog post 1500 kata, video YouTube 10 menit,
-podcast 30 menit). Ini investasi konten terbesar.
+1. **Buyer channel:** di mana calon pembeli benar-benar bertanya, membandingkan,
+   atau membeli?
+2. **Source:** bahan apa yang betul-betul tersedia—demo, foto, voice note,
+   pertanyaan pelanggan, catatan proses, atau konten panjang?
+3. **Goal:** perubahan apa yang dibutuhkan—pertanyaan lebih relevan, quote,
+   order, repeat order, atau gross profit?
+4. **Capacity:** berapa konten yang bisa dibuat, diperiksa, dan dipublikasikan
+   tanpa mengganggu operasi?
 
-**Spoke** = N potongan kecil yang tarik **klaim berbeda** dari hub, untuk
-platform berbeda. Bukan summarize — **extract distinct angle** per spoke.
+Jika buyer channel belum diketahui, tanyakan satu pertanyaan dan berhenti.
+Jangan membuat kalender platform generik.
 
-## Kenapa "distinct" bukan "identical"?
+## Source dan turunan
 
-1. **Algoritma penalti** identical crosspost (LinkedIn, TikTok, IG detect).
-2. **Audience fatigue** — follower yang sama lihat 5x konten yang sama = unfollow.
-3. **Format beda** — yang work di TikTok (visual hook 3 detik) ≠ work di LinkedIn (300 kata take).
-4. **Reach multiplier** — distinct variant reach audience berbeda.
+**Source** adalah bahan paling kaya yang sudah ada. Ia tidak harus berupa video
+panjang; untuk usaha kecil, satu voice note pemilik, foto proses, atau chat
+pelanggan yang dianonimkan bisa lebih berguna.
 
-## Workflow repurposing (1 hub → 8-10 spokes)
+**Turunan** mengambil angle yang berbeda dan bentuk yang cocok untuk kanal.
+Jumlahnya tidak ditetapkan di awal. Satu source boleh menghasilkan satu draft
+kuat saja; menghasilkan banyak konten tipis bukan leverage.
 
-```
-HUB: 1 video YouTube 10 menit "Cara Milih Biji Kopi Specialty"
-  │
-  ├── SPOKE 1: TikTok 30s — hook "3 tanda biji kopi sudah stale"
-  ├── SPOKE 2: IG Reels 15s — visual demo "lihat warna biji, cium aroma"
-  ├── SPOKE 3: IG Carousel 7 slide — "5 kriteria biji specialty (vs komersial)"
-  ├── SPOKE 4: X Thread 7 tweet — "Thread: apa yang membuat kopi 'specialty'? Saya jelasin"
-  ├── SPOKE 5: LinkedIn 250 kata — "Pelajaran memilih supplier dari pengalaman beli biji"
-  ├── SPOKE 6: IG Story 3 frame — poll "Kamu pernah beli biji stale? YES/NO"
-  ├── SPOKE 7: Blog 500 kata SEO — "Cara milih biji kopi specialty (panduan pemula)"
-  ├── SPOKE 8: Newsletter section 150 kata — "Minggu ini: tips milih biji"
-  └── SPOKE 9: TikTok stitch/comment reply — jawab pertanyaan comment spesifik
-```
+Contoh ilustratif, bukan format wajib:
 
-9 spokes, masing-masing **angle berbeda**, dari 1 hub. Reach: TikTok audience
-+ IG + X + LinkedIn + blog search + email list. Semua dari 1 investasi utama.
-
-## Cara extract spokes yang distinct
-
-Untuk tiap spoke, tanya: **apa angle yang RELEVAN untuk platform ini?**
-
-| Platform | Angle umum |
-|---|---|
-| TikTok/Reels | Visual demo, contrarian hook, "stop doing X" |
-| IG Carousel | Step-by-step, listicle, saveable |
-| X Thread | Hot take, contrarian, story progression |
-| LinkedIn | Profesional lesson, B2B angle, career insight |
-| Blog | SEO-driven comprehensive, evergreen |
-| Newsletter | Curated, personal note |
-
-Contoh konkret dari hub "Cara Milih Biji":
-- TikTok: **Visual** — "Lihat 3 hal ini sebelum beli biji" (demo close-up)
-- X Thread: **Story** — "Saya pernah beli biji 'specialty' Rp 200rb ternyata fake. Ini cara ceknya."
-- LinkedIn: **Lesson** — "3 prinsip memilih supplier yang saya pelajari dari beli biji 3 tahun"
-- Blog: **Comprehensive** — "Panduan lengkap milih biji kopi specialty 2026 (15 hal cek)"
-
-**Distinct angle** = reach audience berbeda + tidak bored.
-
-## Tools di skill ini
-
-```bash
-# Repurpose 1 source ke multi-platform (auto-generate distinct variants)
-bash scripts/repurpose.sh ~/content/blog-post.md --platforms all
-
-# Atau specific platforms
-bash scripts/repurpose.sh ~/content/video-transcript.md --platforms instagram,tiktok,x
+```text
+SOURCE: demo memilih bahan baku + penjelasan pemilik
+  ├── kanal visual: potongan demo yang menjawab pertanyaan pembeli
+  ├── kanal chat: foto + jawaban singkat untuk pertanyaan yang sama
+  └── halaman produk: penjelasan kriteria dan trade-off secara lengkap
 ```
 
-Script generate draft per platform dengan instruction eksplisit "DISTINCT, bukan identical".
+Pilih hanya cabang yang punya buyer signal dan bisa diproduksi. Format, durasi,
+jumlah slide, panjang teks, hashtag, dan waktu publish harus mengikuti batas
+platform terkini, account insights, serta kapasitas pengguna—bukan benchmark
+universal.
 
-## Cadence repurposing
+## Membuat angle yang berbeda
 
-Jangan publish semua spokes di hari yang sama. Distribusikan:
+Untuk setiap kanal, isi kartu berikut:
 
-| Hari | Spoke | Alasan |
-|---|---|---|
-| Senin | TikTok (hook) | Awal minggu, reach |
-| Selasa | IG Reels | Audience IG aktif |
-| Rabu | X Thread | Mid-week engagement |
-| Kamis | LinkedIn | Professional slot |
-| Jumat | IG Carousel | Saveable content weekend |
-| Sabtu | IG Story poll | Light engagement |
-| Minggu | Blog/Newsletter | Long-form weekend read |
+- Pertanyaan pembeli yang dijawab
+- Klaim dari source yang boleh dipakai
+- Bukti/asset yang menyertainya
+- Bentuk yang natural di kanal tersebut
+- Tindakan pembeli berikutnya
+- Biaya waktu untuk membuat + review
 
-1 hub = konten 1 minggu. Investasi 4-6 jam buat hub → 7 hari konten.
+Kalau dua draft menjawab pertanyaan dan memakai susunan yang sama persis,
+gabungkan atau pilih yang lebih cocok. Jangan mengarang fakta baru hanya agar
+terlihat berbeda.
 
-## Metric: "leverage ratio"
+## Menyusun cadence
 
-Leverage = (jumlah spokes sukses) / (jam investasi hub).
+Cadence dimulai dari slot kapasitas yang diberikan pengguna. Tempatkan materi
+bernilai paling dekat dengan tujuan lebih dulu, sisakan ruang untuk pertanyaan
+aktual, lalu evaluasi. Hari dan jam dipilih dari account insights atau hasil uji
+akun sendiri; tidak ada hari terbaik yang berlaku untuk semua bisnis.
 
-- 1 hub 4 jam → 7 spokes, 4 perform = ratio 1.0 (sehat)
-- 1 hub 4 jam → 7 spokes, 1 perform = ratio 0.25 (evaluasi angle)
-- 1 hub 4 jam → 7 spokes, 7 perform = ratio 1.75 (great, replicate)
+## Menilai hasil
 
-Track di audit bulanan: spoke mana yang paling konsisten perform?
+Catat source, waktu produksi, kanal, pertanyaan relevan, quote, order, dan gross
+profit bila tersedia. Bandingkan dengan baseline akun sendiri. View/save boleh
+dipakai sebagai sinyal diagnostik, tetapi jangan dijadikan bukti penjualan tanpa
+jalur yang terlihat.
 
 ## Anti-pattern
 
-- ❌ **Summarize** semua spokes = konten redundant
-- ❌ **Copy-paste** caption antar platform
-- ❌ **Post semua spokes sekaligus** (audience flooded)
-- ❌ **Hub tidak substantial** — kalau hub tipis, spokes juga tipis
-- ❌ **Spoke tanpa angle** — "repurpose untuk X" tanpa pikir kenapa X
+- Menyalin teks yang sama ke semua kanal tanpa menyesuaikan konteks
+- Memaksa hadir di kanal yang pembelinya tidak gunakan
+- Membuat lebih banyak turunan daripada kapasitas review/publish
+- Menambah klaim, angka, tren, atau testimoni yang tidak ada di source
+- Menetapkan jadwal, rasio, dan format universal tanpa data akun
+
+Gunakan `scripts/repurpose.sh` untuk membuat prompt draft. Semua hasil tetap
+berstatus DRAFT dan perlu review pemilik.

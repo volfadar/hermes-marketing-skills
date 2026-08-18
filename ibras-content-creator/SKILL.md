@@ -57,7 +57,7 @@ voice and engagement. Default is draft-first — but *default* is not *only*.
 What platforms actually penalise is volume nobody reviewed, not scheduling.
 
 This skill is platform-aware (format, length, CTA conventions per platform) but
-**does not itself talk to platform APIs** — publishing paths, all six of them
+**does not itself talk to platform APIs** — publishing paths, all seven of them
 with their real costs and drawbacks, live in `ibras-social-publishing`. Send
 scheduling questions there rather than answering "no".
 
@@ -147,7 +147,7 @@ bash "${HERMES_SKILL_DIR}/scripts/ideate.sh" --week --platform instagram
 bash "${HERMES_SKILL_DIR}/scripts/repurpose.sh" ~/content/video-transcript.md
 
 # 5. Build calendar
-bash "${HERMES_SKILL_DIR}/scripts/calendar.sh" --weeks 2 --platform instagram > calendar.md
+bash "${HERMES_SKILL_DIR}/scripts/calendar.sh" --weeks 2 --platform instagram --slots <capacity-per-week> > calendar.md
 ```
 
 ## Commands
@@ -158,7 +158,7 @@ bash "${HERMES_SKILL_DIR}/scripts/calendar.sh" --weeks 2 --platform instagram > 
 | `bash scripts/pillars.sh "pillar1, pillar2, ..."` | Set 3-5 content pillars |
 | `bash scripts/ideate.sh [--week\|--month] [--platform X]` | Generate content ideas per pillar |
 | `bash scripts/repurpose.sh <source-file> [--platforms all]` | 1 long-form → N platform drafts |
-| `bash scripts/calendar.sh --weeks N --platform X` | Build a content calendar (markdown table) |
+| `bash scripts/calendar.sh --weeks N --platform X --slots <capacity-per-week>` | Build a capacity-based content calendar |
 | `bash scripts/caption.sh "<topic>" --platform X` | Draft a single caption in your voice |
 | `bash scripts/audit.sh [--month]` | Review what worked + lessons |
 | `bash scripts/doctor.sh` | Diagnostic |

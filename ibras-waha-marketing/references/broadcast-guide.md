@@ -21,16 +21,19 @@
 ## Format CSV kontak
 
 ```csv
-phone,name,opt_in,opt_in_source,labels
-6281234567890,Andi,yes,landing-form-2026-08,customer
-6281234567891,Budi,yes,wa-reply-yes,lead
-6281234567892,Citra,yes,checkout-consent,customer,vip
+phone,name,opt_in,opt_in_source,opt_in_date,opt_in_scope,labels
+6281234567890,Andi,yes,landing-form,2026-08-01,weekly-offers,customer
+6281234567891,Budi,yes,wa-reply-yes,2026-08-04,event-updates,lead
+6281234567892,Citra,yes,checkout-checkbox,2026-08-07,order-and-offers,customer
 ```
 
-**Kolom wajib:** `phone`, `opt_in` (yes/no).
-**Opsional:** `name` (untuk personalisasi `{name}`), `opt_in_source` (audit trail), `labels`.
+**Kolom consent wajib:** `phone`, `opt_in`, `opt_in_source`, `opt_in_date`, dan
+`opt_in_scope`. `name` dan `labels` opsional. Baris `yes` yang tidak punya
+source, date, atau scope akan diperlakukan sebagai **belum consent** dan di-skip.
 
-**Aturan:** `scripts/lib/broadcast.py` SKIP baris dengan `opt_in != yes`. Bukan saran — hard rule di skill ini.
+**Aturan runtime:** `scripts/lib/broadcast.py` hanya memasukkan consent yang
+lengkap, lalu mengecek `opt_out.csv`. Opt-out yang lebih baru selalu
+mengalahkan opt-in lama. Ini hard rule, bukan saran copywriting.
 
 ## Format template pesan
 
@@ -128,7 +131,8 @@ hermes cron add "0 10 * * *" "kirim promo ke semua customer via WAHA" --deliver 
 
 **Sumber opt-in yang sah:**
 1. **Landing page form** dengan checkbox eksplisit "Saya mau info via WA"
-2. **WA reply keyword** — broadcast "Ketuk YES untuk join update" → mereka reply YES
+2. **WA reply keyword dalam konteks yang sudah diizinkan** — misalnya orang
+   sedang dilayani atau lebih dulu bertanya di WA, lalu memilih menerima update
 3. **Checkout consent** — checkbox di form pembelian
 4. **Event workshop** — form pendaftaran dengan checkbox
 5. **Lead magnet** — download PDF, consent WA di form
@@ -138,6 +142,11 @@ hermes cron add "0 10 * * *" "kirim promo ke semua customer via WAHA" --deliver 
 - Daftar peserta event yang tidak consent WA
 - Nomor dari grup WA tanpa consent personal
 - Lead LinkedIn/email yang belum consent WA eksplisit
+- Riwayat chat dua arah atau pembelian lama tanpa persetujuan promosi yang tercatat
+
+Jangan kirim broadcast "balas YES untuk setuju" ke daftar historis. Permintaan
+consent itu sendiri adalah kontak proaktif; mintalah lewat kanal publik, form,
+checkout, atau percakapan layanan yang sedang aktif.
 
 ## Opt-out mechanism (wajib)
 
@@ -149,6 +158,9 @@ Kalau ada yang STOP:
 1. Hapus dari CSV aktif
 2. Add ke blacklist (`opt_out.csv`)
 3. **JANGAN pernah** kirim lagi ke nomor itu
+
+Engine membaca blacklist itu pada setiap dry-run dan send. Kalau nomor masih
+punya `opt_in=yes` di file lama, ia tetap di-skip.
 
 ## Metrik post-broadcast (yang penting)
 
