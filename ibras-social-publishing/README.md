@@ -52,10 +52,14 @@ bash scripts/doctor.sh
 |---|---|---|---|---|
 | `manual-native` | gratis | tidak ada | sesuai | 1/5 |
 | `saas-scheduler` | $0–30/bln | tidak ada | sesuai | 1/5 |
+| `repliz` | Rp0–49rb* | tidak ada | sesuai | 1/5 |
 | `official-api` | $0–10/bln | rendah | sesuai | 4/5 |
 | `selfhost-scheduler` | $4–15/bln | rendah | sesuai | 3/5 |
 | `browser-tailscale` | $4–8/bln | sedang | abu-abu | 4/5 |
 | `unofficial-api` | gratis–$30/bln | sangat tinggi | melanggar | 3/5 |
+
+\* Harga tercatat sebagai sekali bayar saat sumber dibuka; cek ulang sebelum
+keputusan karena harga dan fitur pihak ketiga dapat berubah.
 
 ## Dua pertanyaan sebelum tabel apa pun
 

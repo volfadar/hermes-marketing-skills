@@ -100,6 +100,7 @@ bash scripts/research.sh "banned"
 |---|---|---|---|---|---|
 | `manual-native` | Manual + penjadwal bawaan platform | gratis | tidak ada | sesuai | 1/5 |
 | `saas-scheduler` | Buffer / Later / Publer / Metricool | $0–30/bln | tidak ada | sesuai | 1/5 |
+| `repliz` | Repliz — komentar, DM, jadwal | Rp0–49rb* | tidak ada | sesuai | 1/5 |
 | `official-api` | Meta Graph (IG/Threads) + X API berbayar | $0–10/bln | rendah | sesuai | 4/5 |
 | `selfhost-scheduler` | Postiz / Mixpost Lite di VPS sendiri | $4–15/bln | rendah | sesuai | 3/5 |
 | `browser-tailscale` | Browser di VPS + moderasi dari HP | $4–8/bln | sedang | abu-abu | 4/5 |
@@ -107,6 +108,9 @@ bash scripts/research.sh "banned"
 
 Detail dan kerugian tiap jalur: `references/jalur.md`, atau
 `bash scripts/advise.sh show <id>`.
+
+\* Harga Repliz tercatat sebagai sekali bayar saat sumber dibuka; cek ulang
+halaman harga sebelum keputusan karena harga dan fitur pihak ketiga dapat berubah.
 
 ## Angka yang sudah diverifikasi (12 Agustus 2026)
 
