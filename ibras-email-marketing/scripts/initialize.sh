@@ -70,7 +70,7 @@ if [[ "$PROVIDER" == "gmail" || "$PROVIDER" == "workspace" ]]; then
   fi
 fi
 
-CFG_DIR="${HERMES_EMAIL_CONFIG_DIR:-$HOME/.hermes-email}"
+CFG_DIR="${HERMES_EMAIL_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.hermes-email}"
 mkdir -p "$CFG_DIR/state"
 umask 077
 cat > "$CFG_DIR/config.env" <<EOF
@@ -98,7 +98,7 @@ python3 "$SKILL_DIR/scripts/lib/mailbox.py" test || {
 }
 
 section "3/4  Siapkan folder data bersama"
-BIZ_DIR="${HERMES_BUSINESS_DIR:-$HOME/.hermes/business}"
+BIZ_DIR="${HERMES_BUSINESS_DIR:-${HERMES_HOME:-$HOME/.hermes}/business}"
 mkdir -p "$BIZ_DIR"
 ok "Folder data: $BIZ_DIR"
 if [[ -f "$BIZ_DIR/faq.yaml" ]]; then

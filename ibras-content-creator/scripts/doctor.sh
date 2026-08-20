@@ -23,7 +23,9 @@ MEM="${HERMES_HOME:-$HOME/.hermes}/memories/USER.md"
 if [[ -f "$MEM" ]] && grep -qi "voice\|tone\|brand" "$MEM" 2>/dev/null; then
   ok "Voice profile terdeteksi di $MEM"
 else
-  p_warn "Voice profile belum jelas. Run: bash scripts/voice-profile.sh ~/samples/"
+  p_warn "Voice profile belum ada — output bakal terdengar generik"
+  echo "      belum pernah posting? pakai export chat WA atau balasanmu ke pelanggan:"
+  echo "      bash scripts/voice-profile.sh <folder|file|->"
 fi
 
 printf '\n\033[1;36m━━ 4. Dependencies ━━\033[0m\n'

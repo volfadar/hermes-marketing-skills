@@ -15,6 +15,8 @@ SKILL_NAMES = (
     "ibras-waha-marketing",
     "ibras-email-marketing",
     "ibras-cloakserve-research",
+    "ibras-setup",
+    "ibras-discipline",
 )
 SUPPORT_DIRS = ("references", "templates", "scripts", "assets", "examples")
 START = "<!-- HERMES_BUNDLE_MANIFEST_START -->"

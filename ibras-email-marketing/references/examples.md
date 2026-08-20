@@ -174,7 +174,9 @@ python3 scripts/check-numbers.py /tmp/penawaran.txt
 
 # Orang yang sama, dua kanal — jangan hitung dua kali kalau kamu
 # punya batas kontak harian
-bash ../ibras-waha-marketing/scripts/waha.sh contacts --limit 50
+# (butuh skill ibras-waha-marketing terpasang; kalau tidak ada, lewati baris ini)
+W=../ibras-waha-marketing/scripts/waha.sh; [ -f "$W" ] && bash "$W" contacts --limit 50 \
+  || echo "skill ibras-waha-marketing belum terpasang — angka kontak WA tidak dihitung"
 bash scripts/mail.sh search "from:pelanggan@x.com newer_than:7d"
 ```
 

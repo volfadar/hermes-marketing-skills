@@ -1,6 +1,6 @@
 ---
 name: ibras-content-creator
-description: Use for content ideas, captions, posts, calendars, repurposing, or reviewing content performance. Works from posts, a voice note, customer chats, product photos, or a short interview; starts with one sustainable channel and human review.
+description: "Tulis konten: ide, caption, judul, kalender isi. Use to draft or repurpose content, plan an editorial calendar, or turn one piece into several. Writes in the owner's own voice from her existing material. Does not publish."
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -61,8 +61,8 @@ This skill is platform-aware (format, length, CTA conventions per platform) but
 with their real costs and drawbacks, live in `ibras-social-publishing`. Send
 scheduling questions there rather than answering "no".
 
-**Suara dari profil.** Kalau `~/.hermes/business/profile.yaml` ada, baca
-`sikap.suara_saya` sebelum menulis apa pun — sapaan dan contoh chat aslinya.
+**Suara dari profil.** Kalau file profilnya ada — path-nya dari
+`python3 scripts/lib/profile.py path` — baca `sikap.suara_saya` sebelum menulis apa pun — sapaan dan contoh chat aslinya.
 Itu lebih akurat daripada tebakan mana pun, dan mencegah draft yang menulis
 *"gue"* untuk orang Bandung yang menulis *"aku"*.
 
@@ -134,8 +134,13 @@ Before delivering a batch: `python3 scripts/check-numbers.py <draft.md>`
 ## Quick Start
 
 ```bash
-# 1. (Once) Build the voice profile from any real samples you have
+# 1. (Once) Build the voice profile from any text she has actually written.
+#    Never posted? That is the common case, not a blocker — a WhatsApp chat
+#    export or her last 20 replies to customers is her voice, and more honest
+#    than a polished caption. A folder, a single file, or pasted text all work.
 bash "${HERMES_SKILL_DIR}/scripts/voice-profile.sh" ~/my-samples/
+bash "${HERMES_SKILL_DIR}/scripts/voice-profile.sh" ~/wa-export.txt
+pbpaste | bash "${HERMES_SKILL_DIR}/scripts/voice-profile.sh" -
 
 # 2. (Once) Set your content pillars
 bash "${HERMES_SKILL_DIR}/scripts/pillars.sh" "kopi specialty, manual brew pemula, behind the scenes, tips hemat"
@@ -154,7 +159,7 @@ bash "${HERMES_SKILL_DIR}/scripts/calendar.sh" --weeks 2 --platform instagram --
 
 | Command | What it does |
 |---|---|
-| `bash scripts/voice-profile.sh <samples-dir>` | Extract your voice from 3-5 existing posts → `USER.md` memory |
+| `bash scripts/voice-profile.sh <folder\|file\|->` | Extract your voice from any text you have written → `USER.md` memory |
 | `bash scripts/pillars.sh "pillar1, pillar2, ..."` | Set 3-5 content pillars |
 | `bash scripts/ideate.sh [--week\|--month] [--platform X]` | Generate content ideas per pillar |
 | `bash scripts/repurpose.sh <source-file> [--platforms all]` | 1 long-form → N platform drafts |
@@ -286,6 +291,7 @@ These links are the complete runtime manifest; load individual files only when n
 - [scripts/pillars.sh](scripts/pillars.sh)
 - [scripts/preflight.sh](scripts/preflight.sh)
 - [scripts/repurpose.sh](scripts/repurpose.sh)
+- [scripts/test-voice.sh](scripts/test-voice.sh)
 - [scripts/voice-profile.sh](scripts/voice-profile.sh)
 
 ### templates

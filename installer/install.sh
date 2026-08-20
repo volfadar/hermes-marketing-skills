@@ -6,7 +6,7 @@
 # menemukan skill tanpa prefiks itu. Installer ini yang menjaga
 # konsistensinya di sini.)
 #
-#   bash installer/install.sh                      # pasang semua 7 skill
+#   bash installer/install.sh                      # pasang semua 9 skill
 #   bash installer/install.sh --only ibras-email-marketing,ibras-social-publishing
 #   bash installer/install.sh --list               # daftar + status
 #   bash installer/install.sh --home /path/hermes  # Hermes home lain
@@ -18,8 +18,9 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS=(ibras-brand-strategy-coach ibras-cloakserve-research ibras-content-creator
-        ibras-email-marketing ibras-marketing-orchestrator ibras-social-publishing
-        ibras-waha-marketing)
+        ibras-discipline
+        ibras-email-marketing ibras-marketing-orchestrator ibras-setup
+        ibras-social-publishing ibras-waha-marketing)
 
 HOME_DIR="${HERMES_HOME:-$HOME/.hermes}"
 ONLY=()
@@ -45,7 +46,8 @@ installed() { [[ -d "$HOME_DIR/skills/$1" ]]; }
 if [[ "$MODE" == list ]]; then
   printf "%-24s %-9s %s\n" "SKILL" "STATUS" "DESKRIPSI"
   for s in "${SKILLS[@]}"; do
-    desc=$(awk '/^description:/{sub(/^description: */,""); print; exit}' "$ROOT/$s/SKILL.md" | cut -c1-60)
+    # descriptions containing a colon must be YAML-quoted; strip the quotes for display
+    desc=$(awk '/^description:/{sub(/^description: */,""); gsub(/^"|"$/,""); print; exit}' "$ROOT/$s/SKILL.md" | cut -c1-60)
     if installed "$s"; then st="terpasang"; else st="-"; fi
     printf "%-24s %-9s %s…\n" "$s" "$st" "$desc"
   done
@@ -94,7 +96,14 @@ if command -v hermes >/dev/null 2>&1; then
   listing="$(HERMES_HOME="$HOME_DIR" hermes skills list 2>/dev/null || true)"
   missing=0
   for s in "${SELECTED[@]}"; do
-    if ! grep -q "$s" <<<"$listing"; then
+    # `hermes skills list` renders a fixed-width table and ellipsises anything
+    # longer than the column: `ibras-brand-strategy-c…`. Grepping the full name
+    # therefore reported THREE correctly-installed skills as missing, on every
+    # run. A participant reading "✗ tidak terlihat" retries the slow hub path —
+    # which is the exact failure this installer exists to avoid.
+    # Match on the longest prefix the table can never truncate away.
+    probe="${s:0:20}"
+    if ! grep -q -- "$probe" <<<"$listing"; then
       echo "  ✗ $s tidak terlihat oleh 'hermes skills list'" >&2
       missing=$((missing+1))
     fi
@@ -121,5 +130,21 @@ fi
 
 echo
 echo "Selesai: $ok skill di $HOME_DIR/skills/"
+echo
+
+# Skill terpasang != skill jalan. Dependensinya gagal tanpa pesan error apa pun,
+# jadi preflight-nya dijalankan di sini, bukan diserahkan ke orang untuk diingat.
+SETUP="$HOME_DIR/skills/ibras-setup/scripts/setup.sh"
+if [[ -f "$SETUP" ]]; then
+  echo "Mengecek dependensinya (model, browser, WAHA, SMTP)…"
+  echo
+  HERMES_HOME="$HOME_DIR" bash "$SETUP" || true
+  echo
+  echo "Perbaiki yang aman otomatis:  bash $SETUP --fix"
+else
+  echo "! ibras-setup tidak terpasang — lewati preflight."
+fi
+
+echo
 echo "Coba:    hermes -z 'Aku jual kue lapis lewat WhatsApp, mau mulai jualan lagi setelah 6 bulan rehat. Mulai dari mana?'"
 echo "Panduan lengkap + prompt siap-tempel: README.md"

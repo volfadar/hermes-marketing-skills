@@ -2,13 +2,16 @@
 #
 # Satu file. Semua skill baca ini sebelum nulis apa pun.
 #
-# Tiga lapis, dan tiap lapis mencegah satu hal:
+# Empat lapis, dan tiap lapis mencegah satu hal:
 #   fakta   → mencegah Hermes NGARANG. Tanpa harga di sini, dia bikin harga
 #             sendiri (pernah kejadian: "total kontrak Rp 12.150.000", ngarang).
 #   sikap   → mencegah SLOP. Tanpa ini promonya bisa dipakai toko sebelah
 #             dengan ganti satu kata. Fakta bikin pesan benar; sikap bikin
 #             pesan itu milik kamu.
 #   batasan → mencegah Hermes nyaranin hal yang kamu nggak akan kerjain.
+#   asal    → mencegah saran yang GENERIK. Tanpa ini rencananya cuma terbentuk
+#             dari batasan ("cuma sejam, cuma 3 orang, nggak punya kenalan"),
+#             dan rencana kayak gitu sama persis buat semua orang.
 #
 # Nggak perlu diisi sekaligus. Isi `fakta` dulu (90 detik), kerjaan langsung
 # jalan. `sikap` tumbuh sendiri dari chat pelanggan yang kamu balas tiap hari.
@@ -100,6 +103,46 @@ sikap:
   # dan paling sering kebuang. Hermes nambahin sendiri kalau denger.
   cerita:
     - "mulai buka gara-gara tetangga sering nitip cucian pas aku masih kerja kantoran"
+
+# ── ASAL ─────────────────────────────────────────────────────────────────
+# Dari mana dia datang. Ini yang bikin sarannya nggak generik.
+#
+# `batasan` itu temboknya. `asal` itu ruangannya. Kalau cuma tembok yang
+# dicatat, rencananya bakal terbentuk dari tembok doang — dan rencana yang
+# isinya cuma "cuma sejam, cuma 3 orang, nggak punya kenalan" itu sama persis
+# buat semua orang. Itu yang bikin sesi 19-08-2026 dibilang "AI slop".
+#
+# Digalinya satu-satu sambil ngobrol, bukan diisi sekaligus. Sepuluh seam-nya
+# ada di references/excavation.md (khusus skill brand-strategy-coach).
+asal:
+  kerja: "dulu kerja di pabrik konveksi bagian QC, keluar 2024"
+  keluarga: "ibu dulu buka warung nasi, sering bantu belanja pagi"
+  pendidikan: "SMA, ikut OSIS bagian konsumsi — selalu kebagian ngurus vendor"
+  komunitas:
+    - "grup WA ibu-ibu komplek (240 orang)"
+    - "grup alumni SMA"
+  minat:
+    - "suka banget benerin barang rusak, sampai punya obeng set sendiri"
+  # Semua yang pernah dia bikin sampai jadi. Termasuk yang nggak dibayar.
+  # `untuk_siapa` JANGAN dibiarkan kosong dengan alasan "iseng" — "iseng" itu
+  # kata pengisi, dan satu pertanyaan lanjutan hampir selalu ngubah dia jadi
+  # nama orang, permintaan, atau kekesalan.
+  jejak:
+    - nama: "sistem antrian jemputan sekolah pakai spreadsheet"
+      untuk_siapa: "wali murid di sekolah anaknya"
+      kenapa: "tiap pagi ribut rebutan jemputan"
+      masih_jalan: "masih, sampai sekarang dipakai"
+  sering_diminta: "tetangga sering minta tolong nyuciin bed cover yang gede"
+  panutan:
+    - "akun laundry di Surabaya yang suka bahas kesalahan cuci"
+  keresahan: "laundry sekitar sini nggak ada yang mau ngaku kalau bajunya rusak"
+  cerita:
+    - "pernah nolak nyuci jas karena tau nggak sanggup, malah dikasih pelanggan tetap"
+  # Ditarik SETELAH ada 8-12 kepingan dari minimal 5 seam. Pakai kata-kata dia.
+  # Dibacakan balik sebagai pertanyaan: "kena nggak? atau ada yang meleset?"
+  # Kalau belum kelihatan polanya, KOSONGIN. Benang merah yang dikarang lebih
+  # buruk daripada yang kosong — sama persis alasannya dengan `sikap`.
+  benang_merah: "aku nggak jualan cuci bersih, aku jualan berani ngaku kalau ada yang salah"
 
 # ── BATASAN ──────────────────────────────────────────────────────────────
 # Kalimatnya dia sendiri. Dibaca ulang sebelum tiap saran.

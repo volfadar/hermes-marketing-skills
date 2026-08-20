@@ -1,6 +1,6 @@
 ---
 name: ibras-social-publishing
-description: Use to publish or schedule social posts and choose among seven paths, from manual/native and local tools to official or unofficial APIs. Compares budget, risk, skill, volume, buyer channel, drawbacks, and measured bottlenecks; advises without pretending one tool fits all.
+description: Terbitkan dan jadwalkan ke Instagram, Facebook, TikTok, YouTube, Threads, X. Use to publish or schedule a post that is already written, or to choose between manual, self-hosted, official API, and unofficial routes. Does not write the copy.
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -57,8 +57,8 @@ Yang ada: konsekuensinya, dan bentuk yang lebih baik untuk tujuan yang sama.
 Aturan lengkapnya — dan daftar pendek hal yang benar-benar tidak boleh — ada di
 `references/automation-posture.md`. **Baca sebelum menolak apa pun.**
 
-**Batasan orangnya dibaca, bukan ditebak.** Kalau
-`~/.hermes/business/profile.yaml` ada, baca `batasan` sebelum menyebut jalur
+**Batasan orangnya dibaca, bukan ditebak.** Kalau file profilnya ada —
+path-nya dari `python3 scripts/lib/profile.py path` — baca `batasan` sebelum menyebut jalur
 mana pun: jalur yang melanggar `REFUSE` adalah kegagalan sebagus apa pun
 angkanya, dan jalur yang butuh alat di luar `ACCESS` tidak akan pernah jalan.
 Jangan menyarankan yang dia sudah bilang tidak akan dikerjakan.

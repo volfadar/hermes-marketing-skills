@@ -8,7 +8,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-CFG_DIR="${WAHA_CONFIG_DIR:-$HOME/.waha-marketing}"
+CFG_DIR="${WAHA_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.waha-marketing}"
 CFG="$CFG_DIR/config.env"
 
 [[ -f "$CFG" ]] || { echo "Run scripts/initialize.sh first." >&2; exit 1; }

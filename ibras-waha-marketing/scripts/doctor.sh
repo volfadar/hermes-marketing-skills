@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # doctor.sh — diagnose WAHA connectivity + skill setup.
 set -uo pipefail
-CFG_DIR="${WAHA_CONFIG_DIR:-$HOME/.waha-marketing}"
+CFG_DIR="${WAHA_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.waha-marketing}"
 CFG="$CFG_DIR/config.env"
 
 PASS=0; WARN=0; FAIL=0

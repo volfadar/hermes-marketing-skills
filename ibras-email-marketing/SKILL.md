@@ -1,6 +1,6 @@
 ---
 name: ibras-email-marketing
-description: Use for email, inbox, unread mail, Gmail, newsletters, consented campaigns, or replies — not only marketing. Reads, searches, drafts, sends, labels, archives, and answers repeat questions through IMAP/SMTP with handoff, consent, promise, and regulated-claim safeguards.
+description: "Kotak masuk dan surat: Gmail, IMAP, SMTP, newsletter, balasan. Use to read, search, draft, send, label, or archive mail, and to answer repeat questions. Recipient permission is required before anything promotional."
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT

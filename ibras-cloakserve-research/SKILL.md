@@ -1,6 +1,6 @@
 ---
 name: ibras-cloakserve-research
-description: Use for market research, buyer demand, competitors, prices, reviews, alternatives, trends, or evidence from public web pages. Separates seller-side supply from buyer-side signals and browses through a stealth CDP route when ordinary sites block access.
+description: "Riset dari halaman web publik: permintaan pasar, kompetitor, tarif yang benar-benar dipasang, ulasan. Use to find outside evidence for a claim or to check whether buyers exist. Separates who sells from who buys, and browses through a stealth route when a site blocks access."
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -40,7 +40,8 @@ usually behaves. State the gap, define a buyer-side commercial test, and compare
 the direct outcome, bundled diagnosis, and separately paid diagnosis. A catchy
 local label that preserves the same work and buying reason still fails.
 The response is limited to the evidence gap, one buyer-side test, and those
-three shapes. Do not continue into a “helpful” generic plan while waiting.
+three shapes, and it is said once. Do not continue into a “helpful” generic
+plan while waiting, and do not serve the same three shapes again in a later turn.
 Do not assert the target segment's budget, margin, awareness, channel, or
 behaviour. Turn those into test questions, and leave sample, time, and price
 caps for the user to set. When explaining a mismatch, state only that the

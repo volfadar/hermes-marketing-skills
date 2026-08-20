@@ -27,7 +27,7 @@
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-CFG="${HERMES_EMAIL_CONFIG_DIR:-$HOME/.hermes-email}/config.env"
+CFG="${HERMES_EMAIL_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.hermes-email}/config.env"
 
 case "${1:-}" in
   -h|--help|help|"")

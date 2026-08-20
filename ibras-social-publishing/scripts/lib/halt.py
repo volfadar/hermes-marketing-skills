@@ -39,8 +39,23 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-BUSINESS_DIR = Path(os.environ.get("HERMES_BUSINESS_DIR") or
-                    os.path.expanduser("~/.hermes/business"))
+def _business_dir() -> str:
+    """
+    HERMES_BUSINESS_DIR > HERMES_HOME/business > ~/.hermes/business.
+
+    `HERMES_HOME` used to be skipped here, which meant every Hermes home on one
+    machine shared a single business directory — one owner's profile, HALT
+    switch, ledger and escalation queue reaching every other owner's session.
+    See profile.py `_default_dir` for the run that surfaced it.
+    """
+    explicit = os.environ.get("HERMES_BUSINESS_DIR")
+    if explicit:
+        return explicit
+    home = os.environ.get("HERMES_HOME") or os.path.expanduser("~/.hermes")
+    return os.path.join(home, "business")
+
+
+BUSINESS_DIR = Path(_business_dir())
 
 # The canonical switch. One file, every outbound path reads it.
 HALT_FILE = Path(os.environ.get("HERMES_HALT_FILE", BUSINESS_DIR / "HALT"))

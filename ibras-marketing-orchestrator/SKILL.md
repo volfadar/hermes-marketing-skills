@@ -1,6 +1,6 @@
 ---
 name: ibras-marketing-orchestrator
-description: Use for any marketing request that may need more than one skill, or when unsure whether to research, position, write, publish, message, or measure. Routes the next smallest useful step and preserves shared business state; it does not replace the specialist skill.
+description: Pemasaran yang butuh lebih dari satu langkah, atau belum jelas mulai dari mana. Use for any marketing request that may need more than one skill, or when it is unclear whether to research, position, write, publish, message, or measure. Routes the next smallest step and preserves shared state.
 ---
 
 # Marketing Orchestrator
@@ -32,7 +32,8 @@ usually behaves. State the gap, define a buyer-side commercial test, and compare
 the direct outcome, bundled diagnosis, and separately paid diagnosis. A catchy
 local label that preserves the same work and buying reason still fails.
 The response is limited to the evidence gap, one buyer-side test, and those
-three shapes. Do not continue into a “helpful” generic plan while waiting.
+three shapes, and it is said once. Do not continue into a “helpful” generic
+plan while waiting, and do not serve the same three shapes again in a later turn.
 Do not assert the target segment's budget, margin, awareness, channel, or
 behaviour. Turn those into test questions, and leave sample, time, and price
 caps for the user to set. When explaining a mismatch, state only that the
@@ -187,10 +188,13 @@ names five things. A step missing any of them is not a step yet.**
 | WhatsApp at any scale | `ibras-waha-marketing` | a second WhatsApp script; Repliz does not cover WhatsApp |
 | Email, any volume | `ibras-email-marketing` (Gmail SMTP) | a mailer we write; Repliz does not cover email |
 | Comments · DMs · scheduling on IG · FB · TikTok · YouTube · Threads | **Repliz** — bought | a poller, a scheduler, a browser that logs in |
+| *Choosing* how to publish or schedule at all | `ibras-social-publishing` — it compares the seven routes and usually lands on Repliz | picking a tool before the constraints are known |
 | Anything on a clock | `scripts/lib/watch.py` → `hermes cronjob` | a reminder in her calendar, a checklist she must remember |
 | A fact that must survive to next week | `profile.yaml` · `ledger.jsonl` · `escalations.jsonl` · job notepad | a spreadsheet, a note in the chat, her memory |
 | Someone waiting for an answer | `handoff.py` | "she'll follow up" |
 | Public pages, evidence | `ibras-cloakserve-research` | describing a page nobody opened |
+| Any figure, price, or claim about to reach a buyer | `ibras-discipline` (`skill_view(name="ibras-discipline")`) | quoting a number from memory |
+| Nothing runs — model, browser, WAHA, SMTP | `ibras-setup` | guessing which dependency broke |
 
 **Which facts need a slot, and which do not.** The test is *who else has to read it*, not
 how important it feels.

@@ -2,9 +2,9 @@
 # doctor.sh — diagnosa koneksi email + kesiapan balasan otomatis.
 set -uo pipefail
 SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-CFG_DIR="${HERMES_EMAIL_CONFIG_DIR:-$HOME/.hermes-email}"
+CFG_DIR="${HERMES_EMAIL_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.hermes-email}"
 CFG="$CFG_DIR/config.env"
-BIZ_DIR="${HERMES_BUSINESS_DIR:-$HOME/.hermes/business}"
+BIZ_DIR="${HERMES_BUSINESS_DIR:-${HERMES_HOME:-$HOME/.hermes}/business}"
 HALT="${HERMES_EMAIL_HALT_FILE:-/tmp/hermes-email-halt}"
 
 PASS=0; WARN=0; FAIL=0

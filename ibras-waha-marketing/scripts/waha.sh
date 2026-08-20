@@ -29,7 +29,7 @@
 # All write ops print "DRY RUN" preview unless --confirm is passed.
 set -euo pipefail
 
-CFG_DIR="${WAHA_CONFIG_DIR:-$HOME/.waha-marketing}"
+CFG_DIR="${WAHA_CONFIG_DIR:-${HERMES_HOME:-$HOME}/.waha-marketing}"
 CFG="$CFG_DIR/config.env"
 [[ -f "$CFG" ]] || { echo "Run initialize.sh first (no config at $CFG)" >&2; exit 1; }
 # shellcheck disable=SC1090

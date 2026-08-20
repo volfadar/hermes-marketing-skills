@@ -4,21 +4,71 @@
 #
 # Usage: bash voice-profile.sh <samples-dir> [--print-only]
 set -euo pipefail
-DIR="${1:-}"
+SRC="${1:-}"
 PRINT_ONLY="no"
 [[ "${2:-}" == "--print-only" ]] && PRINT_ONLY="yes"
 
-[[ -z "$DIR" || ! -d "$DIR" ]] && {
-  echo "Usage: bash voice-profile.sh <samples-dir>"
-  echo "  samples-dir = folder with 3-5 .txt/.md files of your existing posts"
-  exit 1
+usage() {
+  cat <<'TXT'
+Usage: bash voice-profile.sh <folder | file | ->
+
+  folder   berisi tulisanmu (ekstensi apa pun, asal teks)
+  file     satu file saja juga boleh
+  -        tempel teksnya langsung, akhiri dengan Ctrl-D
+
+Sumber yang dipakai, dari yang paling kaya ke yang paling seadanya:
+  1. postingan lama                  .txt .md .html — kalau ada
+  2. export chat WhatsApp            Chat > Ekspor chat > Tanpa media
+  3. transkrip voice note            .vtt .srt, atau ketik ulang seadanya
+  4. balasanmu ke pelanggan          copy-paste 10-20 chat terakhir
+  5. caption yang pernah kamu tulis  walau cuma tiga
+
+Belum pernah posting sama sekali bukan penghalang — nomor 2 sampai 4 itu tulisanmu
+juga, dan justru lebih jujur daripada caption yang sudah dipoles.
+TXT
 }
 
-# Collect samples
-SAMPLES=$(ls "$DIR"/*.{txt,md} 2>/dev/null | head -10)
-[[ -z "$SAMPLES" ]] && { echo "No .txt/.md samples in $DIR"; exit 1; }
+[[ -z "$SRC" ]] && { usage; exit 1; }
+
+TMP_IN=""
+# Harus selalu balik 0: perintah terakhir di dalam trap menentukan exit code
+# skripnya, jadi `[[ -n "" ]]` di sini diam-diam mengubah sukses jadi gagal.
+cleanup() { [[ -n "$TMP_IN" ]] && rm -rf "$TMP_IN"; return 0; }
+trap cleanup EXIT
+
+if [[ "$SRC" == "-" ]]; then
+  TMP_IN="$(mktemp -d)"
+  cat > "$TMP_IN/tempelan.txt"
+  [[ -s "$TMP_IN/tempelan.txt" ]] || { echo "Tidak ada teks yang ditempel."; exit 1; }
+  SRC="$TMP_IN"
+fi
+
+if [[ -f "$SRC" ]]; then
+  SAMPLES="$SRC"
+elif [[ -d "$SRC" ]]; then
+  # Terima file teks apa pun, bukan cuma .txt/.md. Versi lama menolak export chat
+  # WhatsApp dan transkrip voice note — padahal SKILL.md sendiri menyebut keduanya
+  # sebagai sumber yang sah, dan bagi orang yang belum pernah posting itulah satu-
+  # satunya tulisan yang dia punya.
+  SAMPLES="$(find "$SRC" -maxdepth 1 -type f -size -2M 2>/dev/null \
+    | while IFS= read -r f; do
+        case "$(basename "$f")" in .*) continue ;; esac
+        if file -b --mime-type "$f" 2>/dev/null | grep -qE '^text/|json|xml'; then echo "$f"
+        elif LC_ALL=C grep -qIm1 . "$f" 2>/dev/null; then echo "$f"; fi
+      done | head -10)"
+else
+  echo "Bukan file atau folder: $SRC"; echo; usage; exit 1
+fi
+
+if [[ -z "$SAMPLES" ]]; then
+  echo "Tidak ada teks yang bisa dibaca di: $SRC"
+  echo
+  usage
+  exit 1
+fi
 N=$(echo "$SAMPLES" | wc -l)
-echo "Found $N samples in $DIR"
+echo "Ketemu $N sumber teks"
+[[ "$N" -lt 3 ]] && echo "  (cuma $N — profilnya jadi kasar. 3-5 lebih baik, tapi tetap jalan.)"
 
 # Build a prompt that asks Hermes to extract voice attributes
 read -r -d '' PROMPT <<EOF || true

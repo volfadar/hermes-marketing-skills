@@ -44,7 +44,8 @@ def _state_dir() -> Path:
     biz = os.environ.get("HERMES_BUSINESS_DIR")
     if biz:
         return Path(biz) / "state"
-    return Path(os.path.expanduser("~/.hermes/business/state"))
+    home = os.environ.get("HERMES_HOME") or os.path.expanduser("~/.hermes")
+    return Path(home) / "business" / "state"
 
 
 STATE_DIR = _state_dir()

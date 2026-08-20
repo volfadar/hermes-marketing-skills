@@ -20,6 +20,8 @@ BASE_NAMES = (
     "waha-marketing",
     "email-marketing",
     "cloakserve-research",
+    "setup",
+    "discipline",
 )
 SKILL_NAMES = tuple(f"ibras-{name}" for name in BASE_NAMES)
 ALLOWED_SUPPORT_DIRS = frozenset(
@@ -195,7 +197,8 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    print("marketplace contract: PASS (7 namespaced, complete Hermes bundles)")
+    print(f"marketplace contract: PASS ({len(SKILL_NAMES)} namespaced, "
+          "complete Hermes bundles)")
     return 0
 
 

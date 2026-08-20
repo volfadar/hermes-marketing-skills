@@ -104,35 +104,30 @@ peserta benar-benar memasang.
 >
 > — [Nama kamu]
 
-## Varian C — tanpa download (langsung dari GitHub)
+## Varian C — tanpa download (satu baris, dari GitHub)
 
-Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
+Untuk peserta yang sudah nyaman dengan terminal:
 
-> Ketujuh identifier di bawah sudah diverifikasi dari instalasi kosong di
-> Hermes Agent v0.20.2 dan meresolusi ke repo `volfadar/hermes-marketing-skills`.
+> Dua perintah, dua detik, dan tidak butuh akun GitHub:
+>
+> ```
+> git clone --depth 1 https://github.com/volfadar/hermes-marketing-skills.git
+> cd hermes-marketing-skills && bash installer/install.sh
+> ```
+>
+> Cek dengan `hermes skills list` — harus muncul 7 baris `ibras-*` berstatus
+> `enabled`. Jalan ulang perintah yang sama kapan saja = update.
 
-> Lima skill mendapat verdict SAFE dan bisa langsung dipasang tanpa download:
->
-> ```
-> hermes skills install volfadar/hermes-marketing-skills/ibras-marketing-orchestrator
-> hermes skills install volfadar/hermes-marketing-skills/ibras-brand-strategy-coach
-> hermes skills install volfadar/hermes-marketing-skills/ibras-content-creator
-> hermes skills install volfadar/hermes-marketing-skills/ibras-social-publishing
-> hermes skills install volfadar/hermes-marketing-skills/ibras-waha-marketing
-> ```
->
-> Dua skill mendapat verdict CAUTION karena fungsinya memang sensitif. Periksa
-> isinya di repo, lalu pasang dengan override yang eksplisit:
->
-> ```
-> hermes skills install volfadar/hermes-marketing-skills/ibras-email-marketing --force
-> hermes skills install volfadar/hermes-marketing-skills/ibras-cloakserve-research --force
-> ```
->
-> Email membaca kredensial IMAP/SMTP dari environment dan dapat mengirim email;
-> cloakserve menjalankan Docker/Tailscale untuk browser riset. Keduanya CAUTION,
-> bukan DANGEROUS. Keduanya telah diuji terpasang melalui identifier marketplace
-> di Hermes Agent v0.20.2 dengan `--force`.
+**Jangan** menyuruh Hermes memasang ketujuhnya lewat identifier
+`hermes skills install volfadar/...` atau lewat Dashboard Chat tanpa token
+GitHub. Hub installer mengambil **satu request API per file**, isi repo ini
+**296 file**, dan batas GitHub tanpa login **60 request per jam** — jadi kuota
+habis di tengah skill kedua dan sisanya gagal. Pada sesi nyata 19 Agustus 2026
+itu memakan 21 menit dan tetap gagal.
+
+Kalau memang mau lewat Hub, naikkan batasnya dulu jadi 5.000/jam dengan
+`gh auth login`, atau taruh `GITHUB_TOKEN=ghp_...` (public repo, read-only) di
+`~/.hermes/.env`. Sesudah itu identifier di README boleh dipakai.
 
 ---
 
@@ -144,6 +139,7 @@ Untuk peserta yang sudah nyaman dengan Hermes dan hanya mau cepat mencoba:
 | Hermes jalan tapi tidak menjawab / jawaban aneh | Model belum aktif — `hermes setup --portal` (login sekali, tanpa API key). |
 | Skill tidak muncul di list padahal terpasang | Cek apakah setup-nya dulu memilih "Blank Slate" (mematikan toolset skills) — `hermes skills opt-in --sync`. Kalau bukan: jangan ubah nama folder hasil unzip; jalan ulang installer. |
 | `hermes skills install` menolak `ibras-email-marketing` / `ibras-cloakserve-research` | Itu verdict CAUTION, bukan DANGEROUS: skill-nya memegang kredensial email atau menjalankan Docker/Tailscale. Periksa isinya di repo lalu tambahkan `--force`. Atau pakai zip + installer (Varian A) — tanpa scan. |
+| Install lewat Hub/Dashboard lama banget lalu gagal (`403` / `rate limit`) | Kuota GitHub 60 request/jam habis — hub ngambil 1 request per file, repo ini 296 file. **Jangan diulang**, kuotanya per jam. Pakai `git clone` + `bash installer/install.sh` (2 detik). |
 | Profile tidak kebaca | `pip3 install pyyaml` |
 | Pakai Windows? | Hermes berjalan di WSL/macOS/Linux — jalankan installer dari terminal Hermes-mu berjalan. |
 | Data saya aman? | Semua berjalan lokal di Hermes kamu sendiri; tidak ada SaaS baru. Skill email/WhatsApp hanya bertindak dengan konfirmasi. |

@@ -19,8 +19,13 @@ if command -v docker >/dev/null 2>&1; then
   p_ok "Docker: $(docker --version 2>/dev/null | awk '{print $3}' | tr -d ',')"
   if docker info >/dev/null 2>&1; then p_ok "Docker daemon: jalan"
   else p_fail "Docker daemon tidak jalan — start Docker Desktop"; fi
+elif curl -sf --max-time 3 "http://127.0.0.1:${PORT:-9222}/json/version" >/dev/null 2>&1; then
+  # CDP sudah hidup lewat jalur lain (Chromium langsung). Docker cuma salah satu
+  # dari dua rute; menandainya gagal padahal browsernya jalan itu alarm palsu.
+  p_warn "Docker tidak ada, tapi CDP sudah hidup lewat jalur lain — tidak masalah"
+  p_warn "  (cloakserve punya fingerprint Asia/Jakarta + id-ID; jalur langsung tidak)"
 else
-  p_fail "Docker tidak terinstall — https://docker.com"
+  p_fail "Docker tidak terinstall, dan tidak ada CDP di port ${PORT:-9222} — https://docker.com"
 fi
 
 hdr "2. Container cloakserve"
@@ -57,8 +62,19 @@ if [[ -f "$CFG" ]]; then
   else
     p_warn "browser.cdp_url BELUM ter-set. Run: bash $(dirname "$0")/wire-hermes.sh"
   fi
-  if grep -Eq "default:.*deepseek|default:.*claude|default:.*gpt|default:.*gemini|default:.*nous" "$CFG" 2>/dev/null; then
-    p_ok "model.default ter-set"
+  # Baca nilainya, jangan cocokkan nama vendor. Versi lama grep untuk
+  # deepseek|claude|gpt|gemini|nous, jadi model yang sah tapi di luar daftar itu
+  # dilaporkan "hilang" pada instalasi yang sebenarnya benar — dan doctor yang
+  # gagal di instalasi sehat mengajari orang mengabaikan doctor.
+  MODEL_DEFAULT="$(python3 - "$CFG" <<'PYEOF' 2>/dev/null
+import sys, yaml
+try: c = yaml.safe_load(open(sys.argv[1])) or {}
+except Exception: c = {}
+print(((c.get("model") or {}).get("default") or "").strip())
+PYEOF
+)"
+  if [[ -n "$MODEL_DEFAULT" ]]; then
+    p_ok "model.default ter-set: ${MODEL_DEFAULT}"
   else
     p_fail "model.default hilang/kosong — Hermes akan error 404 tool-use. Edit ${CFG}:"
     echo "    model:"

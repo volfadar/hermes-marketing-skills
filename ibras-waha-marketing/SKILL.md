@@ -1,6 +1,6 @@
 ---
 name: ibras-waha-marketing
-description: Use for WhatsApp replies, contacts, labels, groups, consented promotion, broadcast, or WAHA setup. Keeps service replies simple, requires recipient permission for promotion, and applies pacing, claim, promise, and emergency-stop safeguards.
+description: "WhatsApp lewat WAHA: chat, kontak, label, grup, broadcast. Use to answer WhatsApp messages, manage contacts or groups, or send a permitted broadcast. Recipient permission is required before anything promotional."
 version: 1.0.0
 author: Hermes Marketing Workshop
 license: MIT
@@ -280,7 +280,8 @@ cuma di harga.
 > *"Level 5 ini aku bikin gara-gara ada yang komplain level 4 kurang pedes.
 > 15rb/pcs. Mau coba?"* → nggak bisa ditukar, itu ceritanya dia. **Lolos.**
 
-Bahannya diambil dari `sikap` di `~/.hermes/business/profile.yaml`. Kalau
+Bahannya diambil dari `sikap` di file profil (path-nya dari
+`python3 scripts/lib/profile.py path`). Kalau
 profilnya belum ada, uji tukar dilewati — dan promonya memang akan generik,
 karena memang tidak ada bahan. Itu isyarat buat mengisi profilnya, bukan buat
 berhenti kirim.
